@@ -147,12 +147,16 @@
 		</dependency>
 		<!-- JDBC연결을 위한 의존성 끝 -->
 		
+		<!-- 커넥션풀을 위한 의존성 시작 -->
 		<!-- https://mvnrepository.com/artifact/com.zaxxer/HikariCP -->
 		<dependency>
 		    <groupId>com.zaxxer</groupId>
 		    <artifactId>HikariCP</artifactId>
 		    <version>3.3.1</version>
 		</dependency>
+		<!-- 커넥션풀을 위한 의존성 끝 -->
+		
+		<!-- mybatis을 위한 의존성 시작 -->
 		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
 		<dependency>
 		    <groupId>org.mybatis</groupId>
@@ -177,7 +181,17 @@
 		    <artifactId>spring-jdbc</artifactId>
 		    <version>5.2.9.RELEASE</version>
 		</dependency>
+		<!-- mybatis을 위한 의존성 끝 -->
 		
+		<!-- Log4jdbc-log4j2을 위한 의존성 시작 -->
+		<!-- 테스트log에 좀더 직관적으로 표현 -->
+		<!-- https://mvnrepository.com/artifact/org.bgee.log4jdbc-log4j2/log4jdbc-log4j2-jdbc4 -->
+		<dependency>
+		    <groupId>org.bgee.log4jdbc-log4j2</groupId>
+		    <artifactId>log4jdbc-log4j2-jdbc4</artifactId>
+		    <version>1.16</version>
+		</dependency>
+		<!-- Log4jdbc-log4j2을 위한 의존성 끝 -->
     
 	</dependencies>
     <build>
