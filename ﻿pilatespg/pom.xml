@@ -192,7 +192,35 @@
 		    <version>1.16</version>
 		</dependency>
 		<!-- Log4jdbc-log4j2을 위한 의존성 끝 -->
-    
+    	
+    	
+    	<!-- security로 인한 로그인 회원가입 처리(CSRF) 시작 -->
+    	<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-web</artifactId>
+		    <version>4.2.3.RELEASE</version>
+		</dependency>
+    	<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-config -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-config</artifactId>
+		    <version>4.2.3.RELEASE</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-core</artifactId>
+		    <version>4.2.3.RELEASE</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-taglibs -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-taglibs</artifactId>
+		    <version>4.2.3.RELEASE</version>
+		</dependency>
+		<!-- security로 인한 로그인 회원가입 처리(CSRF) 끝 -->
+    	
 	</dependencies>
     <build>
         <plugins>
