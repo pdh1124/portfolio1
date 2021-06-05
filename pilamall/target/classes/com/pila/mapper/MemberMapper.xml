@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pila.mapper.MemberMapper">
+
+	<resultMap type="com.pila.domain.AuthVO" id="authMap">
+		<result property="userId" column="userid" />
+		<result property="auth" column="auth" />
+	</resultMap>
+	
+	<resultMap type="com.pila.domain.MemberVO" id="memberMap">
+		<id property="userId" column="userid" />
+		<result property="userId" column="userid" />
+		<result property="userPass" column="userpass" />
+		<result property="userName" column="username" />
+		<result property="userEmail" column="useremail" />
+		<result property="userPhone" column="userphone" />
+		<result property="userAddr1" column="useraddr1" />
+		<result property="userAddr2" column="useraddr2" />
+		<result property="userAddr3" column="useraddr3" />
+		<result property="adminCk" column="adminck" />
+		<result property="regDate" column="regdate" />
+		<result property="money" column="money" />
+		<collection property="authList" resultMap="authMap" />
+	</resultMap>
+	
+	<select id="read" resultMap="memberMap">
+	</select>
+	
+</mapper>
