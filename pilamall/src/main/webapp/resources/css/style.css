@@ -236,6 +236,23 @@ img {
   display: inline-block;
   margin: 0;
   position:relative;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+}
+#top-menu > ul > li > form > a {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 20px 10px;
+  -webkit-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+  display: block;
+}
+#top-menu > ul > li:hover > form > a {
+  background:#fff;
+  color:#666666;
 }
 #top-menu > ul > li > a {
   color: #fff;
@@ -249,7 +266,7 @@ img {
 }
 #top-menu > ul > li:hover > a {
   background:#fff;
-  color:#e09e25;
+  color:#666666;
 }
 #top-menu > ul li > ul {
   background: #fff none repeat scroll 0 0;

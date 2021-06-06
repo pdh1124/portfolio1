@@ -20,7 +20,7 @@
 			<div class="col-sm-6">
 				<div class="login">
 					<form id="login-form" method="post" action="/member/login">
-					<input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 						<h2>LOGIN</h2>
 						<p>필라몰에 오신것을 환영합니다.</p>
 						<label>아이디<span>*</span></label>
@@ -28,11 +28,14 @@
 						<label>패스워드<span>*</span></label>
 						<input type="password" name="userPass" placeholder="****" />
 						<div class="remember">
-							<input type="checkbox" />
+							<input type="checkbox" name="remember-me" />
 							<p>자동로그인</p>
 							<p><a href="/member/findUserId">아이디</a>나 <a href="/member/findUserPass">패스워드</a>를 잊으셨나요?</p>
 						</div>
 						<input type="submit" value="login" />
+						<br /><br />
+						<h3><c:out value="${error }" /></h3>
+						<h3><c:out value="${logout }" /></h3>
 					</form>
 				</div>
 			</div>

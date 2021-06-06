@@ -6,6 +6,8 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!-- jstl fmt를 쓸 때 태그에 fmt로 표시 fmt : formatter 형식 맞춰서 표시 -->
+
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -57,9 +59,21 @@
 			<div class="col-sm-12 col-md-4">
 				<div id="top-menu" class="float-right">
 					<ul>
-						<li><a href="/member/login">로그인</a></li>
-						<li style="color:#ffffff;">/</li>
-						<li><a href="/member/signup">회원가입</a>
+						<sec:authorize access="isAuthenticated()">
+							<sec:authentication property="principal.username" var="userId"/>
+							<li>어서오세요.&nbsp; ${userId } 님</li>
+							<li>/</li>
+							<li>
+								<form action="/member/logout" method="POST">
+									<a href="/member/logout">로그아웃</a>
+								</form>
+							</li>
+						</sec:authorize>
+						<sec:authorize access="isAnonymous()">
+							<li><a href="/member/login">로그인</a></li>
+							<li style="color:#ffffff;">/</li>
+							<li><a href="/member/signup">회원가입</a></li>
+						</sec:authorize>
 					</ul>
 				</div>
 			</div>

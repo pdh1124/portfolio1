@@ -15,10 +15,9 @@ public class MemberVO {
 	private String userAddr1; //주소1
 	private String userAddr2; //주소2
 	private String userAddr3; //주소3
-	private int adminCk; //관리자여부
 	private Date regDate; //생성일
 	private int money; //돈
+	private boolean enabled; //계정 정지 유무
 	
-	
-	private List<AuthVO> authList; //자동로그인(아이디,자동로그인 권한)
+	private List<AuthVO> authList; //권한(어드민,관리자,일반)
 }
