@@ -15,6 +15,17 @@
 		<level value="info" />
 	</logger>
 	
+	<!-- 테스트시 심각하거나 위험한 상황이 아닌경우 보여주지 말아라 -->
+	<logger name="jdbc.audit">
+		<level value="fatal"></level>
+	</logger>
+	<logger name="jdbc.resultset">
+		<level value="warn"></level>
+	</logger>
+	<logger name="jdbc.connection">
+		<level value="warn"></level>
+	</logger>
+	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
 		<level value="info" />

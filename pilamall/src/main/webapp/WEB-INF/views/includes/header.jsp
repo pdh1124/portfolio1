@@ -160,7 +160,7 @@
 							<li><a href="#">게시판</a>
 								<ul class="sub-menu">
 									<li><a href="#">문의 게시판</a></li>
-									<li><a href="#">커뮤니티 게시판</a></li>
+									<li><a href="/board/comm_list">커뮤니티 게시판</a></li>
 								</ul>
 							</li>
 							<li><a href="#">소개</a></li>
