@@ -44,6 +44,8 @@
 	<link rel="stylesheet" type="text/css" href="/resources/css/responsive.css" />
 	<!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </head>
+
+
 <body>
 <div class="header-top"><!--Start Header Top Area-->
 	<div class="container">
@@ -63,10 +65,18 @@
 							<sec:authentication property="principal.username" var="userId"/>
 							<li>어서오세요.&nbsp; ${userId } 님</li>
 							<li>/</li>
+							<sec:authorize access="hasRole('ROLE_ADMIN')">
+								<li><a href="#">관리자페이지</a></li>
+								<li>/</li>
+							</sec:authorize>
+							<sec:authorize access="hasRole('ROLE_USER')">
+								<li><a href="#">마이페이지</a></li>
+								<li>/</li>
+							</sec:authorize>
 							<li>
-								<form action="/member/logout" method="POST">
-									<a href="/member/logout">로그아웃</a>
-								</form>
+							<form action="/member/logout" method="POST">
+								<a id="member_logout" href="/member/logout">로그아웃</a>
+							</form>
 							</li>
 						</sec:authorize>
 						<sec:authorize access="isAnonymous()">
@@ -83,15 +93,22 @@
 <div class="header-area"><!--Start Header Area-->
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-4 col-lg-3"></div>
-			<div class="col-sm-4 col-lg-6">
+			<div class="col-sm-4 col-lg-3">
 				<div class="logo text-center">
 					<a href="/product/main">
 						<img src="/resources/img/header/logo.png" alt="" />
 					</a>
 				</div>
 			</div>
+			<div class="col-sm-4 col-lg-6">
+				<div class="search float-right">
+					<input type="text" value="" placeholder="상품을 검색해 주세요...." />
+					<button class="submit"><i class="fa fa-search"></i></button>
+				</div>
+				
+			</div>
 			<div class="col-sm-4 col-lg-3">
+				<sec:authorize access="isAuthenticated()">
 				<div class="cart-info float-right">
 					<a href="cart.html">
 						<h5>My cart <span>2</span> items - <span>$390</span></h5>
@@ -116,10 +133,15 @@
 						</div>
 					</div>
 				</div>
-				<div class="search float-right">
-					<input type="text" value="" placeholder="Search Here...." />
-					<button class="submit"><i class="fa fa-search"></i></button>
-				</div>
+				</sec:authorize>
+				<sec:authorize access="isAnonymous()">	
+					<div class="cart-info float-right">
+						<a href="/member/login">
+							<h5>장바구니</h5>
+							<i class="fa fa-shopping-cart"></i>
+						</a>
+					</div>
+				</sec:authorize>		
 			</div>
 		</div>
 	</div>
@@ -131,268 +153,34 @@
 				<div class="main-menu hidden-sm hidden-xs">
 					<nav>
 						<ul>
-							<li><a href="/product/main" class="active">Home</a>
+							<li><a href="/product/main" class="active">메인페이지</a></li>
+							<li><a href="#">전체 상품</a></li>
+							<li><a href="#">요가복</a></li>
+							<li><a href="#">요가용품</a></li>
+							<li><a href="#">게시판</a>
 								<ul class="sub-menu">
-									<li><a href="/product/main">Home 1</a></li>
-									<li><a href="/product/main">Home 2</a></li>
-									<li><a href="/product/main">Home 3</a></li>
+									<li><a href="#">문의 게시판</a></li>
+									<li><a href="#">커뮤니티 게시판</a></li>
 								</ul>
 							</li>
-							<li><a href="#">Pages</a>
-								<div class="mega-menu mega-menu-page">
-									<div class="column-1 column">
-										<ul>
-											<li><a href="about-us.html">About US</a></li>
-											<li><a href="blog.html">Blog</a></li>
-											<li><a href="blog-left-sidebar.html">Blog left sidebar</a></li>
-											<li><a href="blog-right-sidebar.html">Blog right sidebar</a></li>
-											<li><a href="blog-details.html">Blog details</a></li>
-										</ul>
-									</div>
-									<div class="column-2 column">
-										<ul>
-											<li><a href="cart.html">Cart</a></li>
-											<li><a href="checkout.html">Checkout</a></li>
-											<li><a href="coming-soon.html">Coming soon</a></li>
-											<li><a href="contact.html">Contact</a></li>
-											<li><a href="contact-2.html">Contact 2</a></li>
-										</ul>
-									</div>
-									<div class="column-3 column">
-										<ul>
-											<li><a href="faq.html">FAQ</a></li>
-											<li><a href="login.html">Login</a></li>
-											<li><a href="portfolio.html">Portfolio 3 column</a></li>
-											<li><a href="portfolio-2.html">Portfolio 4 column</a></li>
-											<li><a href="404.html">404</a></li>
-										</ul>
-									</div>
-									<div class="column-4 column">
-										<ul>
-											<li><a href="shop.html">Shop</a></li>
-											<li><a href="shop-list.html">Shop list</a></li>
-											<li><a href="shop-left-sidebar.html">Shop left sidebar</a></li>
-											<li><a href="shop-right-sidebar.html">Shop right sidebar</a></li>
-											<li><a href="product-details.html">Product details</a></li>
-										</ul>
-									</div>
-								</div>
-							</li>
-							<li><a href="shop.html">Shop</a>
-								<div class="mega-menu mega-menu-1">
-									<div class="column-1 column">
-										<ul>
-											<li><a href="shop-list.html">rings</a></li>
-											<li><a href="shop-left-sidebar.html">diamond ring</a></li>
-											<li><a href="shop-right-sidebar.html">gold ring</a></li>
-											<li><a href="shop-list.html">sliver ring</a></li>
-											<li><a href="shop-left-sidebar.html">Platinum ring</a></li>
-										</ul>
-									</div>
-									<div class="column-2 column">
-										<ul>
-											<li><a href="shop-list.html">Bracelets</a></li>
-											<li><a href="shop-left-sidebar.html">diamond Bracelets</a></li>
-											<li><a href="shop-right-sidebar.html">gold Bracelets</a></li>
-											<li><a href="shop-left-sidebar.html">sliver Bracelets</a></li>
-											<li><a href="shop-right-sidebar.html">Platinum Bracelets</a></li>
-										</ul>
-									</div>
-									<div class="column-3 column">
-										<ul>
-											<li><a href="shop-list.html">lecklaces</a></li>
-											<li><a href="shop-right-sidebar.html">diamond lecklaces</a></li>
-											<li><a href="shop-left-sidebar.html">gold lecklaces</a></li>
-											<li><a href="shop-right-sidebar.html">sliver lecklaces</a></li>
-											<li><a href="shop-left-sidebar.html">Platinum lecklaces</a></li>
-										</ul>
-									</div>
-									<div class="column-4 column">
-										<a href="#"><img src="/resources/img/product/10.jpg" alt="" /></a>
-									</div>
-								</div>
-							</li>
-							<li><a href="shop.html">New Arrivals</a>
-								<div class="mega-menu mega-menu-1">
-									<div class="column-1 column">
-										<ul>
-											<li><a href="shop-list.html">rings</a></li>
-											<li><a href="shop-left-sidebar.html">diamond ring</a></li>
-											<li><a href="shop-right-sidebar.html">gold ring</a></li>
-											<li><a href="shop-list.html">sliver ring</a></li>
-											<li><a href="shop-left-sidebar.html">Platinum ring</a></li>
-										</ul>
-									</div>
-									<div class="column-2 column">
-										<ul>
-											<li><a href="shop-list.html">Bracelets</a></li>
-											<li><a href="shop-left-sidebar.html">diamond Bracelets</a></li>
-											<li><a href="shop-right-sidebar.html">gold Bracelets</a></li>
-											<li><a href="shop-left-sidebar.html">sliver Bracelets</a></li>
-											<li><a href="shop-right-sidebar.html">Platinum Bracelets</a></li>
-										</ul>
-									</div>
-									<div class="column-3 column">
-										<ul>
-											<li><a href="shop-list.html">lecklaces</a></li>
-											<li><a href="shop-right-sidebar.html">diamond lecklaces</a></li>
-											<li><a href="shop-left-sidebar.html">gold lecklaces</a></li>
-											<li><a href="shop-right-sidebar.html">sliver lecklaces</a></li>
-											<li><a href="shop-left-sidebar.html">Platinum lecklaces</a></li>
-										</ul>
-									</div>
-									<div class="column-4 column">
-										<ul>
-											<li><a href="shop-right-sidebar.html">earrings</a></li>
-											<li><a href="shop-list.html">diamond earrings</a></li>
-											<li><a href="shop-left-sidebar.html">gold earrings</a></li>
-											<li><a href="shop-list.html">sliver earrings</a></li>
-											<li><a href="shop-left-sidebar.html">Platinum earrings</a></li>
-										</ul>
-									</div>
-								</div>
-							</li>
-							<li><a href="portfolio.html">Portfolio</a>
-								<ul class="sub-menu">
-									<li><a href="portfolio.html">Portfolio 3 column</a></li>
-									<li><a href="portfolio-2.html">Portfolio 4 column</a></li>
-								</ul>
-							</li>
-							<li><a href="blog.html">Blog</a>
-								<ul class="sub-menu">
-									<li><a href="blog.html">Blog Page</a></li>
-									<li><a href="blog-left-sidebar.html">Blog left sidebar</a></li>
-									<li><a href="blog-right-sidebar.html">Blog right sidebar</a></li>
-								</ul>
-							</li>
-							<li><a href="about-us.html">About Us</a></li>
-							<li><a href="contact.html">Contact</a>
-								<ul class="sub-menu">
-									<li><a href="contact.html">Contact 1</a></li>
-									<li><a href="contact-2.html">Contact 2</a></li>
-								</ul>
-							</li>
+							<li><a href="#">소개</a></li>
 						</ul>
 					</nav>
 				</div>
 				<div class="mobile-menu hidden-md hidden-lg">
 					<nav>
 						<ul>
-							<li><a href="/product/main" class="active">Home</a>
+							<li><a href="/product/main" class="active">메인페이지</a></li>
+							<li><a href="#">전체 상품</a></li>
+							<li><a href="#">요가복</a></li>
+							<li><a href="#">요가용품</a></li>
+							<li><a href="/board/list">게시판</a>
 								<ul>
-									<li><a href="/product/main">Home 1</a></li>
-									<li><a href="/product/main">Home 2</a></li>
-									<li><a href="/product/main">Home 3</a></li>
+									<li><a href="#">문의 게시판</a></li>
+									<li><a href="/board/comm_list">커뮤니티 게시판</a></li>
 								</ul>
 							</li>
-							<li><a href="#">Pages</a>
-								<ul>
-									<li><a href="about-us.html">About US</a></li>
-									<li><a href="blog.html">Blog</a></li>
-									<li><a href="blog-left-sidebar.html">Blog left sidebar</a></li>
-									<li><a href="blog-right-sidebar.html">Blog right sidebar</a></li>
-									<li><a href="blog-details.html">Blog details</a></li>
-									<li><a href="cart.html">Cart</a></li>
-									<li><a href="checkout.html">Checkout</a></li>
-									<li><a href="coming-soon.html">Coming soon</a></li>
-									<li><a href="contact.html">Contact</a></li>
-									<li><a href="contact-2.html">Contact 2</a></li>
-									<li><a href="faq.html">FAQ</a></li>
-									<li><a href="login.html">Login</a></li>
-									<li><a href="portfolio.html">Portfolio 3 column</a></li>
-									<li><a href="portfolio-2.html">Portfolio 4 column</a></li>
-									<li><a href="404.html">404</a></li>
-									<li><a href="shop.html">Shop</a></li>
-									<li><a href="shop-list.html">Shop list</a></li>
-									<li><a href="shop-left-sidebar.html">Shop left sidebar</a></li>
-									<li><a href="shop-right-sidebar.html">Shop right sidebar</a></li>
-									<li><a href="product-details.html">Product details</a></li>
-								</ul>
-							</li>
-							<li><a href="shop.html">Shop</a>
-								<ul>
-									<li><a href="shop-list.html">rings</a>
-									<ul>
-										<li><a href="shop-left-sidebar.html">diamond ring</a></li>
-										<li><a href="shop-right-sidebar.html">gold ring</a></li>
-										<li><a href="shop-list.html">sliver ring</a></li>
-										<li><a href="shop-left-sidebar.html">Platinum ring</a></li>
-									</ul>
-									</li>
-									<li><a href="shop-list.html">Bracelets</a>
-									<ul>
-										<li><a href="shop-left-sidebar.html">diamond Bracelets</a></li>
-										<li><a href="shop-right-sidebar.html">gold Bracelets</a></li>
-										<li><a href="shop-left-sidebar.html">sliver Bracelets</a></li>
-										<li><a href="shop-right-sidebar.html">Platinum Bracelets</a></li>
-									</ul>
-									</li>
-									<li><a href="shop-list.html">lecklaces</a>
-									<ul>
-										<li><a href="shop-right-sidebar.html">diamond lecklaces</a></li>
-										<li><a href="shop-left-sidebar.html">gold lecklaces</a></li>
-										<li><a href="shop-right-sidebar.html">sliver lecklaces</a></li>
-										<li><a href="shop-left-sidebar.html">Platinum lecklaces</a></li>
-									</ul>
-									</li>
-								</ul>
-							</li>
-							<li><a href="shop.html">New Arrivals</a>
-								<ul>
-									<li><a href="shop-list.html">rings</a>
-									<ul>
-										<li><a href="shop-left-sidebar.html">diamond ring</a></li>
-										<li><a href="shop-right-sidebar.html">gold ring</a></li>
-										<li><a href="shop-list.html">sliver ring</a></li>
-										<li><a href="shop-left-sidebar.html">Platinum ring</a></li>
-									</ul>
-									</li>
-									<li><a href="shop-list.html">Bracelets</a>
-									<ul>
-										<li><a href="shop-left-sidebar.html">diamond Bracelets</a></li>
-										<li><a href="shop-right-sidebar.html">gold Bracelets</a></li>
-										<li><a href="shop-left-sidebar.html">sliver Bracelets</a></li>
-										<li><a href="shop-right-sidebar.html">Platinum Bracelets</a></li>
-									</ul>
-									</li>
-									<li><a href="shop-list.html">lecklaces</a>
-									<ul>
-										<li><a href="shop-right-sidebar.html">diamond lecklaces</a></li>
-										<li><a href="shop-left-sidebar.html">gold lecklaces</a></li>
-										<li><a href="shop-right-sidebar.html">sliver lecklaces</a></li>
-										<li><a href="shop-left-sidebar.html">Platinum lecklaces</a></li>
-									</ul>
-									</li>
-									<li><a href="shop-right-sidebar.html">earrings</a>
-									<ul>
-										<li><a href="shop-right-sidebar.html">diamond lecklaces</a></li>
-										<li><a href="shop-left-sidebar.html">gold earrings</a></li>
-										<li><a href="shop-list.html">sliver earrings</a></li>
-										<li><a href="shop-left-sidebar.html">Platinum earrings</a></li>
-									</ul>
-									</li>
-								</ul>
-							</li>
-							<li><a href="portfolio.html">Portfolio</a>
-								<ul>
-									<li><a href="portfolio.html">Portfolio 3 column</a></li>
-									<li><a href="portfolio-2.html">Portfolio 4 column</a></li>
-								</ul>
-							</li>
-							<li><a href="blog.html">Blog</a>
-								<ul>
-									<li><a href="blog.html">Blog 1</a></li>
-									<li><a href="blog-left-sidebar.html">Blog 2</a></li>
-									<li><a href="blog-right-sidebar.html">Blog 3</a></li>
-								</ul>
-							</li>
-							<li><a href="about-us.html">About Us</a></li>
-							<li><a href="contact.html">Contact</a>
-								<ul>
-									<li><a href="contact.html">Contact 1</a></li>
-									<li><a href="contact-2.html">Contact 2</a></li>
-								</ul>
-							</li>
+							<li><a href="#">소개</a></li>
 						</ul>
 					</nav>
 				</div>
@@ -400,3 +188,12 @@
 		</div>
 	</div>
 </div><!--End Main Menu Area-->
+
+
+<script>
+$(document).ready(function() {
+	$("#member_logout").click(function() {
+		alert("로그아웃이 되었습니다.");
+	});
+});
+</script>

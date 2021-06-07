@@ -42,7 +42,7 @@ public class CommonController {
 	public String memberLogin(String error, String logout, Model model) {
 		log.info("로그인 페이지로 이동");
 		if (error != null) {
-			model.addAttribute("error", "계정을 확인해 주세요.");	
+			model.addAttribute("error", "아이디 혹은 비밀번호를 확인해주세요.");	
 		}
 		if (logout != null) {
 			model.addAttribute("logout", "로그아웃");
@@ -52,12 +52,7 @@ public class CommonController {
 	}
 	
 	@GetMapping("/logout")
-    public String logout(HttpServletRequest request, HttpServletResponse response){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        if(authentication != null){
-            new SecurityContextLogoutHandler().logout(request,response,authentication);
-        }
-        return "redirect:/";
-    }
+	public void logoutGet() {
+		log.info("custom logout");
+	}
 }

@@ -458,21 +458,21 @@ img {
 .search {
   position: relative;
   width: 100%;
-  margin-bottom: 20px;
+  margin: 10px 0;
 }
 .search input {
-  border: 1px solid #bdbdbd;
+  border: 2px solid #bdbdbd;
   color: #6b6b6b;
   font-weight:400;
-  font-size: 11px;
-  padding: 10px;
+  font-size: 13px;
+  padding: 13px;
   width: 100%;
 }
 .search > .submit {
   background: transparent none repeat scroll 0 0;
   border: 0 none;
-  line-height: 38px;
-  padding: 0 10px;
+  line-height: 48px;
+  padding: 0 13px;
   position: absolute;
   right: 0;
 }
