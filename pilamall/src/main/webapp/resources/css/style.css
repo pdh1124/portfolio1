@@ -2080,13 +2080,18 @@ img {
   margin-top: 50px;
 }
 .comments-list {
-  width: 83.33%;
+  width: 100%;
+}
+.div_line {
+  width:100%;
+  border-top:1px solid #BBBBBB;
+  margin: 10px 0;
 }
 h4.heading {
   color: #2a2a2a;
-  font-size: 14px;
+  font-size: 20px;
   font-weight: 700;
-  margin-bottom: 50px;
+  margin: 20px 0 40px 0;
   text-transform: uppercase;
 }
 .commentlists {
@@ -2467,6 +2472,13 @@ h4.heading {
   font-size: 13px;
   padding: 12px 15px;
   width: 100%;
+}
+.login textarea {
+  width:100%;
+  background: #ebebeb none repeat scroll 0 0; 
+  border: 1px solid #ccc;
+  color: #3e3f3f; 
+  padding: 12px 15px;
 }
 .remember {
   margin-top: 25px;
@@ -2904,6 +2916,104 @@ h4.heading {
   margin-bottom: 10px;
 }
 /*-----------------------
+	16-1. board list
+-------------------------*/
+.board_table {
+  
+}
+.table-info .b_bno {
+  width: 5%;
+  padding: 15px;
+}
+.b_bno {
+  text-align: center;
+}
+.b_title {
+  width: 30%;
+  padding: 15px;
+}
+.b_writer {
+  width: 15%;
+  padding: 15px;
+}
+.b_regdate {
+  width: 10%;
+  padding: 15px;
+  text-align: center;
+}
+.b_views {
+  width: 5%;
+  padding: 15px;
+  text-align: center;
+}
+.b_re_up {
+  width: 5%;
+  padding: 15px;
+  text-align: center;
+}
+.b_re_down {
+  width: 5%;
+  padding: 15px;
+  text-align: center;
+}
+.b_write_left {
+  width: 10%;
+  padding: 15px;
+}
+.b_write_right {
+  width: 90%;
+  padding: 15px;
+}
+.board_bt button {
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px 15px;
+  text-transform: uppercase;
+}
+.board_bt_reset {
+  background: #ebebeb none repeat scroll 0 0;
+  border: 1px solid #cccccc;
+  color: #595a5a;
+}
+.board_bt_reset:hover {
+  background: #ccc none repeat scroll 0 0;
+  color: #111;
+}
+.board_bt_submit {
+  background: #e09e25 none repeat scroll 0 0;
+  border: 1px solid #e09e25;
+  color: #fff;
+}
+.board_bt_submit:hover {
+  background:#555555;
+  border: 1px solid #555555;
+}
+.board_move_bt{
+  margin-top:10px;
+  text-align:right;
+  }
+
+.board_move_bt a {
+  display: inline-block;
+  margin-left: 10px;
+  background: #ebebeb none repeat scroll 0 0;
+  border: 1px solid #cccccc;
+  color: #595a5a;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 10px 15px;
+  text-decoration:none;
+  text-transform: uppercase;
+  float: right;
+}
+.board_move_bt a:hover {
+  background: #e09e25 none repeat scroll 0 0;
+  border: 1px solid #e09e25;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+/*-----------------------
 	16. Cart Page
 -------------------------*/
 .table-responsive {
@@ -2933,6 +3043,7 @@ h4.heading {
 .table-responsive tbody tr.table-info td:first-child {
   border-left: 1px solid #ddd;
 }
+
 .table-info .produ {
   width: 15%;
   padding: 15px;
@@ -3075,7 +3186,10 @@ h4.heading {
   font-weight: 700;
   text-transform: uppercase;
 }
-.proceed{margin-top:10px;text-align:right;}
+.proceed{
+  margin-top:10px;
+  text-align:right;
+}
 .proceed a {
   display: inline-block;
   margin-left: 20px;

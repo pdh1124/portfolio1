@@ -62,4 +62,7 @@
 </security:authentication-manager>
 
 
+<!-- 시큐리티 어노테이션 사용 할 수 있도록 설정 -->
+<security:global-method-security pre-post-annotations="enabled" secured-annotations="enabled" />
+
 </beans>

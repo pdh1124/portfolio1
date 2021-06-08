@@ -11,41 +11,78 @@
 
 <div class="page-title fix"><!--Start Title-->
 	<div class="overlay section">
-		<h2>로그인</h2>
+		<h2>커뮤니티 게시판</h2>
 	</div>
 </div><!--End Title-->
-<div class="login-page page fix"><!--start login Area-->
+<section class="cart-page page fix"><!--Start Cart Area-->
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-6">
-				<div class="login">
-					<form id="login-form" method="post" action="/member/login">
-						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-						<h2>LOGIN</h2>
-						<p>필라몰에 오신것을 환영합니다.</p>
-						<label>아이디<span>*</span></label>
-						<input type="text" name="userId" placeholder="아이디" />
-						<label>패스워드<span>*</span></label>
-						<input type="password" name="userPass" placeholder="****" />
-						<div class="remember">
-							<input type="checkbox" name="remember-me" />
-							<p>자동로그인</p>
-							<p><a href="/member/findUserId">아이디</a>나 <a href="/member/findUserPass">패스워드</a>를 잊으셨나요?</p>
-						</div>
-						<input type="submit" value="login" />
-						<br /><br />
-						<h3><c:out value="${error }" /></h3>
-						<h3><c:out value="${logout }" /></h3>
-					</form>
+
+			<div class="proceed fix" style="margin:16px;"> 
+				<a id="procedto" href="/board/comm_register">글 작성하기</a>
+			</div>
+			<div class="col-sm-12">
+				<div class="table-responsive">
+					<table class="table cart-table board_table">
+						<thead class="table-title">
+							<tr>
+								<th class="b_bno">글번호</th>
+								<th class="b_title">제목</th>
+								<th class="b_writer">작성자</th>
+								<th class="b_regdate">작성일</th>
+								<th class="b_views">조회수</th>
+								<th class="b_re_up">추천</th>
+								<th class="b_re_down">반대</th>
+							</tr>													
+						</thead>
+						<tbody>
+							<c:forEach var="board" items="${list }">
+								<tr class="table-info">
+									<td class="b_bno">
+										<h5><c:out value="${board.bno }" /></h5>
+									</td>
+									<td class="b_title">
+										<h5><a href="/board/comm_get?bno=${board.bno }"><c:out value="${board.title }" /></a><span style="color:red"></span></h5>
+									</td>
+									<td class="b_writer">
+										<h5><c:out value="${board.writer }" /></h5>
+									</td>
+									<td class="b_regdate">
+										<h5><fmt:formatDate pattern="yyyy-MM-dd" value="${board.regdate }" /></h5>
+									</td>
+									<td class="b_views">
+										<h5>3</h5>
+									</td>
+									<td class="b_re_up">
+										<h5>1</h5>
+									</td>
+									<td class="b_re_down">
+										<h5>1</h5>
+									</td>
+								</tr>
+							</c:forEach>					
+						</tbody>
+					</table>
 				</div>
 			</div>
-			<div class="col-sm-6">
-				<div class="about-img">
-					<img src="/resources/img/member/login_img.jpg" alt="" />
-				</div>
-			</div>
+			<!-- Pagination -->
+			<div class="pagination">
+				<ul style="margin-top: 50px;">
+					<li><a href="#"><i class="fa fa-angle-left"></i></a></li>
+					<li class="active"><span>1</span></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li><a href="#">4</a></li>
+					<li><a href="#">5</a></li>
+					<li><a href="#">6</a></li>
+					<li><a href="#">7</a></li>
+					<li><a href="#">8</a></li>
+					<li><a href="#">9</a></li>
+					<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+				</ul>
+			</div>	
 		</div>
 	</div>
-</div><!--End login Area-->
+</section><!--End Cart Area-->
 
 <%@ include file="../includes/footer.jsp"%>
