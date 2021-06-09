@@ -18,8 +18,11 @@
 	<div class="container">
 		<div class="row">
 			<div class="login">
-				<form id="login-form" role="form" method="POST" action="/board/comm_register">
+				<form id="login-form operForm" role="form" method="POST" action="/board/comm_modify">
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+					<input type="hidden" name="bno" value="${board.bno }">
+					<input type="hidden" name="pageNum" value="${cri.pageNum }" />
+					<input type="hidden" name="amount" value="${cri.amount }" /> 
 					<div class="col-sm-12">
 						<div class="table-responsive">
 							<table class="table cart-table board_table">
@@ -34,7 +37,7 @@
 											<h5>글제목</h5>
 										</td>
 										<td class="b_write_right">
-											<input type="text" name="title" placeholder="글 제목을 입력해주세요." />
+											<input type="text" name="title" value='<c:out value="${board.title }" />' />
 										</td>								
 									</tr>
 									<tr class="table-info">
@@ -42,7 +45,7 @@
 											<h5>작성자</h5>
 										</td>
 										<td class="b_write_right">
-											<input type="text" name="writer" placeholder="작성자명" />
+											<input type="text" name="writer" readonly="readonly" value='<c:out value="${board.writer }" />' />
 										</td>								
 									</tr>
 									<tr class="table-info">
@@ -50,14 +53,15 @@
 											<h5>글 내용</h5>
 										</td>
 										<td class="b_write_right">
-											<textarea rows="10" type="text" name="content" placeholder="글 내용을 입력해주세요."></textarea>
+											<textarea rows="10" type="text" name="content"><c:out value="${board.content }" /></textarea>
 										</td>								
 									</tr>					
 								</tbody>
 							</table>
 							<div class="board_bt">
-								<button class="board_bt_reset" type="reset">다시쓰기</button>
-								<button class="board_bt_submit" type="submit">글 작성하기</button>
+								<button data-oper="list" class="board_bt_list">목록보기</button>
+								<button data-oper="remove" class="board_bt_remove" type="submit">삭제하기</button>
+								<button data-oper="modify" class="board_bt_submit" type="submit">수정하기</button>
 							</div>
 						</div>
 					</div>
@@ -68,4 +72,43 @@
 	</div>
 </section><!--End Cart Area-->
 
+
 <%@ include file="../includes/footer.jsp"%>
+
+<script>
+$(document).ready(function() {
+	
+	var operForm = $("form");
+	
+	//각각 버튼에 대한 실행 
+	$(".board_bt button").on("click", function(e) {
+		
+		var operation = $(this).data("oper");
+		
+		//리스트 버튼
+		if (operation === 'list') {
+			e.preventDefault();
+			operForm.attr("action","/board/comm_list").attr("method","get");
+			
+			var pageNumTag = $("input[name='pageNum']");
+			var amountTag = $("input[name='amount']");
+			
+			operForm.empty(); //내용 비우기
+			operForm.append(pageNumTag);
+			operForm.append(amountTag);
+		}
+		//삭제 버튼
+		else if (operation === 'remove') {
+			e.preventDefault();
+			operForm.attr("action","/board/comm_remove");
+		}
+		
+		//수정버튼
+		else if (operation === 'modify') {
+			
+		}
+		
+		operForm.submit();
+	});
+});
+</script>

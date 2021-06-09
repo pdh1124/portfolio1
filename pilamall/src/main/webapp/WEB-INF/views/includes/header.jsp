@@ -10,7 +10,8 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE HTML>
 <html>
-<head>
+<head profile="http://www.w3.org/2005/10/profile">
+<link rel="icon" type="image/png" href="http://example.com/myicon.png">
 	<meta charset="UTF-8">
 	<title>필라몰 | pilamall</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -188,12 +189,3 @@
 		</div>
 	</div>
 </div><!--End Main Menu Area-->
-
-
-<script>
-$(document).ready(function() {
-	$("#member_logout").click(function() {
-		alert("로그아웃이 되었습니다.");
-	});
-});
-</script>

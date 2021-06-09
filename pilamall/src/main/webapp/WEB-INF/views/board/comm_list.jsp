@@ -41,8 +41,11 @@
 									<td class="b_bno">
 										<h5><c:out value="${board.bno }" /></h5>
 									</td>
+									<!--td class="b_title">
+										<h5><a href="/board/comm_get?bno=${board.bno }"><c:out value="${board.title }" /><span style="color:red"></span></a></h5>
+									</td-->
 									<td class="b_title">
-										<h5><a href="/board/comm_get?bno=${board.bno }"><c:out value="${board.title }" /></a><span style="color:red"></span></h5>
+										<h5><a href="${board.bno }" class="move"><c:out value="${board.title }" /><span style="color:red"></span></a></h5>
 									</td>
 									<td class="b_writer">
 										<h5><c:out value="${board.writer }" /></h5>
@@ -68,21 +71,46 @@
 			<!-- Pagination -->
 			<div class="pagination">
 				<ul style="margin-top: 50px;">
-					<li><a href="#"><i class="fa fa-angle-left"></i></a></li>
-					<li class="active"><span>1</span></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">4</a></li>
-					<li><a href="#">5</a></li>
-					<li><a href="#">6</a></li>
-					<li><a href="#">7</a></li>
-					<li><a href="#">8</a></li>
-					<li><a href="#">9</a></li>
-					<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+					<c:if test="${pageMaker.prev }">
+						<li><a href="${pageMaker.startPage-1 }"><i class="fa fa-angle-left"></i></a></li>
+					</c:if>
+					<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
+						<li class='${pageMaker.cri.pageNum == num?"active":"" }'><a href="${num} "><span>${num }</span></a></li>
+					</c:forEach>
+					<c:if test="${pageMaker.next }">
+						<li><a href="${pageMaker.endPage-1 }"><i class="fa fa-angle-right"></i></a></li>
+					</c:if>
 				</ul>
-			</div>	
+			</div>
+			
+			<form id="actionForm" action="/board/comm_list" method="get">
+				<input type="hidden" name="pageNum" value="${pgaeMaker.cri.pageNum }" />
+				<input type="hidden" name="amount" value="${pgaeMaker.cri.amount }" />
+			</form>				
 		</div>
 	</div>
 </section><!--End Cart Area-->
 
 <%@ include file="../includes/footer.jsp"%>
+
+<script>
+$(document).ready(function() {
+	
+	var actionForm = $("#actionForm");
+	
+	//페이징 숫자 및 <, >를 클릭하면 넘어가는 메소드
+	$("pagination ul li a").on("click", function(e) {
+		e.preventDefault();
+		actionFrom.find("input[name='pageNum']").val($(this).attr("href"));
+		actionFrom.submit();
+	});
+	
+	//제목 클릭시 넘어가는 메소드
+	$(".move").on("click", function(e) {
+		e.preventDefault();
+		actionFrom.append("<input type='hidden' name='bno' value='" + $(this).attr("href") + "'>");
+		actionFrom.attr("action", "/board/comm_get");
+		actionFrom.submit();
+	});
+});
+</script>

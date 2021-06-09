@@ -56,10 +56,13 @@
 								</tbody>
 							</table>
 							<div class="board_bt">
-								<button class="board_bt_list" type="reset">목록보기</button>
-								<button class="board_bt_remove" type="reset">삭제하기</button>
-								<button class="board_bt_submit" type="submit">수정하기</button>
+								<button class="board_bt_reset" type="reset">다시쓰기</button>
+								<button class="board_bt_submit" type="submit">글 작성하기</button>
 							</div>
+							
+							<form action="/board/comm_modify" met=get>
+								<input type="hidden" id="bno" name="bno" value="${board.bno }" />
+							</form>
 						</div>
 					</div>
 	

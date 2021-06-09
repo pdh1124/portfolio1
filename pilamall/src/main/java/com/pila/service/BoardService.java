@@ -3,6 +3,7 @@ package com.pila.service;
 import java.util.List;
 
 import com.pila.domain.BoardVO;
+import com.pila.domain.Criteria;
 
 public interface BoardService {
 	
@@ -14,6 +15,8 @@ public interface BoardService {
 	
 	public boolean remove(Long bno); //글삭제
 	
-	public List<BoardVO> getList(); //목록보기
+	public List<BoardVO> getList(Criteria cri); //목록보기
+	
+	public int getTotal(Criteria cri);
 	
 }

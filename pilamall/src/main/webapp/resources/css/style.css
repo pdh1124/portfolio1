@@ -2970,6 +2970,12 @@ h4.heading {
   padding: 10px 15px;
   text-transform: uppercase;
 }
+.board_bt a {
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px 15px;
+  text-transform: uppercase;
+}
 .board_bt_reset {
   background: #ebebeb none repeat scroll 0 0;
   border: 1px solid #cccccc;
@@ -2988,11 +2994,30 @@ h4.heading {
   background:#555555;
   border: 1px solid #555555;
 }
-.board_move_bt{
+.board_move_bt {
   margin-top:10px;
   text-align:right;
   }
 
+.board_move_bt button {
+  display: inline-block;
+  margin-left: 10px;
+  background: #ebebeb none repeat scroll 0 0;
+  border: 1px solid #cccccc;
+  color: #595a5a;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 10px 15px;
+  text-decoration:none;
+  text-transform: uppercase;
+  float: right;
+}
+.board_move_bt button:hover {
+  background: #e09e25 none repeat scroll 0 0;
+  border: 1px solid #e09e25;
+  color: #ffffff;
+  font-weight: bold;
+}
 .board_move_bt a {
   display: inline-block;
   margin-left: 10px;

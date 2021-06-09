@@ -3,6 +3,7 @@ package com.pila.mapper;
 import java.util.List;
 
 import com.pila.domain.BoardVO;
+import com.pila.domain.Criteria;
 
 public interface BoardMapper {
 	
@@ -18,5 +19,8 @@ public interface BoardMapper {
 	
 	public int update(BoardVO board); //수정
 	
+	public List<BoardVO> getListWithPaging(Criteria cri); //페이징 처리
 	
+	public int getTotalCount(Criteria cri);
+
 }

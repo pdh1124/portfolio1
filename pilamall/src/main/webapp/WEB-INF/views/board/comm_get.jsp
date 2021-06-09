@@ -18,10 +18,20 @@
 	<div class="container">
 		<div class="row">
 			<div class="board_move_bt fix"> 
-				<a href="/board/comm_modify">수정하기</a>
-				<a href="/board/comm_list">목록보기</a>
-				<a href="/board/comm_register">다음 &gt;</a>
-				<a href="/board/comm_register">&lt; 이전</a>
+				<button data-oper="modify">수정하기</button>
+				<button data-oper="list">목록보기</button>
+				<c:if test="${pageDTO.nextNum ne 0 }">
+					<a data-oper="next">다음 &gt;</a>
+				</c:if>
+				<c:if test="${pageDTO.prevNum ne 0 }">
+				<a data-oper="prev">&lt; 이전</a>
+				</c:if>
+				
+				<form id="hidden_form" action="/board/modify" method="get">
+					<input type="hidden" id="bno" name="bno" value="${board.bno }" />
+					<input type="hidden" name="pageNum" value="${cri.pageNum }" />
+					<input type="hidden" name="amount" value="${cri.amount }" /> 
+				</form>
 			</div>
 			<div class="single-blog blog-details">
 					<div class="content fix">
@@ -90,6 +100,8 @@
 							</li><!-- #comment-## -->
 						</ol>
 					</div>
+					
+					
 					<div class="commentform">
 						<div class="div_line"></div>
 						<h4 class="heading">댓글 작성</h4>
@@ -117,3 +129,27 @@
 </section><!--End Cart Area-->
 
 <%@ include file="../includes/footer.jsp"%>
+
+<script>
+$(document).ready(function() {
+
+	var operForm = $(".board_move_bt form");
+	
+	$(".board_move_bt button").on("click", function(e) {
+		var operation = $(this).data("oper");
+		
+		if (operation === 'list') {
+			e.preventDefault();
+			operForm.attr("action","/board/comm_list").attr("method","get");
+			operForm.empty(); //내용 비우기
+		}
+		else if (operation === 'modify') {
+			e.preventDefault();
+			operForm.attr("action","/board/comm_modify").submit();
+		}
+		
+		operForm.submit();
+	});
+});
+</script>
+
