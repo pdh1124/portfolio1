@@ -12,4 +12,11 @@ public class BoardVO {
 	private String writer; //작성자
 	private Date regdate; //작성일
 	private Date updateDate; //수정일
+	
+	private Long prevBno; //이전글
+	private Long nextBno; //다음글	
+	
+	public BoardVO() {
+		
+	}
 }

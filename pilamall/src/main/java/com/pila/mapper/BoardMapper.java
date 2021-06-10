@@ -22,5 +22,7 @@ public interface BoardMapper {
 	public List<BoardVO> getListWithPaging(Criteria cri); //페이징 처리
 	
 	public int getTotalCount(Criteria cri);
+	
+	public Long prevPage(Long prevBno);
 
 }

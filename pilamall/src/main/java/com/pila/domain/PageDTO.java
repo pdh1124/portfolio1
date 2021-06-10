@@ -7,15 +7,15 @@ import lombok.ToString;
 @ToString
 public class PageDTO {
 	
-	private int startPage;
-	private int endPage;
-	private boolean prev;
-	private boolean next;
-	private int total;
-	private Criteria cri;
+	private int startPage; //시작페이지
+	private int endPage; //마지막페이지
+	private boolean prev; //이전버튼
+	private boolean next; //다음버튼
+	private int total; //총게시물 수
+	private Criteria cri; //pageNum,amount
 	
 	public PageDTO(Criteria cri, int total) {
-	
+		
 		this.cri = cri;
 		this.total = total;
 		

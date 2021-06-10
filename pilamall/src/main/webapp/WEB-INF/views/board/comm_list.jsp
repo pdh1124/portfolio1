@@ -72,20 +72,20 @@
 			<div class="pagination">
 				<ul style="margin-top: 50px;">
 					<c:if test="${pageMaker.prev }">
-						<li><a href="${pageMaker.startPage-1 }"><i class="fa fa-angle-left"></i></a></li>
+						<li class="pageMove"><a href="${pageMaker.startPage-1 }"><i class="fa fa-angle-left"></i></a></li>
 					</c:if>
 					<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
-						<li class='${pageMaker.cri.pageNum == num?"active":"" }'><a href="${num} "><span>${num }</span></a></li>
+						<li class='pageMove ${pageMaker.cri.pageNum == num?"active":"" }'><a href="${num} "><span>${num }</span></a></li>
 					</c:forEach>
 					<c:if test="${pageMaker.next }">
-						<li><a href="${pageMaker.endPage-1 }"><i class="fa fa-angle-right"></i></a></li>
+						<li class="pageMove"><a href="${pageMaker.endPage-1 }"><i class="fa fa-angle-right"></i></a></li>
 					</c:if>
 				</ul>
 			</div>
-			
+		
 			<form id="actionForm" action="/board/comm_list" method="get">
-				<input type="hidden" name="pageNum" value="${pgaeMaker.cri.pageNum }" />
-				<input type="hidden" name="amount" value="${pgaeMaker.cri.amount }" />
+				<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }" />
+				<input type="hidden" name="amount" value="${pageMaker.cri.amount }" />
 			</form>				
 		</div>
 	</div>
@@ -99,18 +99,19 @@ $(document).ready(function() {
 	var actionForm = $("#actionForm");
 	
 	//페이징 숫자 및 <, >를 클릭하면 넘어가는 메소드
-	$("pagination ul li a").on("click", function(e) {
+	$(".pageMove a").on("click", function(e) {
 		e.preventDefault();
-		actionFrom.find("input[name='pageNum']").val($(this).attr("href"));
-		actionFrom.submit();
+		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+		actionForm.submit();
 	});
 	
 	//제목 클릭시 넘어가는 메소드
 	$(".move").on("click", function(e) {
+		console.log("클릭함2");
 		e.preventDefault();
-		actionFrom.append("<input type='hidden' name='bno' value='" + $(this).attr("href") + "'>");
-		actionFrom.attr("action", "/board/comm_get");
-		actionFrom.submit();
+		actionForm.append("<input type='hidden' name='bno' value='" + $(this).attr("href") + "'>");
+		actionForm.attr("action","/board/comm_get");
+		actionForm.submit();
 	});
 });
 </script>
