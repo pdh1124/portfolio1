@@ -22,7 +22,9 @@
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 					<input type="hidden" name="bno" value="${board.bno }">
 					<input type="hidden" name="pageNum" value="${cri.pageNum }" />
-					<input type="hidden" name="amount" value="${cri.amount }" /> 
+					<input type="hidden" name="amount" value="${cri.amount }" />
+					<input type="hidden" name="type" value="${pageMaker.cri.type }" />
+					<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }" /> 
 					<div class="col-sm-12">
 						<div class="table-responsive">
 							<table class="table cart-table board_table">
@@ -92,10 +94,14 @@ $(document).ready(function() {
 			
 			var pageNumTag = $("input[name='pageNum']");
 			var amountTag = $("input[name='amount']");
+			var keywordTag = $("input[name='keyword']");
+			var typeTag = $("input[name='type']");
 			
 			operForm.empty(); //내용 비우기
 			operForm.append(pageNumTag);
 			operForm.append(amountTag);
+			operForm.append(keywordTag);
+			operForm.append(typeTag);
 		}
 		//삭제 버튼
 		else if (operation === 'remove') {

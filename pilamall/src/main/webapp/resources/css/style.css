@@ -1721,6 +1721,7 @@ img {
   z-index: 9999;
 }
 .hot-pro img, .new-pro img{}
+
 .pagination {
   border-radius: 0;
   clear: both;
@@ -3037,7 +3038,35 @@ h4.heading {
   color: #ffffff;
   font-weight: bold;
 }
-
+.board_search {
+  position: relative;
+  width: 100%;
+  margin: 10px 0;
+}
+.board_search input {
+  border: 2px solid #bdbdbd;
+  color: #6b6b6b;
+  font-weight:400;
+  font-size: 13px;
+  padding: 13px;
+  width: 65%;
+  float:right;
+}
+.board_search > .submit {
+  background: transparent none repeat scroll 0 0;
+  border: 0 none;
+  line-height: 48px;
+  padding: 0 13px;
+  position: absolute;
+  right: 0;
+}
+.board_type {
+	width:32%;
+	font-size:13px;
+	padding:13px 0;
+	border: 2px solid #bdbdbd;
+	position: absolute;
+}
 /*-----------------------
 	16. Cart Page
 -------------------------*/

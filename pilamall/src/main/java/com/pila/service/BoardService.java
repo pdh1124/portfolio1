@@ -19,7 +19,4 @@ public interface BoardService {
 	
 	public int getTotal(Criteria cri);
 	
-	public Long getPrev(Long prevBno);
-	
-	
 }

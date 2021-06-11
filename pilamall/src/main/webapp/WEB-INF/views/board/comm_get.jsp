@@ -20,17 +20,19 @@
 			<div class="board_move_bt fix"> 
 				<button data-oper="modify">수정하기</button>
 				<button data-oper="list">목록보기</button>
-				<c:if test="${BoardVO.nextBno ne 0 }">
-					<button data-oper="next">다음 &gt;</button>
+				<c:if test="${board.nextBno ne null}">
+					<a href="/board/comm_get?bno=${board.nextBno}">다음 &gt;</a>
 				</c:if>
-				<c:if test="${BoardVO.prevBno ne 0 }">
-					<button data-oper="prev">&lt; 이전</button>
+				<c:if test="${board.prevBno ne null}">
+					<a href="/board/comm_get?bno=${board.prevBno}">&lt; 이전</a>
 				</c:if>
 				
 				<form id="hidden_form" action="/board/modify" method="get">
 					<input type="hidden" id="bno" name="bno" value="${board.bno }" />
 					<input type="hidden" name="pageNum" value="${cri.pageNum }" />
-					<input type="hidden" name="amount" value="${cri.amount }" /> 
+					<input type="hidden" name="amount" value="${cri.amount }" />
+					<input type="hidden" name="type" value="${pageMaker.cri.type }" />
+					<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }" /> 
 				</form>
 			</div>
 			

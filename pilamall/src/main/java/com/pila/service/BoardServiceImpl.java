@@ -57,10 +57,4 @@ public class BoardServiceImpl implements BoardService {
 		return mapper.getTotalCount(cri);
 	}
 
-	@Override
-	public Long getPrev(Long prevBno) {
-		log.info("이전글번호 : " + prevBno);
-		return mapper.prevPage(prevBno);
-	}
-
 }
