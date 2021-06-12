@@ -161,7 +161,7 @@ $(document).ready(function() {
 		e.preventDefault();
 		board_searchForm.submit();
 	});
-	
+	//검색버튼 -----------------끝
 	
 	
 });
