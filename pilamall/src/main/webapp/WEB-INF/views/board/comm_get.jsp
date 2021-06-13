@@ -141,7 +141,8 @@
 
 <script>
 $(document).ready(function() {
-
+	
+	//
 	var operForm = $(".board_move_bt form");
 	
 	$(".board_move_bt button").on("click", function(e) {
@@ -169,4 +170,5 @@ $(document).ready(function() {
 	});
 });
 </script>
+<script type="text/javascript" src="/resources/js/comm_reply.js"></script>
 
