@@ -64,7 +64,7 @@
 							<div class="the-comment">
 								<div class="comment-box">
 									<div class="comment-author">
-										<p class="com-name"><strong></strong></p><a class="repost-link">  </a> <a class="comment-reply-link">  </a>
+										<p class="com-name"><strong></strong></p><span id='comment-modify'>  </span> <a class="comment-reply-link">  </a>
 									</div>
 									<div class="comment-text">
 										<p></p>
@@ -172,7 +172,7 @@ $(document).ready(function() {
 	});
 	
 	
-	//콘솔에다가 출력하는 것
+	//콘솔에다가 리스트를 출력하는 것
 	/*replyService.getList(
 		{
 			bno: bnoValue,
@@ -185,6 +185,8 @@ $(document).ready(function() {
 		}
 	);*/
 	
+
+	//댓글 리스트
 	var replyUL = $(".commentlists");
 	
 	function showList(page) {
@@ -202,8 +204,11 @@ $(document).ready(function() {
 				str += "<li class='sin-comment'>";
 				str += "<div class='the-comment'>";
 				str += "<div class='comment-box'>";
-				str += "<div class='comment-author'>";
-				str += "<p class='com-name'><strong>" + list[i].replyer + "</strong></p>" + replyService.displayTime(list[i].replyDate) + " ";
+				str += "<div class='comment-author' data-rno='" + list[i].rno + "'>";
+				str += "<p class='com-name'><strong>" + list[i].replyer + "</strong></p>";
+				str += replyService.displayTime(list[i].replyDate);
+				str += "<a class='comment-modify'> 수정 </a>";
+				str += "<a class='comment-reply-link'> 삭제 </a>";
 				str += "</div>";
 				str += "<div class='comment-text'>";
 				str += "<p>" + list[i].reply + "</p>";
@@ -216,6 +221,13 @@ $(document).ready(function() {
 		});
 	}
 	showList(1);
+	
+	
+	
+	//댓글 수정
+	$(".comment-modify").on("click", function(e) {
+		console.log("hi");
+	});
 
 });
 </script>

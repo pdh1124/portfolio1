@@ -56,9 +56,6 @@ public class BoardController {
 	@GetMapping({"/comm_get", "/comm_modify"})
 	public void get(@RequestParam("bno") Long bno , Model model, @ModelAttribute("cri") Criteria cri) {
 	
-		
-		log.info("이전글" + bno);
-	
 		model.addAttribute("board", service.get(bno));
 	}
 	

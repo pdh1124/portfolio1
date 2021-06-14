@@ -65,11 +65,32 @@ var replyService = (function() { //자바스크립트는 함수를 변수에 할
 
 	}
 	
+	//댓글 수정
+	function update(reply, callback, error) {
+		$.ajax({
+			type: 'put',
+			url: '/replies/' + reply.rno,
+			data: JSON.stringify(reply),
+			contentType: "application/json;charset=utf-8",
+			success: function(result, status, xhr) {
+				if(callback) {
+					callback(result);
+				}
+			},
+			error: function(xhr, status, er) {
+				if(error) {
+					error(er);
+				}
+			}
+		});
+	}
+	
 	return {
 	// 변수명,호출명 예) replyService.add
 		add: add,
 		getList: getList,
-		displayTime: displayTime
+		displayTime: displayTime,
+		update: update
 	};
 })(); // 즉시 실행 함수 : 끝부분이 ();식으로 끝나면 명시하는 것과 동시에 메모리에 등록
 
