@@ -62,75 +62,36 @@
 					<ol class="commentlists">
 						<li class="sin-comment">
 							<div class="the-comment">
-								<div class="avatar">
-									<img alt="" src="img/blog/comment-1.jpg">	
-								</div>
 								<div class="comment-box">
 									<div class="comment-author">
-										<p class="com-name"><strong>Tom Cruze</strong></p>3 day ago  <a href="#" class="repost-link"> Repost </a> <a href="#" class="comment-reply-link"> Reply </a>
+										<p class="com-name"><strong></strong></p><a class="repost-link">  </a> <a class="comment-reply-link">  </a>
 									</div>
 									<div class="comment-text">
-										<p>Lorem ipsum dolor sit amet, consectetur adi ing elit, sed do eiusmo empor incididunt ut labore et dolore magna aliqua magna aliqua Lorem ipsum dolor sit amet, consectetur adi ing elit, sed do eiusmo empor incididunt ut labore et dolore magna aliqua magna aliqua Lorem ipsum dolor sit amet, </p>
-									</div>
-								</div>
-							</div>
-							<ul class="children-comment">
-								<li class="comment">
-									<div class="the-comment">
-										<div class="avatar">
-											 <img alt="" src="img/blog/comment-2.jpg">
-										</div>
-										<div class="comment-box">
-											<div class="comment-author">
-												<p class="com-name"><strong>Nill Pori</strong></p>3 mins ago <a href="#" class="repost-link"> Repost </a> <a href="#" class="comment-reply-link"> Reply </a>
-											</div>
-											<div class="comment-text">
-												<p>Lorem ipsum dolor sit amet, consectetur adi ing elit, sed do eiusmo empor incididunt ut labore et dolore magna aliqua magna aliqua Lorem ipsum dolor sit amet, consectetur adi ing elit, sed do eiusmo empor incididunt ut labore et dolore magna aliqua magna aliqua.<br>
-											</p></div>
-										</div>
-									</div>
-								</li><!-- #comment-## -->
-							</ul><!-- .children -->
-						</li><!-- #comment-## -->
-						<li class="sin-comment">
-							<div class="the-comment">
-								<div class="avatar">
-									<img alt="" src="img/blog/comment-3.jpg">
-								</div>
-								<div class="comment-box">
-									<div class="comment-author">
-										<p class="com-name"><strong>TOMAS LEE</strong></p>3 day ago  <a href="#" class="repost-link"> Repost </a> <a href="#" class="comment-reply-link"> Reply </a>
-									</div>
-									<div class="comment-text">
-										<p>Lorem ipsum dolor sit amet, consectetur adi ing elit, sed do eiusmo empor incididunt ut labore et dolore magna aliqua magna aliqua Lorem ipsum dolor sit amet, consectetur adi ing elit, sed do eiusmo empor incididunt ut labore et dolore magna aliqua magna aliqua Lorem ipsum dolor sit amet, </p>
+										<p></p>
 									</div>
 								</div>
 							</div>
 						</li><!-- #comment-## -->
 					</ol>
 				</div>
-				
-				
-				<div class="commentform">
+						
+				<div>
 					<div class="div_line"></div>
 					<h4 class="heading">댓글 작성</h4>
-					<form class="comment-form" id="commentform" method="post" action="#">
+					<div id="commentform">
 						<div class="row">
-							<div class="col-md-4">
-								<div class="form-input">
-									<label for="title">제목<span>*</span></label>
-									<input type="text" aria-required="true" value="" name="title" id="title">
-								</div>
+							<div class="form-input" id="reply_form">
+								<label for="title">작성자<span>*</span></label>
+								<input type="hidden" value="${board.bno}" name="bno" id="bno">
+								<input type="hidden" value="replyDate" name="replyDate" id="replyDate">
+								
+								<input type="text" aria-required="true" value="replyer" name="replyer" id="replyer"><br>
+								<label for="comment" class="field-label">내용<span>*</span></label>
+								<textarea aria-required="true" name="reply" id="reply" rows="4"></textarea><br>
+								<button type="submit" id="submit" name="submit">댓글 등록</button>
 							</div>
 						</div>
-						<div class="form-input">
-							<label for="comment" class="field-label">내용<span>*</span></label>
-							<textarea aria-required="true" name="comment" id="comment" rows="4"></textarea>
-						</div>
-						<p class="form-submit">
-							<input type="submit" value="submit" id="submit" name="submit">
-						</p>
-					</form>
+					</div>
 				</div><!-- end commentform -->
 			</div>
 		</div>
@@ -139,10 +100,12 @@
 
 <%@ include file="../includes/footer.jsp"%>
 
+<script type="text/javascript" src="/resources/js/comm_reply.js"></script>
+
 <script>
 $(document).ready(function() {
 	
-	//
+	//목록보기,수정,이전글,다음글 버튼
 	var operForm = $(".board_move_bt form");
 	
 	$(".board_move_bt button").on("click", function(e) {
@@ -157,18 +120,106 @@ $(document).ready(function() {
 			e.preventDefault();
 			operForm.attr("action","/board/comm_modify").submit();
 		}
-		else if (operation === 'next') {
-			e.preventDefault();
-			operForm.attr("action","/board/comm_get").submit();
-		}
-		else if (operation === 'prev') {
-			e.preventDefault();
-			operForm.attr("action","/board/comm_get").submit();
-		}
-		
+	
 		operForm.submit();
 	});
+	
+		
+	//post처리 시 csrf 값을 함께 전송하기 위해 ajaxsend시 같이 넘김
+	/*
+	var csrfHeaderName = "${_csrf.headerName}";
+	var csrfTokenValue = "${_csrf.token}";
+	
+	$(document).ajaxSend(function(e,xhr,options) {
+		xhr.setRequestHeader(csrfHeaderName,csrfTokenValue);
+	});
+	*/
+	
+	//댓글
+	var bnoValue = '<c:out value="${board.bno}"/>'; //bno 게시물 번호
+	
+	var reply_form = $("#reply_form"); //쓰기폼
+	var reply_replyDate = reply_form.find("input[name='replyDate']"); //댓글 작성일 항목.
+	var comm_reply = reply_form.find("textarea[name='reply']");//댓글 내용
+	var comm_replyer = reply_form.find("input[name='replyer']");//댓글 작성자
+	var comm_submit = reply_form.find("button[name='submit']"); //쓰기버튼
+	
+	/*
+	replyService.add({
+		reply : "생성 테스트",
+		replyer : "테스터",
+		bno : bnoValue
+	}, function(result) {
+		alert("result: " + result);
+	});
+	*/
+	
+	//댓글 - 등록 버튼 클릭 
+	comm_submit.on("click", function(e) {
+		
+		var reply = {
+				reply : comm_reply.val(),
+				replyer : comm_replyer.val(),
+				bno : bnoValue
+		};
+		console.log(reply);
+		
+		replyService.add(reply, function(result) {
+			alert(result + "! 댓글 작성이 완료되었습니다.");
+			comm_reply.val("");
+			showList(-1);
+		});
+	});
+	
+	
+	//콘솔에다가 출력하는 것
+	/*replyService.getList(
+		{
+			bno: bnoValue,
+			page: 1
+		}, 
+		function(list) {
+			for(var i = 0, len = list.length || 0; i < len; i++) {
+				console.log(list[i]);
+			}	
+		}
+	);*/
+	
+	var replyUL = $(".commentlists");
+	
+	function showList(page) {
+		replyService.getList({
+			bno : bnoValue,
+			page: page || 1
+		},
+		function(list) {
+			var str = "";
+			if(list == null || list.length == 0) {
+				replyUL.html("");
+				return;
+			}
+			for(var i = 0, len = list.length || 0; i < len; i++) {
+				str += "<li class='sin-comment'>";
+				str += "<div class='the-comment'>";
+				str += "<div class='comment-box'>";
+				str += "<div class='comment-author'>";
+				str += "<p class='com-name'><strong>" + list[i].replyer + "</strong></p>" + replyService.displayTime(list[i].replyDate) + " ";
+				str += "</div>";
+				str += "<div class='comment-text'>";
+				str += "<p>" + list[i].reply + "</p>";
+				str += "</div>";
+				str += "</div>";
+				str += "</div>";
+				str += "</li>";
+			}
+			replyUL.html(str);
+		});
+	}
+	showList(1);
+
 });
 </script>
-<script type="text/javascript" src="/resources/js/comm_reply.js"></script>
+
+
+
 

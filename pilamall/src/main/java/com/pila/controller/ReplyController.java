@@ -29,20 +29,20 @@ public class ReplyController {
 	
 	private ReplyService service;
 	
-	
 	//댓글 쓰기
-	@PostMapping(value="/new", consumes="application/json", produces = {MediaType.TEXT_PLAIN_VALUE})
+	@PostMapping(value = "/new", consumes = "application/json", produces = {MediaType.TEXT_PLAIN_VALUE})
 	public ResponseEntity<String> create(@RequestBody ReplyVO vo) {
 		//@RequestBody : json 형태로 받은 값을 객체로 변환
 	
+		log.info("ReplyVo: " + vo);
 		int insertCount = service.register(vo);
+		log.info("Reply insert count: " + insertCount);
 		
 		return insertCount == 1 ? new ResponseEntity<>("success", HttpStatus.OK) : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		
 		// ResponseEntity : 웹페이지 생성 (상태코드, 헤더, 응답, 데이터)
 		// HttpStatus 페이지 상태를 전달.
 		// 정상 처리되면 정상 처리의 status(상태) 전달하고, 아니면 오류 status 전달.
-		
 	}
 	
 	
@@ -73,10 +73,10 @@ public class ReplyController {
 	
 	
 	//댓글 수정
-	@RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH}, value="/{rno}", comsumes="application/json", produces = {MediaType.TEXT_PLAIN_VALUE})
+	@RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH}, value="/{rno}", consumes="application/json", produces = {MediaType.TEXT_PLAIN_VALUE})
 	public ResponseEntity<String> modify(@RequestBody ReplyVO vo, @PathVariable("rno") Long rno) {
 		
-		vo.setBno(bno);
+		vo.setRno(rno);
 		
 		return service.modify(vo) == 1 ? new ResponseEntity<>("success", HttpStatus.OK) : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}

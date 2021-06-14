@@ -7,7 +7,7 @@
 
 	<!-- 댓글 등록 -->
 	<insert id="insert">
-		insert into comm_reply (rno,bno,reply,replyer) value (seq_comm_reply.nextval, #{bno}, #{reply}, #{replyer})
+		insert into comm_reply (rno,bno,reply,replyer) values (seq_comm_reply.nextval, #{bno}, #{reply}, #{replyer})
 	</insert>
 	
 	<!-- 댓글 조회 -->
