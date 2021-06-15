@@ -74,6 +74,7 @@
 						</li><!-- #comment-## -->
 					</ol>
 				</div>
+				<div class="pagination"></div>
 						
 				<div>
 					<div class="div_line"></div>
@@ -194,7 +195,17 @@ $(document).ready(function() {
 			bno : bnoValue,
 			page: page || 1
 		},
-		function(list) {
+		function(replyCnt, list) {
+			
+			console.log("댓글 갯수 : " + replyCnt);
+			
+			if(page == -1) {
+				pageNum = Math.ceil(replyCnt/10.0);
+				console.log("현재페이지 : " + pageNum);
+				showList(pageNum);
+				return;
+			}
+			
 			var str = "";
 			if(list == null || list.length == 0) {
 				replyUL.html("");
@@ -204,13 +215,13 @@ $(document).ready(function() {
 				str += "<li class='sin-comment'>";
 				str += "<div class='the-comment'>";
 				str += "<div class='comment-box'>";
-				str += "<div class='comment-author' data-rno='" + list[i].rno + "'>";
+				str += "<div class='comment-author'>";
 				str += "<p class='com-name'><strong>" + list[i].replyer + "</strong></p>";
 				str += replyService.displayTime(list[i].replyDate);
-				str += "<a class='comment-modify'> 수정 </a>";
-				str += "<a class='comment-reply-link'> 삭제 </a>";
+				str += "<a class='comment-modify' data-rno='" + list[i].rno + "'> 수정 </a>";
+				str += "<a class='comment-remove' data-rno='" + list[i].rno + "'> 삭제 </a>";
 				str += "</div>";
-				str += "<div class='comment-text'>";
+				str += "<div class='comment-text' id='modify-id_" + list[i].rno + "'>";
 				str += "<p>" + list[i].reply + "</p>";
 				str += "</div>";
 				str += "</div>";
@@ -218,17 +229,110 @@ $(document).ready(function() {
 				str += "</li>";
 			}
 			replyUL.html(str);
+			showReplyPage(replyCnt);
 		});
 	}
 	showList(1);
 	
 	
+	//댓글 페이징
+	var pageNum = 1;
+	var replyPageFooter = $(".pagination");
 	
-	//댓글 수정
-	$(".comment-modify").on("click", function(e) {
-		console.log("hi");
+	function showReplyPage(replyCnt) {
+		var endNum = Math.ceil(pageNum/10.0) * 10;
+		var startNum = endNum - 9;
+		var prev = startNum != 1;
+		var next = false;
+		
+		if(endNum * 10 >= replyCnt) {
+			endNum = Math.ceil(replyCnt / 10.0);
+		}
+		
+		if(endNum * 10 < replyCnt) {
+			next = true;
+		}
+		
+		
+		
+		var str = "<ul style='margin: 10px 0 40px 0'>";
+		if(prev) {
+			str += "<li class='pageMove'>";
+			str += "<a href='" + (startNum - 1) + "'><i class='fa fa-angle-left'></i></a>";
+			str += "</li>";
+		}
+		for(var i = startNum; i <= endNum; i++) {
+			var active = pageNum == i ? "active":"";
+			str += "<li class='pageMove " + active + "'>";
+			str += "<a href='" + i + "'><span>" + i + "</span></a>";
+			str += "</li>";
+		}
+		if(next) {
+			str += "<li class='pageMove'>";
+			str += "<a href='" + (endNum + 1) + "'><i class='fa fa-angle-right'></i></a>";
+			str += "</li>";
+		}
+		str += "</ul>";
+		console.log(str);
+		replyPageFooter.html(str);
+	}
+	
+	//페이징 버튼을 누를 때 댓글 페이지 이동
+	replyPageFooter.on("click", "li a", function(e) {
+		e.preventDefault();
+		
+		var targetPageNum = $(this).attr("href");
+		pageNum = targetPageNum;
+		showList(pageNum);
 	});
+	
+	
+	//댓글 수정 - 수정 버튼 클릭 시 textarea 생성 	
+	$(document).on('click', '.comment-modify', function(){
+		
+		var rno = $(this).data("rno");
+		
+		console.log(rno);
+		replyService.get(rno ,function(reply) {
+			comm_reply.val(reply.reply);
+			comm_replyer.val(reply.replyer);
+			var str = "";
+			str += "<textarea class='modi-textarea' data-rno=" + rno + " aria-required='true' name='reply' id='reply' rows='4'></textarea><br>";
+			str += "<button class='modi-button' type='submit' id='submit' name='submit'>댓글 등록</button>";
+			
+			$("#modify-id_"+rno).html(str);
+		});
+	});
+	
+	
+	//댓글 수정 - textarea에 버튼을 누르면 수정이 완료됨
+	$(document).on('click', '.modi-button', function(){
+	
+		var reply = {
+				rno : $(".modi-textarea").data("rno"),
+				reply : $(".modi-textarea").val()
+		};
+		replyService.update(reply, function(result) {
+			alert("수정완료!");
+			var str = "";
+			str += "<p>" + reply.reply + "</p>";
+			
+			$("#modify-id_"+rno).html(str);
+		});
+	});
+	
+	
+	//댓글 삭제
+	$(document).on('click', '.comment-remove', function(){
 
+		var rno = $(this).data("rno");
+		console.log(rno);
+		
+		replyService.remove(rno, function(result) {
+			alert("삭제가 완료되었습니다.");
+			showList(-1);
+		});
+	});
 });
 </script>
 

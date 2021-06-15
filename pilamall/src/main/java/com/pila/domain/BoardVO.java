@@ -16,7 +16,8 @@ public class BoardVO {
 	private Long prevBno; //이전글
 	private Long nextBno; //다음글	
 	
-	public BoardVO() {
-		
-	}
+	private int replyCnt;
+	private int commUp;
+	private int commDown;
+	
 }

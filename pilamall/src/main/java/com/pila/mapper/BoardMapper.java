@@ -2,6 +2,8 @@ package com.pila.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.pila.domain.BoardVO;
 import com.pila.domain.Criteria;
 
@@ -21,6 +23,11 @@ public interface BoardMapper {
 	
 	public List<BoardVO> getListWithPaging(Criteria cri); //페이징 처리
 	
-	public int getTotalCount(Criteria cri);
-
+	public int getTotalCount(Criteria cri); //게시물 총 갯수
+	
+	public void updateReplyCnt(@Param("bno") Long bno, @Param("amount") int amount); //게시물별 댓글의 갯수 표시
+	
+	
+	
+	
 }

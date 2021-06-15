@@ -64,9 +64,9 @@
 	<!-- 페이징 하기 -->
 	<select id="getListWithPaging" resultType="com.pila.domain.BoardVO">
 		<![CDATA[
-			select bno, title, content, writer, regdate, updatedate
+			select bno, title, content, writer, regdate, updatedate, replycnt, commup, commdown
 			from (
-				select /*+INDEX_DESC(comm_loard pk_comm_board) */ rownum rn, bno, title, content, writer, regdate, updatedate 
+				select /*+INDEX_DESC(comm_loard pk_comm_board) */ rownum rn, bno, title, content, writer, regdate, updatedate, replycnt, commup, commdown
 				from (select * from comm_board where bno > 0 ORDER BY bno DESC)
 				where 
 				

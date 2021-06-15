@@ -3067,6 +3067,10 @@ h4.heading {
 	border: 2px solid #bdbdbd;
 	position: absolute;
 }
+
+/*-----------------------
+	16-2. board modify
+-------------------------*/
 #reply_form {
 	margin:0 15px;
 }
@@ -3103,6 +3107,23 @@ h4.heading {
 }
 #reply_form button:hover {
   background: #555555 ;
+}
+.modi-textarea {
+  background: transparent none repeat scroll 0 0;
+  border: 1px solid #cccccc;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  padding: 7px 15px;
+  width: 100%;
+}
+.modi-button {
+  background: #e09e25 none repeat scroll 0 0;
+  border: 0 none;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 10px 20px;
+  text-transform: uppercase;
 }
 /*-----------------------
 	16. Cart Page

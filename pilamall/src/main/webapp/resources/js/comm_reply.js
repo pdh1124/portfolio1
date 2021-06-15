@@ -36,7 +36,7 @@ var replyService = (function() { //자바스크립트는 함수를 변수에 할
 		$.getJSON("/replies/pages/" + bno + "/" + page + ".json",
 				function(data) {
 					if (callback) {
-						callback(data);
+						callback(data.replyCnt, data.list);
 					}
 				}).fail(function(xhr, status, err) {
 			// xhr : xml http request의 약자.
@@ -85,14 +85,45 @@ var replyService = (function() { //자바스크립트는 함수를 변수에 할
 		});
 	}
 	
+	
+	//댓글 1개 읽기 - 댓글 1개를 가져와야 수정이 가능함
+	function get(rno, callback, error) {
+		$.get("/replies/" + rno + ".json", function(result) {
+			if(callback) {
+				callback(result);
+			}
+		}).fail(function(xhr, status, er) {
+			if(error) {
+				error(er);
+			}
+		})
+	}
+	
+	
+	//댓글 삭제
+	function remove(rno, callback, error) {
+		$.ajax({
+			type: 'delete',
+			url: '/replies/'+rno,
+			success: function(deleteResult, status, xhr) {
+				if(callback) {
+					callback(deleteResult);
+				}
+			},
+			error: function(xhr, status, er) {
+				if(error) {
+					error(er);
+				}
+			}
+		});
+	}
+	
 	return {
-	// 변수명,호출명 예) replyService.add
 		add: add,
 		getList: getList,
 		displayTime: displayTime,
-		update: update
+		update: update,
+		get: get,
+		remove: remove
 	};
-})(); // 즉시 실행 함수 : 끝부분이 ();식으로 끝나면 명시하는 것과 동시에 메모리에 등록
-
-// 자바 스크립트는 함수도 변수에 할당 가능함.
-// 자바 람다식도 함수를 변수에 할당
+})(); 

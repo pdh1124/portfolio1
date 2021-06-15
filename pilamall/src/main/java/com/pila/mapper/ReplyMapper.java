@@ -18,5 +18,7 @@ public interface ReplyMapper {
 	public int update(ReplyVO reply); //댓글 수정
 	
 	public List<ReplyVO> getListWithPaging(@Param("cri") Criteria cri, @Param("bno") Long bno); //댓글 리스트 및 페이징
+
+	public int getCountByBno(Long bno);
 	
 }

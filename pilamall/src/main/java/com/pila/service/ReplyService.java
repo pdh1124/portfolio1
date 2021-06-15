@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.pila.domain.Criteria;
+import com.pila.domain.ReplyPageDTO;
 import com.pila.domain.ReplyVO;
 
 public interface ReplyService {
@@ -18,5 +19,6 @@ public interface ReplyService {
 	public int modify(ReplyVO reply); //댓글 수정
 	
 	public List<ReplyVO> getList(@Param("cri") Criteria cri, @Param("bno") Long bno); //페이지 정보와 게시물 번호를 전달.
-
+	
+	public ReplyPageDTO getListPage(Criteria cri, Long bno);
 }

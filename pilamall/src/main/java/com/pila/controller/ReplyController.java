@@ -1,7 +1,5 @@
 package com.pila.controller;
 
-import java.util.List;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pila.domain.Criteria;
+import com.pila.domain.ReplyPageDTO;
 import com.pila.domain.ReplyVO;
 import com.pila.service.ReplyService;
 
@@ -48,12 +47,12 @@ public class ReplyController {
 	
 	//댓글 읽기
 	@GetMapping(value="/pages/{bno}/{page}", produces = {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<List<ReplyVO>> getList(@PathVariable("page") int page, @PathVariable("bno") Long bno) {
+	public ResponseEntity<ReplyPageDTO> getList(@PathVariable("page") int page, @PathVariable("bno") Long bno) {
 		// @PathVariable : url로 넘겨받은 값 이용
 		
 		Criteria cri = new Criteria(page, 10);
 		
-		return new ResponseEntity<>(service.getList(cri, bno), HttpStatus.OK);
+		return new ResponseEntity<>(service.getListPage(cri, bno), HttpStatus.OK);
 	}
 	
 	
