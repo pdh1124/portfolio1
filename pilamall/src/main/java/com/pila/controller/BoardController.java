@@ -1,5 +1,7 @@
 package com.pila.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,12 +9,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.pila.domain.BoardLikeVO;
 import com.pila.domain.BoardVO;
 import com.pila.domain.Criteria;
+import com.pila.domain.MemberVO;
 import com.pila.domain.PageDTO;
+import com.pila.service.BoardLikeService;
 import com.pila.service.BoardService;
 
 import lombok.AllArgsConstructor;
@@ -25,6 +32,7 @@ import lombok.extern.log4j.Log4j;
 public class BoardController {
 	
 	private BoardService service;
+	private BoardLikeService LikeService;
 	
 	//글목록 보기
 	@GetMapping("/comm_list")
@@ -54,10 +62,49 @@ public class BoardController {
 	
 	//읽기
 	@GetMapping({"/comm_get", "/comm_modify"})
-	public void get(@RequestParam("bno") Long bno , Model model, @ModelAttribute("cri") Criteria cri) {
-	
+	public void get(@RequestParam("bno") Long bno , Model model, @ModelAttribute("cri") Criteria cri,HttpServletRequest httpRequest) {
+		service.viewCnt(bno);
+		
+		String userid = ((MemberVO) httpRequest.getSession().getAttribute("login")).getUserId();
+		
+		BoardLikeVO vo = new BoardLikeVO();
+		vo.setBno(bno);
+		vo.setUserid(userid);
+		
+		int boardlike = LikeService.checkLike(vo);
+		log.info(boardlike);
+		
+		model.addAttribute("heart", boardlike);
 		model.addAttribute("board", service.get(bno));
 	}
+	
+	//좋아요 기능
+	@ResponseBody
+	@PostMapping(value="/heart", produces = "application/json")
+	public int heart(HttpServletRequest httpRequest) {
+		
+		int heart = Integer.parseInt(httpRequest.getParameter("heart"));
+        Long bno = Long.parseLong(httpRequest.getParameter("bno"));
+		String userid = ((MemberVO) httpRequest.getSession().getAttribute("login")).getUserId();
+		
+		BoardLikeVO boardLikeVO = new BoardLikeVO();
+		
+		boardLikeVO.setBno(bno);
+		boardLikeVO.setUserid(userid);
+		
+		log.info(heart);
+		
+		if(heart >= 1) {
+			LikeService.likeDown(boardLikeVO);
+			heart = 0;
+		} else {
+			LikeService.likeUp(boardLikeVO);
+			heart = 1;
+		}
+		
+		return heart;
+	}
+	
 	
 	//수정
 	@PostMapping("/comm_modify")

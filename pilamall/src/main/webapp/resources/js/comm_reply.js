@@ -118,6 +118,14 @@ var replyService = (function() { //자바스크립트는 함수를 변수에 할
 		});
 	}
 	
+	
+	//좋아요 기능
+	function like(rno, callback, error) {
+		$.ajax({
+			type: ''
+		})
+	}
+	
 	return {
 		add: add,
 		getList: getList,

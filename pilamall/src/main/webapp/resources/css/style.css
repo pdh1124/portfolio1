@@ -3067,7 +3067,33 @@ h4.heading {
 	border: 2px solid #bdbdbd;
 	position: absolute;
 }
+/*
+board get
+*/
 
+.recommendation button {
+  display: inline-block;
+  margin-left: 10px;
+  background: #ebebeb none repeat scroll 0 0;
+  border: 1px solid #cccccc;
+  color: #595a5a;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 10px 15px;
+  text-decoration:none;
+  text-transform: uppercase;
+  float: right;
+}
+#recom_up:hover {
+  border: 1px solid #ff0000;
+  color: #ff0000;
+  font-weight: bold;
+}
+#recom_down:hover {
+  border: 1px solid #0000ff;
+  color: #0000ff;
+  font-weight: bold;
+}
 /*-----------------------
 	16-2. board modify
 -------------------------*/

@@ -17,6 +17,7 @@ public class BoardVO {
 	private Long nextBno; //다음글	
 	
 	private int replyCnt;
+	private int views;	
 	private int commUp;
 	private int commDown;
 	

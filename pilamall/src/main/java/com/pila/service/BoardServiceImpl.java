@@ -57,4 +57,10 @@ public class BoardServiceImpl implements BoardService {
 		return mapper.getTotalCount(cri);
 	}
 
+	@Override
+	public int viewCnt(Long bno) {
+		log.info("조회수 증가");
+		return mapper.updateViews(bno);
+	}
+
 }

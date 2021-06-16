@@ -30,8 +30,7 @@
 								<th class="b_writer">작성자</th>
 								<th class="b_regdate">작성일</th>
 								<th class="b_views">조회수</th>
-								<th class="b_re_up">추천</th>
-								<th class="b_re_down">반대</th>
+								<th class="b_re_up">좋아요</th>
 							</tr>													
 						</thead>
 						<tbody>
@@ -44,7 +43,11 @@
 										<h5><a href="/board/comm_get?bno=${board.bno }"><c:out value="${board.title }" /><span style="color:red"></span></a></h5>
 									</td-->
 									<td class="b_title">
-										<h5><a href="${board.bno }" class="move"><c:out value="${board.title }" /><span style="color:red"></span></a></h5>
+										<h5><a href="${board.bno }" class="move"><c:out value="${board.title }" />
+											<c:if test="${board.replyCnt ne 0 }">
+												<span style="color:red"><c:out value="[${board.replyCnt }]"/></span>
+											</c:if>
+										</a></h5>
 									</td>
 									<td class="b_writer">
 										<h5><c:out value="${board.writer }" /></h5>
@@ -53,12 +56,9 @@
 										<h5><fmt:formatDate pattern="yyyy-MM-dd" value="${board.regdate }" /></h5>
 									</td>
 									<td class="b_views">
-										<h5>3</h5>
+										<h5><c:out value="${board.views }"/></h5>
 									</td>
 									<td class="b_re_up">
-										<h5>1</h5>
-									</td>
-									<td class="b_re_down">
 										<h5>1</h5>
 									</td>
 								</tr>
@@ -131,7 +131,6 @@ $(document).ready(function() {
 	
 	//제목 클릭시 넘어가는 메소드
 	$(".move").on("click", function(e) {
-		console.log("클릭함2");
 		e.preventDefault();
 		actionForm.append("<input type='hidden' name='bno' value='" + $(this).attr("href") + "'>");
 		actionForm.attr("action","/board/comm_get");

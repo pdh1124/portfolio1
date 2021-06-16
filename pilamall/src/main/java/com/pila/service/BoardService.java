@@ -19,4 +19,6 @@ public interface BoardService {
 	
 	public int getTotal(Criteria cri);
 	
+	public int viewCnt(Long bno);
+	
 }

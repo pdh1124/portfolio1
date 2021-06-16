@@ -44,10 +44,13 @@
 					<div class="meta">
 						<i class="fa fa-pencil-square-o"></i><c:out value="${board.writer }" /> 
 						<i class="fa fa-calendar"></i><fmt:formatDate pattern="yyyy-MM-dd" value="${board.regdate }" /> 
-						<i class="fa fa-comments"></i>12 Comments
+						<i class="fa fa-comments"></i>조회수 : <c:out value="${board.views }"/>
 					</div>
 					<div class="div_line"></div>
 					<p><c:out value="${board.content }" /></p>
+					<div class="recommendation">
+						<button type="button" id='recom_up' onclick=""><i class="fa fa-thumbs-o-up"></i> 추천</button>
+					</div>
 				</div>
 			</div>
 			
@@ -58,7 +61,7 @@
 			<div id="comments">
 				<div class="comments-list">
 					<div class="div_line"></div>
-					<h4 class="heading">댓글</h4>
+					<h4 class="heading">댓글 <span style="color:#999999;"><c:out value="${board.replyCnt }" /></span></h4>
 					<ol class="commentlists">
 						<li class="sin-comment">
 							<div class="the-comment">
