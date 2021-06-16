@@ -78,34 +78,7 @@ public class BoardController {
 		model.addAttribute("board", service.get(bno));
 	}
 	
-	//좋아요 기능
-	@ResponseBody
-	@PostMapping(value="/heart", produces = "application/json")
-	public int heart(HttpServletRequest httpRequest) {
 		
-		int heart = Integer.parseInt(httpRequest.getParameter("heart"));
-        Long bno = Long.parseLong(httpRequest.getParameter("bno"));
-		String userid = ((MemberVO) httpRequest.getSession().getAttribute("login")).getUserId();
-		
-		BoardLikeVO boardLikeVO = new BoardLikeVO();
-		
-		boardLikeVO.setBno(bno);
-		boardLikeVO.setUserid(userid);
-		
-		log.info(heart);
-		
-		if(heart >= 1) {
-			LikeService.likeDown(boardLikeVO);
-			heart = 0;
-		} else {
-			LikeService.likeUp(boardLikeVO);
-			heart = 1;
-		}
-		
-		return heart;
-	}
-	
-	
 	//수정
 	@PostMapping("/comm_modify")
 	public String modify(BoardVO board, RedirectAttributes rttr, Criteria cri) {
