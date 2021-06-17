@@ -15,27 +15,27 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class BoardLikeServiceImpl implements BoardLikeService {
 
-	@Setter(onMethod_ = @Autowired)
-	private BoardLikeMapper mapper;
-	
-	@Override
-	public void likeUp(BoardLikeVO vo) {
-		mapper.createBoardLike(vo);
-	}
-
-	@Override
-	public void likeDown(BoardLikeVO vo) {
-		mapper.deleteBoardLike(vo);
-	}
-
-	@Override
-	public void likeCalculation(int bno) {
-		mapper.updateBoardLike(bno);
-	}
-
-	@Override
-	public int checkLike(BoardLikeVO vo) {	
-		return mapper.getBoardLike(vo);
-	}
+//	@Setter(onMethod_ = @Autowired)
+//	private BoardLikeMapper mapper;
+//	
+//	@Override
+//	public void likeUp(BoardLikeVO vo) {
+//		mapper.createBoardLike(vo);
+//	}
+//
+//	@Override
+//	public void likeDown(BoardLikeVO vo) {
+//		mapper.deleteBoardLike(vo);
+//	}
+//
+//	@Override
+//	public void likeCalculation(int bno) {
+//		mapper.updateBoardLike(bno);
+//	}
+//
+//	@Override
+//	public int checkLike(BoardLikeVO vo) {	
+//		return mapper.getBoardLike(vo);
+//	}
 
 }

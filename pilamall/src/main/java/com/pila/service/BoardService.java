@@ -2,6 +2,7 @@ package com.pila.service;
 
 import java.util.List;
 
+import com.pila.domain.BoardAttachVO;
 import com.pila.domain.BoardVO;
 import com.pila.domain.Criteria;
 
@@ -17,8 +18,9 @@ public interface BoardService {
 	
 	public List<BoardVO> getList(Criteria cri); //목록보기
 	
-	public int getTotal(Criteria cri);
+	public int getTotal(Criteria cri); //총 게시물 수
 	
-	public int viewCnt(Long bno);
+	public int viewCnt(Long bno); //조회수
+	
 	
 }

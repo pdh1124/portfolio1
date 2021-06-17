@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pila.domain.BoardAttachVO;
 import com.pila.domain.BoardVO;
 import com.pila.domain.Criteria;
+import com.pila.mapper.BoardAttachMapper;
 import com.pila.mapper.BoardMapper;
 
 import lombok.AllArgsConstructor;
@@ -20,6 +22,9 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Setter(onMethod_ = @Autowired)
 	private BoardMapper mapper;
+	
+	@Setter(onMethod_ = @Autowired)
+	private BoardAttachMapper attachMapper;
 	
 	@Override
 	public void register(BoardVO board) {
@@ -62,5 +67,6 @@ public class BoardServiceImpl implements BoardService {
 		log.info("조회수 증가");
 		return mapper.updateViews(bno);
 	}
+
 
 }

@@ -1,7 +1,12 @@
 package com.pila.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,15 +14,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.pila.domain.BoardLikeVO;
+import com.pila.domain.BoardAttachVO;
 import com.pila.domain.BoardVO;
 import com.pila.domain.Criteria;
-import com.pila.domain.MemberVO;
 import com.pila.domain.PageDTO;
 import com.pila.service.BoardLikeService;
 import com.pila.service.BoardService;
@@ -65,16 +68,17 @@ public class BoardController {
 	public void get(@RequestParam("bno") Long bno , Model model, @ModelAttribute("cri") Criteria cri,HttpServletRequest httpRequest) {
 		service.viewCnt(bno);
 		
-		String userid = ((MemberVO) httpRequest.getSession().getAttribute("login")).getUserId();
+//		String userid = ((MemberVO) httpRequest.getSession().getAttribute("login")).getUserId();
+//		
+//		BoardLikeVO vo = new BoardLikeVO();
+//		vo.setBno(bno);
+//		vo.setUserid(userid);
+//		
+//		int boardlike = LikeService.checkLike(vo);
+//		log.info(boardlike);
+//		
+//		model.addAttribute("heart", boardlike);
 		
-		BoardLikeVO vo = new BoardLikeVO();
-		vo.setBno(bno);
-		vo.setUserid(userid);
-		
-		int boardlike = LikeService.checkLike(vo);
-		log.info(boardlike);
-		
-		model.addAttribute("heart", boardlike);
 		model.addAttribute("board", service.get(bno));
 	}
 	
@@ -98,6 +102,7 @@ public class BoardController {
 	@PostMapping("/comm_remove")
 	public String remove(@RequestParam("bno") Long bno, RedirectAttributes rttr, Criteria cri) {
 		log.info("삭제처리" + bno);
+		
 		if(service.remove(bno)) {
 			rttr.addFlashAttribute("result","success");
 		}
@@ -107,5 +112,6 @@ public class BoardController {
 		rttr.addAttribute("keyword", cri.getKeyword());
 		
 		return "redirect:/board/comm_list";
-	}	
+	}
+	
 }

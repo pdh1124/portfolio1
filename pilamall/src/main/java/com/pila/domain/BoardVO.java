@@ -1,11 +1,13 @@
 package com.pila.domain;
 
 import java.sql.Date;
+import java.util.List;
 
 import lombok.Data;
 
 @Data
 public class BoardVO {
+	
 	private Long bno; //글번호
 	private String title; //글제목
 	private String content; //글내용
@@ -16,9 +18,12 @@ public class BoardVO {
 	private Long prevBno; //이전글
 	private Long nextBno; //다음글	
 	
-	private int replyCnt;
-	private int views;	
-	private int commUp;
-	private int commDown;
+	private int replyCnt; //댓글 수
+ 	private int views; //조회수	
+//	private int commUp; //좋아요 수
+	
+//	private List<BoardLikeVO> boardLike; //좋아요 
+	private List<BoardAttachVO> attachList; //첨부파일
+	
 	
 }

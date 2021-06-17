@@ -23,6 +23,7 @@
 	
 	<context:component-scan base-package="com.pila.controller" />
 	
-	
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"/>
+	<!-- 자바를 통해서 생성하는것이 객체인데 이 객체를 xml에서도 작성을 시도하도록 하는것이 bean이다 -->
 	
 </beans:beans>
