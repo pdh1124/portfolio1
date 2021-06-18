@@ -22,5 +22,6 @@ public interface BoardService {
 	
 	public int viewCnt(Long bno); //조회수
 	
+	public List<BoardAttachVO> getAttachList(Long bno); //게시물 번호에 있는 첨부파일 전부 리턴
 	
 }

@@ -54,7 +54,16 @@
 				</div>
 			</div>
 			
-			
+			<div id="comments">
+				<div class="comments-list">
+					<div class="div_line"></div>
+					<h4 class="heading">첨부파일</h4>
+					<div class="uploadResult">
+						<ul>
+						</ul>
+					</div>
+				</div>	
+			</div>
 			
 			
 			
@@ -336,6 +345,38 @@ $(document).ready(function() {
 			showList(-1);
 		});
 	});
+
+	//첨부파일 목록 표시
+	(function() {
+		var bno = '<c:out value="${board.bno}" />';
+		
+		$.getJSON("/board/getAttachList",{bno:bno}, function(arr) {
+		
+			console.log(arr);
+			var str ="";
+			
+			$(arr).each(function(i,attach){
+				str += "<li data-path='" + attach.uploadPath + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.fileName + "' data-type='" + attach.fileType + "'>";
+				str += "<div>";
+				str += "<img src='/resources/img/attach.png' width='20px'>";
+				str += "<span>&nbsp;" + attach.fileName + "</span><br />";
+				str += "</div>";
+				str += "</li>";
+			});
+			$(".uploadResult ul").html(str);
+		});
+	})();
+	
+	
+	//첨부파일 클릭시 다운로드 처리
+	$(".uploadResult").on("click","li",function(e) {
+		console.log("파일 다운로드");
+		var liObj = $(this);
+		var path = encodeURIComponent(liObj.data("path") + "/" + liObj.data("uuid") + "_" + liObj.data("filename"));
+		
+		self.location="/download?fileName="+path;
+	});
+	
 });
 </script>
 

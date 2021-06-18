@@ -95,8 +95,26 @@ $(document).ready(function(e) {
 	$("button[type='submit']").on("click", function(e) {
 		e.preventDefault();
 		console.log("submit clicked");
+		
+		var str = "";
+		$(".uploadResult ul li").each(function(i, obj) {
+			// i:순서 , obj:요소(첨부파일 목록 1개)
+			
+			var jobj = $(obj);
+			console.dir(jobj);
+			console.log("-----------------");
+			console.log(jobj.data("filename"));
+			
+			str += "<input type='hidden' name='attachList[" + i + "].fileName' value='" + jobj.data("filename") + "'>";
+			str += "<input type='hidden' name='attachList[" + i + "].uuid' value='" + jobj.data("uuid") + "'>";
+			str += "<input type='hidden' name='attachList[" + i + "].uploadPath' value='" + jobj.data("path") + "'>";
+			str += "<input type='hidden' name='attachList[" + i + "].fileType' value='" + jobj.data("type") + "'>";
+		});
+		formObj.append(str).submit();
 	});
 	
+	
+	//첨부파일 등록
 	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$"); //해당 확장자 업로드 제한
 	var maxSize = 5242880; // 5MB
 	
@@ -133,6 +151,7 @@ $(document).ready(function(e) {
 			contentType:false,
 			data:formData,
 			type:'POST',
+			dataType:'json',
 			success:function(result) {
 				console.log(result);
 				showUploadResult(result);
@@ -142,7 +161,7 @@ $(document).ready(function(e) {
 	
 	//글쓰기 폼에 첨부파일을 등록 할 경우 목록에 꾸리기
 	function showUploadResult(uploadResultArr) {
-		if(!uploadResultArr || uploadResultArr.ength == 0) {
+		if(!uploadResultArr || uploadResultArr.length == 0) {
 			return;
 		}
 		
@@ -151,9 +170,43 @@ $(document).ready(function(e) {
 		
 		$(uploadResultArr).each(function(i, obj) {
 			
-			var fileCallPath = encodeURIComponent(obj.uploadPath + "/" + obj.uuid + "_" + obj.fileName);
-			var fileLink = fileCallPath.replace(new RegExp(/\\/g), "/");
+			var fileCallPath = encodeURIComponent(obj.uploadPath + "/" + obj.uuid + "_" + obj.fileName); 
+			var fileLink = fileCallPath.replace(new RegExp(/\\/g), "/"); //역슬러시를 찾아서 슬러시로 변환
+			
+	
+			str += "<li data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-filename='" + obj.fileName + "' data-type='" + obj.image + "'>";
+			str += "<div>";
+			str += "<img src='/resources/img/attach.png' width='20' height='20'>";
+			str += "<span>" + obj.fileName + "</span> ";
+			str += "<b data-file='" + fileCallPath + "' data-type='file'> [x]</b>";
+			str += "</div>";
+			str += "</li>";
 		});
+		uploadUL.append(str);
 	}
+	
+	//[x]를 클릭했을때 목록에서 지우기
+	$(".uploadResult").on("click", "b", function(e) {
+		
+		console.log("파일 삭제");
+		
+		var targetFile = $(this).data("file");
+		var type = $(this).data("type");
+		var targetLi = $(this).closest("li");
+		
+		$.ajax({
+			url: '/deleteFile',
+			data: {
+				fileName: targetFile,
+				type: type
+			},
+			dataType: 'text',
+			type: 'POST',
+			success: function(result) {
+				alert(result);
+				targetLi.remove();
+			}
+		})
+	});
 });
 </script>

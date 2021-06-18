@@ -46,4 +46,9 @@
 		select count(rno) from comm_reply where bno=#{bno}
 	</select>
 	
+	<!-- 게시물 삭제시 해당 댓글도 전체 삭제 -->
+	<delete id="deleteAll">
+		delete from comm_reply where bno=#{bno}
+	</delete>
+	
 </mapper>

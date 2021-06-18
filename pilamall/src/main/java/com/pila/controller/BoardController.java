@@ -1,5 +1,8 @@
 package com.pila.controller;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -60,6 +63,10 @@ public class BoardController {
 		log.info("글쓰기 : " + board);
 		service.register(board);
 		rttr.addFlashAttribute("result", board.getBno());
+		
+		if(board.getAttachList() != null) {
+			board.getAttachList().forEach(attach -> log.info(attach));
+		}
 		return "redirect:/board/comm_list";
 	}
 	
@@ -85,33 +92,78 @@ public class BoardController {
 		
 	//수정
 	@PostMapping("/comm_modify")
-	public String modify(BoardVO board, RedirectAttributes rttr, Criteria cri) {
+	public String modify(BoardVO board, RedirectAttributes rttr, @ModelAttribute("cri") Criteria cri) {
 		log.info("수정 : " + board);
+		
 		if(service.modify(board)) {
 			rttr.addFlashAttribute("result", "success");
 		}
+		
+		/*
+		//cri.getListLink();로 한번에 처리
 		rttr.addAttribute("pageNum", cri.getPageNum());
 		rttr.addAttribute("amount", cri.getAmount());
 		rttr.addAttribute("type", cri.getType());
 		rttr.addAttribute("keyword", cri.getKeyword());
+		*/
 		
-		return "redirect:/board/comm_list";
+		return "redirect:/board/comm_list" + cri.getListLink();
 	}
 
 	//삭제
 	@PostMapping("/comm_remove")
-	public String remove(@RequestParam("bno") Long bno, RedirectAttributes rttr, Criteria cri) {
+	public String remove(@RequestParam("bno") Long bno, RedirectAttributes rttr,@ModelAttribute("cri") Criteria cri) {
 		log.info("삭제처리" + bno);
 		
+		List<BoardAttachVO> attachList = service.getAttachList(bno);
+		
 		if(service.remove(bno)) {
+			deleteFiles(attachList);
 			rttr.addFlashAttribute("result","success");
 		}
+		
+		/*
+		//cri.getListLink();로 한번에 처리
 		rttr.addAttribute("pageNum", cri.getPageNum());
 		rttr.addAttribute("amount", cri.getAmount());
 		rttr.addAttribute("type", cri.getType());
 		rttr.addAttribute("keyword", cri.getKeyword());
+		*/
 		
-		return "redirect:/board/comm_list";
+		return "redirect:/board/comm_list" + cri.getListLink();
 	}
+	
+	
+	//첨부파일 목록
+	@GetMapping(value="/getAttachList", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public ResponseEntity<List<BoardAttachVO>> getAttachList(Long bno) {
+		log.info("첨부파일 리스트를 위한 게시물 번호: "+ bno);
+		
+		return new ResponseEntity<>(service.getAttachList(bno), HttpStatus.OK);
+	}
+	
+	
+	//첨부파일 하나씩 삭제
+	private void deleteFiles(List<BoardAttachVO> attachList) {
+		
+		//리스트가 없거나 첨부파일이 없으면 끝낸다.
+		if(attachList == null || attachList.size() == 0) {
+			return;
+		}
+		
+		log.info("첨부파일 삭제");
+		log.info(attachList);
+		
+		attachList.forEach(attach -> {
+			try {
+				Path file = Paths.get("c:\\pilaupload\\" + attach.getUploadPath() + "\\" + attach.getUuid() + "_" + attach.getFileName());
+				Files.deleteIfExists(file);
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
+	}
+	
 	
 }
