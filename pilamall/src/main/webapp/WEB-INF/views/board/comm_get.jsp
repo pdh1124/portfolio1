@@ -18,7 +18,12 @@
 	<div class="container">
 		<div class="row">
 			<div class="board_move_bt fix"> 
-				<button data-oper="modify">수정하기</button>
+				<sec:authentication property="principal" var="pinfo" />
+				<sec:authorize access="isAuthenticated()">
+					<c:if test="${pinfo.username eq board.writer} ">
+						<button data-oper="modify">수정하기</button>
+					</c:if>
+				</sec:authorize>
 				<button data-oper="list">목록보기</button>
 				<c:if test="${board.nextBno ne null}">
 					<a href="/board/comm_get?bno=${board.nextBno}">다음 &gt;</a>

@@ -42,7 +42,7 @@
 											<h5>작성자</h5>
 										</td>
 										<td class="b_write_right">
-											<input type="text" name="writer" placeholder="작성자명" />
+											<input type="text" name="writer" value='<sec:authentication property="principal.username"/>' readonly="readonly" />
 										</td>								
 									</tr>
 									<tr class="table-info">
@@ -132,6 +132,10 @@ $(document).ready(function(e) {
 		return true;
 	}
 	
+	
+	var csrfHeaderName = "${_csrf.headerName}";
+	var csrfTokenValue = "${_csrf.token}";
+	
 	//첨부파일을 올리면 표시,전달하는 ajax
 	$("input[type='file']").change(function(e) {
 		var formData = new FormData();
@@ -149,6 +153,9 @@ $(document).ready(function(e) {
 			url: '/uploadAjaxAction',
 			processData:false,
 			contentType:false,
+			beforeSend : function(xhr) {
+				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+			},
 			data:formData,
 			type:'POST',
 			dataType:'json',
@@ -199,6 +206,9 @@ $(document).ready(function(e) {
 			data: {
 				fileName: targetFile,
 				type: type
+			},
+			beforeSend : function(xhr) {
+				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
 			},
 			dataType: 'text',
 			type: 'POST',

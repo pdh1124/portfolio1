@@ -50,7 +50,10 @@ public class BoardController {
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
 	}
 	
+	
+	//글쓰기(get방식으로 이동)
 	@GetMapping("/comm_register")
+	@PreAuthorize("isAuthenticated()")
 	public void register() {
 		//이동할 주소를 리턴하지 않는다면, 요청한 이름으로의 jsp 파일을 찾음.
 	}
@@ -92,6 +95,7 @@ public class BoardController {
 		
 	//수정
 	@PostMapping("/comm_modify")
+	@PreAuthorize("principal.username == #board.writer")
 	public String modify(BoardVO board, RedirectAttributes rttr, @ModelAttribute("cri") Criteria cri) {
 		log.info("수정 : " + board);
 		
@@ -112,7 +116,8 @@ public class BoardController {
 
 	//삭제
 	@PostMapping("/comm_remove")
-	public String remove(@RequestParam("bno") Long bno, RedirectAttributes rttr,@ModelAttribute("cri") Criteria cri) {
+	@PreAuthorize("principal.username == #writer")
+	public String remove(@RequestParam("bno") Long bno, RedirectAttributes rttr,@ModelAttribute("cri") Criteria cri, String writer) {
 		log.info("삭제처리" + bno);
 		
 		List<BoardAttachVO> attachList = service.getAttachList(bno);
