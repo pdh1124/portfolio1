@@ -19,7 +19,7 @@
 		<div class="row">
 			<div class="login">
 				<form id="login-form" role="form" method="POST" action="/board/comm_register">
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+					<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token}">
 					<div class="col-sm-12">
 						<div class="table-responsive">
 							<table class="table cart-table board_table">
@@ -85,8 +85,6 @@
 	</div>
 </section><!--End Cart Area-->
 
-<%@ include file="../includes/footer.jsp"%>
-
 <script>
 $(document).ready(function(e) {
 	
@@ -135,6 +133,9 @@ $(document).ready(function(e) {
 	
 	var csrfHeaderName = "${_csrf.headerName}";
 	var csrfTokenValue = "${_csrf.token}";
+	/*ajax 처리시 csrf 값을 함께 전송하기 위한 준비
+	스프링 시큐리티는 데이터 post 전송시 csrf 값을 꼭 확인 하므로*/
+	
 	
 	//첨부파일을 올리면 표시,전달하는 ajax
 	$("input[type='file']").change(function(e) {
@@ -220,3 +221,5 @@ $(document).ready(function(e) {
 	});
 });
 </script>
+
+<%@ include file="../includes/footer.jsp"%>

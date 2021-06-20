@@ -11,8 +11,10 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 	
 <!-- 암호화처리, 사용자 계정 정보 처리 -->
-<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 <bean id="customUserDetailsService" class="com.pila.security.CustomUserDetailsService" />
+
+
 
 
 <security:http use-expressions="true" auto-config="true">

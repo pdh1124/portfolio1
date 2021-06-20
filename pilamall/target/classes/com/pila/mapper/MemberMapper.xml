@@ -30,8 +30,8 @@
 		select 
 			mem.userId, userName, userPass, userEmail, userPhone, userAddr1, userAddr2, userAddr3, regDate, money, enabled, a.auth
 		from 
-			tbl_member mem left outer join tbl_member_auth a
-			on mem.userid=a.userid
+			tbl_member mem left outer join 
+			tbl_member_auth a on mem.userid=a.userid
 		where mem.userid=#{userId}   
 	</select>
 	
