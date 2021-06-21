@@ -6,6 +6,7 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!-- jstl fmt를 쓸 때 태그에 fmt로 표시 fmt : formatter 형식 맞춰서 표시 -->
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 
 <%@ include file="../includes/header.jsp"%>
 
@@ -84,6 +85,8 @@
 		</div>
 	</div>
 </section><!--End Cart Area-->
+
+<%@ include file="../includes/footer.jsp"%>
 
 <script>
 $(document).ready(function(e) {
@@ -222,4 +225,4 @@ $(document).ready(function(e) {
 });
 </script>
 
-<%@ include file="../includes/footer.jsp"%>
+

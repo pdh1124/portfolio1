@@ -9,62 +9,63 @@
 		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
-	
-<!-- 암호화처리, 사용자 계정 정보 처리 -->
-<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
-<bean id="customUserDetailsService" class="com.pila.security.CustomUserDetailsService" />
+
+	<!-- 암호화처리, 사용자 계정 정보 처리 -->
+	<bean id="bcryptPasswordEncoder"
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+	<bean id="customUserDetailsService"
+		class="com.pila.security.CustomUserDetailsService" />
+
+	<security:http use-expressions="true" auto-config="true">
+		<security:csrf disabled="false" />
+		<!-- <security:intercept-url access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" 
+			pattern="/user/**" /> -->
+
+		<!-- 모든페이지는 모든 유저가 접근 허용 -->
+		<security:intercept-url pattern="/**"
+			access="permitAll" />
+
+		<!-- 관리자페이지는 관리자만 접근 허용 -->
+		<security:intercept-url pattern="/admin/**"
+			access="hasRole('ROLE_ADMIN')" />
 
 
+		<security:remember-me
+			data-source-ref="dataSource" token-validity-seconds="604800" />
+
+		<security:form-login default-target-url="/"
+			login-page="/member/login" login-processing-url="/member/login"
+			password-parameter="userPass" username-parameter="userId" />
+
+		<security:logout logout-url="/member/logout"
+			invalidate-session="true" logout-success-url="/"
+			delete-cookies="SPRING_SECURITY_REMEMBER_ME_COOKIE,JSESSION_ID" />
+
+		<security:headers>
+			<sec:frame-options disabled="true"></sec:frame-options>
+		</security:headers>
+
+		<!-- 권한이 없어서 금지된 URI 접속할 때 보여줄 페이지(403 에러 페이지 대체) -->
+		<security:access-denied-handler
+			error-page="/" />
+
+	</security:http>
+
+	<!-- security:http> <security:form-login login-page="/member/login" /> <security:logout 
+		logout-url="member/logout"/> </security:http -->
+
+	<!-- DB 연동 설정 -->
+	<security:authentication-manager>
+		<security:authentication-provider
+			user-service-ref="customUserDetailsService">
+			<security:password-encoder
+				ref="bcryptPasswordEncoder" />
+		</security:authentication-provider>
+	</security:authentication-manager>
 
 
-<security:http use-expressions="true" auto-config="true">
-
-	<security:csrf disabled="true" />
-	
-	<!-- <security:intercept-url access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" 
-		pattern="/user/**" /> -->
-		
-	<!-- 모든페이지는 모든 유저가 접근 허용 -->
-	<security:intercept-url pattern="/**" access="permitAll" />
-		
-	<!-- 관리자페이지는 관리자만 접근 허용 -->
-	<security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
-	
-	
-	<security:remember-me data-source-ref="dataSource" token-validity-seconds="604800"/> 
-	
-	<security:form-login default-target-url="/"
-		login-page="/member/login" login-processing-url="/member/login"
-		password-parameter="userPass" username-parameter="userId" />
-	
-	<security:logout logout-url="/member/logout"
-		invalidate-session="true"
-		logout-success-url="/"
-		delete-cookies="SPRING_SECURITY_REMEMBER_ME_COOKIE,JSESSION_ID" />
-	
-	<security:headers>
-		<sec:frame-options disabled="true"></sec:frame-options>
-	</security:headers>	
-	
-	<!-- 권한이 없어서 금지된 URI 접속할 때 보여줄 페이지(403 에러 페이지 대체) -->
-	<security:access-denied-handler error-page="/" />
-		
-</security:http>
-	
-<!-- security:http>
-	<security:form-login login-page="/member/login" />
-	<security:logout logout-url="member/logout"/>
-</security:http-->
-
-<!-- DB 연동 설정 -->
-<security:authentication-manager>
-	<security:authentication-provider user-service-ref="customUserDetailsService">
-		<security:password-encoder ref="bcryptPasswordEncoder" />
-	</security:authentication-provider>
-</security:authentication-manager>
-
-
-<!-- 시큐리티 어노테이션 사용 할 수 있도록 설정 -->
-<security:global-method-security pre-post-annotations="enabled" secured-annotations="enabled" />
+	<!-- 시큐리티 어노테이션 사용 할 수 있도록 설정 -->
+	<security:global-method-security
+		pre-post-annotations="enabled" secured-annotations="enabled" />
 
 </beans>

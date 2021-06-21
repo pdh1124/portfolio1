@@ -74,8 +74,13 @@
 							</table>
 							<div class="board_bt">
 								<button data-oper="list" class="board_bt_list">목록보기</button>
-								<button data-oper="remove" class="board_bt_remove" type="submit">삭제하기</button>
-								<button data-oper="modify" class="board_bt_submit" type="submit">수정하기</button>
+								<sec:authentication property="principal" var="pinfo" />
+								<sec:authorize access="isAuthenticated()">
+									<c:if test="${pinfo.username eq board.writer }">
+										<button data-oper="remove" class="board_bt_remove" type="submit">삭제하기</button>
+										<button data-oper="modify" class="board_bt_submit" type="submit">수정하기</button>
+									</c:if>
+								</sec:authorize>
 							</div>
 						</div>
 					</div>
@@ -92,6 +97,13 @@
 <script>
 $(document).ready(function() {
 	
+	
+	var csrfHeaderName = "${_csrf.headerName}";
+	var csrfTokenValue = "${_csrf.token}";
+	
+	$(document).ajaxSend(function(e,xhr,options) {
+		xhr.setRequestHeader(csrfHeaderName,csrfTokenValue);
+	});
 	var formObj = $("form");
 	
 	//각각 버튼에 대한 실행 

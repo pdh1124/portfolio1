@@ -92,7 +92,9 @@
 					</ol>
 				</div>
 				<div class="pagination"></div>
-						
+				
+				
+				<sec:authorize access='isAuthenticated()'>
 				<div>
 					<div class="div_line"></div>
 					<h4 class="heading">댓글 작성</h4>
@@ -103,7 +105,7 @@
 								<input type="hidden" value="${board.bno}" name="bno" id="bno">
 								<input type="hidden" value="replyDate" name="replyDate" id="replyDate">
 								
-								<input type="text" aria-required="true" value="replyer" name="replyer" id="replyer"><br>
+								<input type="text" aria-required="true" value="<sec:authentication property="principal.username"/>" name="replyer" id="replyer" readonly="readonly"><br>
 								<label for="comment" class="field-label">내용<span>*</span></label>
 								<textarea aria-required="true" name="reply" id="reply" rows="4"></textarea><br>
 								<button type="submit" id="submit" name="submit">댓글 등록</button>
@@ -111,6 +113,7 @@
 						</div>
 					</div>
 				</div><!-- end commentform -->
+				</sec:authorize>
 			</div>
 		</div>
 	</div>
@@ -143,15 +146,18 @@ $(document).ready(function() {
 	});
 	
 		
-	//post처리 시 csrf 값을 함께 전송하기 위해 ajaxsend시 같이 넘김
-	/*
 	var csrfHeaderName = "${_csrf.headerName}";
 	var csrfTokenValue = "${_csrf.token}";
 	
 	$(document).ajaxSend(function(e,xhr,options) {
 		xhr.setRequestHeader(csrfHeaderName,csrfTokenValue);
 	});
-	*/
+	
+	
+	var replyer = null;
+	<sec:authorize access="isAuthenticated()">
+		replyer='${pinfo.username}';
+	</sec:authorize>
 	
 	//댓글
 	var bnoValue = '<c:out value="${board.bno}"/>'; //bno 게시물 번호
@@ -180,8 +186,16 @@ $(document).ready(function() {
 				replyer : comm_replyer.val(),
 				bno : bnoValue
 		};
+		
 		console.log(reply);
 		
+		var reply_con = comm_reply.val();
+		
+		console.log("reply_con"+reply_con);
+		if(reply_con=="") {
+			return;
+		}
+			
 		replyService.add(reply, function(result) {
 			alert(result + "! 댓글 작성이 완료되었습니다.");
 			comm_reply.val("");
@@ -235,8 +249,10 @@ $(document).ready(function() {
 				str += "<div class='comment-author'>";
 				str += "<p class='com-name'><strong>" + list[i].replyer + "</strong></p>";
 				str += replyService.displayTime(list[i].replyDate);
+				str += "<sec:authorize access='isAuthenticated()'>";
 				str += "<a class='comment-modify' data-rno='" + list[i].rno + "'> 수정 </a>";
 				str += "<a class='comment-remove' data-rno='" + list[i].rno + "'> 삭제 </a>";
+				str += "</sec:authorize>";
 				str += "</div>";
 				str += "<div class='comment-text' id='modify-id_" + list[i].rno + "'>";
 				str += "<p>" + list[i].reply + "</p>";
@@ -269,8 +285,6 @@ $(document).ready(function() {
 		if(endNum * 10 < replyCnt) {
 			next = true;
 		}
-		
-		
 		
 		var str = "<ul style='margin: 10px 0 40px 0'>";
 		if(prev) {
@@ -324,11 +338,27 @@ $(document).ready(function() {
 	
 	//댓글 수정 - textarea에 버튼을 누르면 수정이 완료됨
 	$(document).on('click', '.modi-button', function(){
-	
+		
+		var originalReplyer = comm_replyer.val();
+		
 		var reply = {
 				rno : $(".modi-textarea").data("rno"),
-				reply : $(".modi-textarea").val()
+				reply : $(".modi-textarea").val(),
+				replyer : originalReplyer
 		};
+		
+		if(!replyer) {
+			alert("로그인 후 수정 가능합니다.");
+			modal.modal("hide");
+			return;
+		}
+		
+		if(replyer != originalReplyer) {
+			alert("자신이 작성한 댓글만 수정 가능");
+			modal.modal("hide");
+			return;
+		}
+		
 		replyService.update(reply, function(result) {
 			alert("수정완료!");
 			var str = "";
@@ -336,16 +366,33 @@ $(document).ready(function() {
 			
 			$("#modify-id_"+rno).html(str);
 		});
+		
+		
 	});
 	
 	
 	//댓글 삭제
 	$(document).on('click', '.comment-remove', function(){
-
+	
+		
+		
 		var rno = $(this).data("rno");
 		console.log(rno);
+		var originalReplyer = comm_replyer.val();
 		
-		replyService.remove(rno, function(result) {
+		if(!replyer) {
+			alert("로그인 후 수정 가능합니다.");
+			modal.modal("hide");
+			return;
+		}
+		
+		if(replyer != originalReplyer) {
+			alert("자신이 작성한 댓글만 수정 가능");
+			modal.modal("hide");
+			return;
+		}
+		
+		replyService.remove(rno, originalReplyer, function(result) {
 			alert("삭제가 완료되었습니다.");
 			showList(-1);
 		});
