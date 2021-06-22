@@ -154,6 +154,7 @@ $(document).ready(function() {
 	});
 	
 	
+	//수정 및 삭제를 위한 replyer
 	var replyer = null;
 	<sec:authorize access="isAuthenticated()">
 		replyer='${pinfo.username}';
@@ -189,12 +190,12 @@ $(document).ready(function() {
 		
 		console.log(reply);
 		
+		//댓글 내용이 비어있다면 그냥 끝내라
 		var reply_con = comm_reply.val();
-		
-		console.log("reply_con"+reply_con);
+		console.log("reply_con:"+reply_con);
 		if(reply_con=="") {
 			return;
-		}
+		};
 			
 		replyService.add(reply, function(result) {
 			alert(result + "! 댓글 작성이 완료되었습니다.");
@@ -247,7 +248,7 @@ $(document).ready(function() {
 				str += "<div class='the-comment'>";
 				str += "<div class='comment-box'>";
 				str += "<div class='comment-author'>";
-				str += "<p class='com-name'><strong>" + list[i].replyer + "</strong></p>";
+				str += "<p class='com-name' id='modify-replyer_" + list[i].rno + "'><strong>" + list[i].replyer + "</strong></p>";
 				str += replyService.displayTime(list[i].replyDate);
 				str += "<sec:authorize access='isAuthenticated()'>";
 				str += "<a class='comment-modify' data-rno='" + list[i].rno + "'> 수정 </a>";
@@ -323,7 +324,21 @@ $(document).ready(function() {
 		
 		var rno = $(this).data("rno");
 		
+		var originalReplyer = comm_replyer.val();
+		var reply_main = $("#modify-replyer_" + rno).text();
+		
+		if(!reply_main) {
+			alert("로그인 후 수정 가능합니다.");
+			return;
+		}
+		
+		if(reply_main != originalReplyer) {
+			alert("자신이 작성한 댓글만 수정 가능");
+			return;
+		}
+		
 		console.log(rno);
+		 
 		replyService.get(rno ,function(reply) {
 			comm_reply.val(reply.reply);
 			comm_replyer.val(reply.replyer);
@@ -338,8 +353,9 @@ $(document).ready(function() {
 	
 	//댓글 수정 - textarea에 버튼을 누르면 수정이 완료됨
 	$(document).on('click', '.modi-button', function(){
-		
+	
 		var originalReplyer = comm_replyer.val();
+		var rno = $(".modi-textarea").data("rno");
 		
 		var reply = {
 				rno : $(".modi-textarea").data("rno"),
@@ -347,15 +363,22 @@ $(document).ready(function() {
 				replyer : originalReplyer
 		};
 		
-		if(!replyer) {
-			alert("로그인 후 수정 가능합니다.");
-			modal.modal("hide");
+		var reply_main = $("#modify-replyer_" + rno).text();
+
+		//댓글 내용이 비어있다면 그냥 끝내라
+		var reply_con = comm_reply.val();
+		console.log("reply_con:"+reply_con);
+		if(reply_con=="") {
+			return;
+		};
+		
+		if(!reply_main) {
+			alert("로그인 후 수정이 가능합니다.");
 			return;
 		}
 		
-		if(replyer != originalReplyer) {
-			alert("자신이 작성한 댓글만 수정 가능");
-			modal.modal("hide");
+		if(reply_main != originalReplyer) {
+			alert("자신이 작성한 수정만 삭제가 가능");
 			return;
 		}
 		
@@ -374,21 +397,18 @@ $(document).ready(function() {
 	//댓글 삭제
 	$(document).on('click', '.comment-remove', function(){
 	
-		
-		
-		var rno = $(this).data("rno");
-		console.log(rno);
 		var originalReplyer = comm_replyer.val();
+		var rno = $(this).data("rno");
+		var reply_main = $("#modify-replyer_" + rno).text();
 		
-		if(!replyer) {
-			alert("로그인 후 수정 가능합니다.");
-			modal.modal("hide");
+		
+		if(!reply_main) {
+			alert("로그인 후 삭제가 가능합니다.");
 			return;
 		}
 		
-		if(replyer != originalReplyer) {
-			alert("자신이 작성한 댓글만 수정 가능");
-			modal.modal("hide");
+		if(reply_main != originalReplyer) {
+			alert("자신이 작성한 댓글만 삭제가 가능");
 			return;
 		}
 		

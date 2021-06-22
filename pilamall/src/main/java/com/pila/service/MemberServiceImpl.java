@@ -1,7 +1,5 @@
 package com.pila.service;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.pila.domain.MemberVO;
@@ -12,12 +10,11 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	MemberMapper mapper;
 	
+	//로그인
 	@Override
 	public MemberVO login(String userId) {
 		MemberVO vo = mapper.read(userId);
 		return vo;
 	}
-
-
 
 }
