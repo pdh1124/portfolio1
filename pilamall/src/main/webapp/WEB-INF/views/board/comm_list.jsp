@@ -59,7 +59,7 @@
 										<h5><c:out value="${board.views }"/></h5>
 									</td>
 									<td class="b_re_up">
-										<h5>1</h5>
+										<h5><c:out value="${board.likeCnt }"/></h5>
 									</td>
 								</tr>
 							</c:forEach>					

@@ -20,9 +20,8 @@ public class BoardVO {
 	
 	private int replyCnt; //댓글 수
  	private int views; //조회수	
-//	private int commUp; //좋아요 수
-	
-//	private List<BoardLikeVO> boardLike; //좋아요 
+	private int likeCnt; //좋아요 수
+
 	private List<BoardAttachVO> attachList; //첨부파일
 	
 	

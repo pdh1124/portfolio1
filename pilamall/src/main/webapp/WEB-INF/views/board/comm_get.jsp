@@ -53,8 +53,8 @@
 					</div>
 					<div class="div_line"></div>
 					<p><c:out value="${board.content }" /></p>
-					<div class="recommendation">
-						<button type="button" id='recom_up' onclick=""><i class="fa fa-thumbs-o-up"></i> 추천</button>
+					<div class="recommendation board_like">
+						<button type="button" class="like_onoff" id='recom_down' onclick=""><i class="fa fa-thumbs-o-up"></i> 좋아요 ${board.likeCnt }</button>
 					</div>
 				</div>
 			</div>
@@ -389,7 +389,7 @@ $(document).ready(function() {
 			
 			$("#modify-id_"+rno).html(str);
 		});
-		
+		location.reload();
 		
 	});
 	
@@ -416,6 +416,7 @@ $(document).ready(function() {
 			alert("삭제가 완료되었습니다.");
 			showList(-1);
 		});
+		location.reload();
 	});
 
 	//첨부파일 목록 표시
@@ -448,6 +449,55 @@ $(document).ready(function() {
 		
 		self.location="/download?fileName="+path;
 	});
+	
+	
+	<sec:authorize access="isAnonymous()">
+	$(".like_onoff").on("click", function(e) {
+		alert("로그인 한 사용자만 좋아요가 가능합니다.");
+		return;
+	});
+	</sec:authorize>
+	
+	
+	<sec:authorize access="isAuthenticated()">
+	//좋아요 처리
+	var heartval = ${heart};
+	
+	
+	if (heartval > 0) {
+		console.log(heartval);
+		$(".like_onoff").attr("id","recom_up");
+		$(".board_like").prop('name', heartval);
+	} else {
+		console.log(heartval);
+		$(".like_onoff").attr("id","recom_dowm");
+		$(".board_like").prop('name', heartval);
+	}
+	
+	$(".like_onoff").on("click", function(e) {
+		
+		var that = $(".board_like");
+		var sendDate = {
+			'bno': ${board.bno },
+			'heart': that.prop('name')
+		};
+		
+		$.ajax({
+			url: '/board/heart',
+			type: 'POST',
+			data: sendDate,
+			success: function(data){
+				that.prop('name', data);
+				if(data==1) {
+					$(".like_onoff").attr("id","recom_up");
+				} else {
+					$(".like_onoff").attr("id","recom_dowm");
+				}
+			}
+		});
+		location.reload();
+	});
+	</sec:authorize>
 	
 });
 </script>

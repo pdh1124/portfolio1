@@ -3076,7 +3076,7 @@ board get
   margin-left: 10px;
   background: #ebebeb none repeat scroll 0 0;
   border: 1px solid #cccccc;
-  color: #595a5a;
+  color: #cccccc;
   font-size: 12px;
   font-weight: 500;
   padding: 10px 15px;
@@ -3084,14 +3084,14 @@ board get
   text-transform: uppercase;
   float: right;
 }
-#recom_up:hover {
+#recom_up {
   border: 1px solid #ff0000;
   color: #ff0000;
   font-weight: bold;
 }
-#recom_down:hover {
-  border: 1px solid #0000ff;
-  color: #0000ff;
+#recom_down {
+  border: 1px solid #999999;
+  color: #999999;
   font-weight: bold;
 }
 /*-----------------------

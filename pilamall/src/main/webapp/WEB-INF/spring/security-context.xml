@@ -22,12 +22,10 @@
 			pattern="/user/**" /> -->
 
 		<!-- 모든페이지는 모든 유저가 접근 허용 -->
-		<security:intercept-url pattern="/**"
-			access="permitAll" />
+		<security:intercept-url pattern="/**" access="permitAll" />
 
 		<!-- 관리자페이지는 관리자만 접근 허용 -->
-		<security:intercept-url pattern="/admin/**"
-			access="hasRole('ROLE_ADMIN')" />
+		<security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
 
 
 		<security:remember-me
@@ -46,13 +44,14 @@
 		</security:headers>
 
 		<!-- 권한이 없어서 금지된 URI 접속할 때 보여줄 페이지(403 에러 페이지 대체) -->
-		<security:access-denied-handler
-			error-page="/" />
+		<security:access-denied-handler error-page="/" />
 
 	</security:http>
 
-	<!-- security:http> <security:form-login login-page="/member/login" /> <security:logout 
-		logout-url="member/logout"/> </security:http -->
+	<!-- security:http> 
+		<security:form-login login-page="/member/login" /> 
+		<security:logout logout-url="member/logout"/> 
+	</security:http -->
 
 	<!-- DB 연동 설정 -->
 	<security:authentication-manager>
