@@ -25,32 +25,34 @@
 			<div class="col-sm-6">
 				<div class="login">
 					<form id="signup-form" method="post" action="/member/signup">
+						<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token}">
 						<h2>회원가입</h2>
 						<p>필라몰에서 나만의 계정을 만들어보세요.</p>
 						<label>아이디<span>*</span></label>
-						<input type="text" id="userId" name="userID" required/>
-						<input type="hidden" id="idCheckVal" value="N">
-						<div class="text_fail" id="id-danger">이미 존재하는 id입니다 .</div>
-						<div class="text_success" id="id-success">사용가능한 id 입니다.</div>
-						<div class="text_fail" id="id-error"> 회원아이디는 띄어쓰기없이 5~15자리의 영문자 또는 숫자만 가능합니다 .</div>
-						
-						
+						<input type="text" id="userId" name="userId" placeholder="아이디를 입력하세요. (영문 소문자, 숫자만 입력 가능)" required/>
+
 						<label>비밀번호<span>*</span></label>
 						<input type="password" id="userPass" name="userPass" placeholder="비밀번호를 입력해주세요. (영문 대/소문자, 숫자를 모두 포함)" required/>
-						<label>비밀번호 확인<span>*</span></label>
-						<input type="password" required/>
-						
+	
 						<label>성함<span>*</span></label>
 						<input type="text" id="userName" name="userName" required/>
-						<input type="hidden" id="idCheckVal" value="N">
-						<div class="text_fail" id="id-danger">이미 존재하는 id입니다 .</div>
-						<div class="text_success" id="id-success">사용가능한 id 입니다.</div>
-						<div class="text_fail" id="id-error"> 회원아이디는 띄어쓰기없이 5~15자리의 영문자 또는 숫자만 가능합니다 .</div>
+						
+						<label>이메일<span>*</span></label>
+						<input type="text" id="userEmail" name="userEmail" required/>
 						
 						<label>핸드폰번호<span>*</span></label>
+						<input type="text" id="userPhone" name="userPhone" required/>
 						
+						<label>주소1<span>*</span></label>
+						<input type="text" id="userAddr1" name="userAddr1" required/>
 						
-						<input type="submit" value="Sign up" />
+						<label>주소2<span>*</span></label>
+						<input type="text" id="userAddr2" name="userAddr2" required/>
+						
+						<label>주소3<span>*</span></label>
+						<input type="text" id="userAddr3" name="userAddr3" required/>
+						
+						<input class="signup-button" type="submit" value="Sign up" />
 					</form>
 				</div>
 			</div>
