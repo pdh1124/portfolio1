@@ -61,6 +61,17 @@ body {
 h1, h2, h3, h4, h5, h6, p {
   margin:0;
 }
+input:focus {
+	border:1px solid #e09e25 !important;
+	background-color: #efefef !important;
+	outline: none !important;
+}
+textarea:focus {
+	border:1px solid #e09e25 !important;
+	background-color: #efefef !important;
+	outline: none !important;
+	resize: none !important;
+}
 a {
   color: #3e3f3f;
   -webkit-transition: all 0.3s ease 0s;

@@ -8,4 +8,6 @@ public interface MemberService {
 	public MemberVO login(String userId);	//로그인
 	
 	public void signup(MemberVO vo, AuthVO auth); //회원가입	
+	
+	public int idCheck(MemberVO vo); //아이디 중복 체크
 }

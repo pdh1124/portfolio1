@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pila.domain.AuthVO;
 import com.pila.domain.MemberVO;
@@ -72,5 +73,14 @@ public class CommonController {
 		session.invalidate(); //세션에 전체를 날려버린다. 
 		logger.info("로그아웃");
 		return "redirect:/";
+	}
+	
+	
+	//아이디중복체크
+	@ResponseBody
+	@PostMapping("/idCheck")
+	public int idCheck(MemberVO vo) throws Exception {
+		int result = service.idCheck(vo);
+		return result; 
 	}
 }
