@@ -37,9 +37,14 @@ public class MemberServiceImpl implements MemberService {
 	//아이디 중복 체크
 	@Override
 	public int idCheck(MemberVO vo) {
-		
 		int result = mapper.idCheck(vo);
-		
+		return result;
+	}
+	
+	//이메일 중복 체크
+	@Override
+	public int emCheck(MemberVO vo) {
+		int result = mapper.emCheck(vo);
 		return result;
 	}
 

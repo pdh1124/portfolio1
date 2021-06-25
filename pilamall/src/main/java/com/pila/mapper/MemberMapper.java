@@ -11,4 +11,6 @@ public interface MemberMapper {
 	public void insertAuth(AuthVO auth); //회원가입 시 권한을 일반회원으로 줌
 	
 	public int idCheck(MemberVO vo); //아이디 중복 체크
+	
+	public int emCheck(MemberVO vo); //이메일 중복 체크
 }

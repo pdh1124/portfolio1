@@ -10,4 +10,6 @@ public interface MemberService {
 	public void signup(MemberVO vo, AuthVO auth); //회원가입	
 	
 	public int idCheck(MemberVO vo); //아이디 중복 체크
+	
+	public int emCheck(MemberVO vo); //이메일 중복 체크
 }

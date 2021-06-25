@@ -2928,7 +2928,7 @@ h4.heading {
   margin-bottom: 10px;
 }
 /*-----------------------
-	16-1. board list
+	15-1. board list
 -------------------------*/
 .board_table {
   
@@ -3106,7 +3106,7 @@ board get
   font-weight: bold;
 }
 /*-----------------------
-	16-2. board modify
+	15-2. board modify
 -------------------------*/
 #reply_form {
 	margin:0 15px;
@@ -3162,6 +3162,26 @@ board get
   padding: 10px 20px;
   text-transform: uppercase;
 }
+/*-----------------------
+	15-3. signup
+-------------------------*/
+.check-button {
+  border: 1px solid #e09e25;
+  color: #e09e25;
+  display: block;
+  width:100%;
+  font-size: 13px;
+  padding: 7px 15px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-top: 10px;
+}
+.check-button:hover {
+  border: 1px solid #e09e25;
+  background-color: #e09e25;
+  color: #fff;
+}
+
 /*-----------------------
 	16. Cart Page
 -------------------------*/
