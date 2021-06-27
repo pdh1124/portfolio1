@@ -47,5 +47,12 @@ public class MemberServiceImpl implements MemberService {
 		int result = mapper.emCheck(vo);
 		return result;
 	}
+	
+	//핸드폰 번호 중복 체크
+	@Override
+	public int phCheck(MemberVO vo) {
+		int result = mapper.phCheck(vo);
+		return result;
+	}
 
 }

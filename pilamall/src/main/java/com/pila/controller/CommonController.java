@@ -138,4 +138,13 @@ public class CommonController {
 		}
 		return map;
 	}
+	
+	
+	//핸드폰 중복 체크
+	@ResponseBody
+	@PostMapping("/phCheck")
+	public int phCheck(MemberVO vo) throws Exception {
+		int result = service.phCheck(vo);
+		return result; 
+	}
 }

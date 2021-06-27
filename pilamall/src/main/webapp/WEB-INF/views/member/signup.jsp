@@ -46,8 +46,7 @@
 						<input type="hidden" id="pwcCheckVal" value="N" />
 						<div class="text_fail" id="pw-danger" style="color:red">비밀번호가 일치하지 않습니다.</div>
 						<div class="text_success" id="pw-success" style="color:blue">비밀번호가 일치합니다.</div>
-						
-						
+
 						<label>성함<span>*</span></label>
 						<input type="text" id="userName" name="userName" required/>
 						
@@ -59,12 +58,15 @@
 						<div class="text_success" id="em-success" style="color:blue">사용가능한 E-mail 입니다.</div>
 						<button class="check-button" id="emCheck-button">본인인증하기</button>
 						
-						
 						<input type="text" class="compare" placeholder="인증 키 입력" style="display:none" />
 						<button class="check-button" id="emNumCheck-button">인증 키 확인</button>
 						
 						<label>핸드폰번호<span>*</span></label>
 						<input type="text" id="userPhone" name="userPhone" required/>
+						<input type="hidden" id="phCheckVal" value="N" />
+						<div class="text_fail" id="ph-danger" style="color:red">이미 가입한 핸드폰 번호입니다.</div>
+						<div class="text_fail" id="ph-error" style="color:red">010을 포함한 11자리의 숫자로 입력해주시기바랍니다.</div>
+						<div class="text_success" id="ph-success" style="color:blue">사용가능한 핸드폰 번호 입니다.</div>
 						
 						<label>주소1<span>*</span></label>
 						<input type="text" id="userAddr1" name="userAddr1" required/>
@@ -307,6 +309,53 @@ $(document).ready(function() {
 	});
 	
 	
+	/*핸드폰 유효성 및 중복 검사*/
+	//해당 안내문구를 가린다.
+	$("#ph-danger").hide();
+	$("#ph-error").hide();
+	$("#ph-success").hide();
+	
+	//휴대폰 유효성 범위
+	var phReg = /^[0-9]{11}$/;
+	
+	$("#userPhone").keyup(function() {
+		if($("#userPhone").val() != " ") {
+			if(phReg.test($("#userPhone").val())) {
+				
+				$.ajax({
+					url: "/member/phCheck",
+					data: {
+						"userPhone":$("#userPhone").val()
+					},
+					dataType: "json",
+					type: "post",
+					async: false,
+					success: function(data) {
+						if(data == 1) {
+							$("#ph-danger").show();
+							$("#ph-error").hide();
+							$("#ph-success").hide();
+							document.getElementById("phCheckVal").value == 'N';
+						} 
+						else if(data == 0) {
+							$("#ph-danger").hide();
+							$("#ph-error").hide();
+							$("#ph-success").show();
+							document.getElementById("phCheckVal").value == 'Y';
+						}
+					}
+				});
+			}
+			
+			else if(!phReg.test($("#userPhone").val())) {
+				$("#ph-danger").hide();
+				$("#ph-error").show();
+				$("#ph-success").hide();
+				document.getElementById("phCheckVal").value == 'N';
+			}
+		}
+	})
+	
 	/*검사를 통과하지 못했을 경우*/
 	var sendForm = $("#signup-form");
 	
@@ -340,6 +389,12 @@ $(document).ready(function() {
 			alert("이메일을 제대로 입력해주시길 바랍니다.");
 			$("#userEmail").focus();
 			return false;
+		}
+		
+		//핸드폰 유효성 및 중복 체크
+		if(document.getElementById("phCheckVal").value == 'N') {
+			alert("핸드폰번호를 제대로 입력해주시기 바랍니다.");
+			$("#userPhone").focus();
 		}
 		
 		console.log(isCertifiaction);
