@@ -3174,7 +3174,7 @@ board get
   padding: 7px 15px;
   text-transform: uppercase;
   font-weight: 600;
-  margin-top: 10px;
+  margin: 10px 0;
 }
 .check-button:hover {
   border: 1px solid #e09e25;
