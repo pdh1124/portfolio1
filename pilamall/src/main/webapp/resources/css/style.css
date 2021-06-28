@@ -3078,9 +3078,6 @@ h4.heading {
 	border: 2px solid #bdbdbd;
 	position: absolute;
 }
-/*
-board get
-*/
 
 .recommendation button {
   display: inline-block;
@@ -3180,6 +3177,37 @@ board get
   border: 1px solid #e09e25;
   background-color: #e09e25;
   color: #fff;
+}
+/*-----------------------
+	15-4 findId
+-------------------------*/
+#findid_result {
+	font-size: 16px;
+	line-height: 28px;
+}
+#findid_result span {
+	font-size: 24px;
+	font-weight: bold;
+}
+.findid_move_bt {
+  margin-top:10px;
+  }
+.findid_move_bt a {
+  display: inline-block;
+  margin-right: 5px;
+  background: #e09e25 none repeat scroll 0 0;
+  border: 1px solid #e09e25;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 10px 15px;
+  text-decoration:none;
+  text-transform: uppercase;
+}
+.findid_move_bt a:hover {
+  background: #ebebeb none repeat scroll 0 0;
+  border: 1px solid #cccccc;
+  color: #595a5a;
 }
 
 /*-----------------------

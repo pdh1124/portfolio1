@@ -1,10 +1,14 @@
 package com.pila.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.RandomStringUtils;
@@ -20,6 +24,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pila.domain.AuthVO;
@@ -146,5 +151,90 @@ public class CommonController {
 	public int phCheck(MemberVO vo) throws Exception {
 		int result = service.phCheck(vo);
 		return result; 
+	}
+	
+	//아이디 찾기 페이지로 이동
+	@GetMapping("/findUserId")
+	public void findUserId() {
+		
+	}
+	
+	//아이디를 찾기위해 이름과 이메일을 입력하면 존재여부 확인
+	@ResponseBody
+	@PostMapping("/findUserIdCheck")
+	public int findUserIdCheck(MemberVO vo) {
+		int result = service.findUserIdCheck(vo);
+		return result;
+	}
+	
+	//아이디가 존재하면 아이디를 나타내는 것 처리
+	@PostMapping("/findUserIdResult")
+	public String findUserIdResult(@RequestParam("userName") String userName, @RequestParam("userEmail") String userEmail, Model model, MemberVO vo, HttpServletResponse response) throws IOException {
+		response.setContentType("text/html; charset=UTF-8"); //alert창을 위해 만듦
+		int result = service.findUserIdCheck(vo);
+		if (result == 0) { //아이디가 존재 하지 않는다면
+			
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('아이디가 존재하지 않습니다.');</script>");
+			out.flush();
+			return "/member/findUserId";
+		}
+		else { //아이디가 존재 한다면 
+			String userId = service.findUserIdResult(userName, userEmail);
+			model.addAttribute("userId", userId);
+			return "/member/findUserIdResult";
+		}
+	}
+	
+	
+	//비밀번호 찾기 페이지로 이동
+	@GetMapping("/findUserPass")
+	public void findUserPass() {
+		
+	}
+	
+	//비밀번호 찾을때 아이디와 이메일 입력해 계정이 있는지 확인
+	@ResponseBody
+	@PostMapping("/findUserPassCheck")
+	public int findUserPassCheck(MemberVO vo) {
+		int result = service.findUserPassCheck(vo);
+		return result;
+	}
+	
+	//비밀번호 찾기시 이메일로 임시번호 발급과 임시번호로 비밀번호 변경처리
+	@PostMapping("/findUserPassResult")
+	public String findUserPassResult(MemberVO vo, HttpServletRequest request, Model model) {
+		
+		int result = service.findUserPassCheck(vo);
+		if(result == 0) { //찾는 계정이 없다면
+			return "/member/findUserPass";
+		} else {
+			//랜덤 번호 만들기
+			String ranPw = RandomStringUtils.randomAlphanumeric(10);
+			String newPw = pwEncoder.encode(ranPw);
+			
+			//랜덤번호 로 비밀번호 세팅 후 아이디 가져오기
+			vo.setUserPass(newPw);
+			service.setUserPass(vo);
+			String userId = request.getParameter("userId");
+			model.addAttribute("userId", userId);
+			
+			//세팅된 임시비밀번호로 메일 보내기
+			String setfrom = "aldksgo*6382"; //개발자의 메일 비밀번호
+			String tomail = request.getParameter("userEmail");
+			String title = "필라몰. 임시 비밀번호를 발급합니다.";
+			String content = userId + "님의 비밀번호는 " + ranPw + " 입니다. 비밀번호를 변경하여 사용해주시기 바랍니다.";
+			
+			try {
+				MimeMessage message = mailSender.createMimeMessage();
+				MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+				
+				messageHelper.setFrom(setfrom); //보내는 사람
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return "hi";
 	}
 }

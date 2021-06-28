@@ -20,7 +20,7 @@
 			<div class="board_move_bt fix"> 
 				<sec:authentication property="principal" var="pinfo" />
 				<sec:authorize access="isAuthenticated()">
-					<c:if test="${pinfo.username eq board.writer} ">
+					<c:if test="${pinfo.username eq board.writer}">
 						<button data-oper="modify">수정하기</button>
 					</c:if>
 				</sec:authorize>

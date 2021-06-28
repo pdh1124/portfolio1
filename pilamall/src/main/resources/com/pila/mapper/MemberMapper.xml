@@ -66,4 +66,33 @@
 		where userPhone = #{userPhone}
 	</select>
 	
+	<!-- 아이디 찾기를 위한 조건입력 -->
+	<select id="findUserIdCheck" resultType="int">
+		select count(*) 
+		from tbl_member 
+		where userName=#{userName} and userEmail=#{userEmail}
+	</select>
+	
+	<!-- 아이디 찾기 결과 -->
+	<select id="findUserIdResult" parameterType="String" resultType="String">
+		select userId
+		from tbl_member 
+		where userName=#{userName} and userEmail=#{userEmail}
+	</select>
+	
+	<!-- 비밀번호 찾기를 위해 아이디와 이메일 입력 -->
+	<select id="findUserPassCheck" resultType="int">
+		select count(*)
+		from tbl_member
+		where userId=#{userId} and userEmail = #{userEmail}
+	</select>
+	
+	<!-- 비밀번호 찾은 후 변경 -->
+	<update id="setUserPass">
+		update tbl_member
+		set userPass = #{userPass}
+		where userId = #{userId} and userEmail = #{userEmail}
+	</update>
+	
+	
 </mapper>

@@ -78,7 +78,7 @@
 						
 						<input type="text" id="userAddr3" name="userAddr3" placeholder="상세주소" required readonly="readonly"/>
 						
-						<input class="signup-button" type="submit" value="Sign up" />
+						<input class="signup-button" type="submit" value="회원가입" />
 					</form>
 				</div>
 			</div>

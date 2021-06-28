@@ -55,4 +55,30 @@ public class MemberServiceImpl implements MemberService {
 		return result;
 	}
 
+	//아이디 찾기 위해 이름과 이메일 체크
+	@Override
+	public int findUserIdCheck(MemberVO vo) {
+		int result = mapper.findUserIdCheck(vo);
+		return result;
+	}
+
+	//아이디 찾기 결과
+	@Override
+	public String findUserIdResult(String userName, String userEmail) {
+		return mapper.findUserIdResult(userName, userEmail);
+	}
+
+	//비밀번호 찾기위해 아이디와 이메일 입력해 확인
+	@Override
+	public int findUserPassCheck(MemberVO vo) {
+		int result = mapper.findUserPassCheck(vo);
+		return result;
+	}
+	
+	//비밀번호 찾기 후 변경
+	@Override
+	public void setUserPass(MemberVO vo) {
+		mapper.setUserPass(vo);
+	}
+
 }

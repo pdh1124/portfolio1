@@ -17,28 +17,21 @@
 <div class="login-page page fix"><!--start login Area-->
 	<div class="container">
 		<div class="row">
+			
 			<div class="col-sm-6">
-				<div class="login">
-					<form id="login-form" method="post" action="/member/login">
-						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-						<h2>LOGIN</h2>
-						<p>필라몰에 오신것을 환영합니다.</p>
-						<label>아이디<span>*</span></label>
-						<input type="text" name="userId" placeholder="아이디" />
-						<label>패스워드<span>*</span></label>
-						<input type="password" name="userPass" placeholder="****" />
-						<div class="remember">
-							<input type="checkbox" name="remember-me" />
-							<p>자동로그인</p>
-							<p><a href="/member/findUserId">아이디</a>나 <a href="/member/findPassword">패스워드</a>를 잊으셨나요?</p>
-						</div>
-						<input type="submit" value="login" />
-						<br /><br />
-						<h3><c:out value="${error }" /></h3>
-						<h3><c:out value="${logout }" /></h3>
-					</form>
+				<div class="login">	
+					<h2>아이디 찾기 결과</h2>
+					<div id="findid_result">찾으신 아이디는 <br /><span><c:out value="${userId }" /></span><br />입니다.</div>
+					
+					<h3><c:out value="${error }" /></h3>
+					<h3><c:out value="${logout }" /></h3>
+					<div class="findid_move_bt">
+						<a  href="/member/login">로그인</a>
+						<a class="board_move_bt" href="/member/findPasword">비밀번호 찾기</a>
+					</div> 
 				</div>
 			</div>
+			
 			<div class="col-sm-6">
 				<div class="about-img">
 					<img src="/resources/img/member/login_img.jpg" alt="" />
