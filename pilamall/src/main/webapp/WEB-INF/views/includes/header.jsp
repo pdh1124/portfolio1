@@ -71,7 +71,7 @@
 								<li>/</li>
 							</sec:authorize>
 							<sec:authorize access="hasRole('ROLE_USER')">
-								<li><a href="#">마이페이지</a></li>
+								<li><a href="/member/mypage">마이페이지</a></li>
 								<li>/</li>
 							</sec:authorize>
 							<li>

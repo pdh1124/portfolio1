@@ -94,5 +94,49 @@
 		where userId = #{userId} and userEmail = #{userEmail}
 	</update>
 	
+	<!-- 마이페이지 -->
+	<select id="getUser" resultType="com.pila.domain.MemberVO">
+		select * 
+		from tbl_member
+		where userId=#{userId}
+	</select>
 	
+	<!-- 패스워드 제외한 변경 -->
+	<update id="updateInfoExPass">
+		update tbl_member
+		set
+		userName=#{userName},
+		userEmail=#{userEmail},
+		userPhone=#{userPhone},
+		userAddr1=#{userAddr1},
+		userAddr2=#{userAddr2},
+		userAddr3=#{userAddr3}
+		where userId=#{userId}
+	</update>
+	
+	<!-- 패스워드 까지 변경 -->
+	<update id="updateInfo">
+		update tbl_member
+		set
+		userPass=#{userPass},
+		userName=#{userName},
+		userEmail=#{userEmail},
+		userPhone=#{userPhone},
+		userAddr1=#{userAddr1},
+		userAddr2=#{userAddr2},
+		userAddr3=#{userAddr3}
+		where userId=#{userId}
+	</update>
+	
+	<!-- 유저삭제 -->
+	<delete id="deleteUser">
+		delete from tbl_member
+		where userId=#{userId}
+	</delete>
+	
+	<!-- 유저의 권한 삭제 -->
+	<delete id="deleteAuth">
+		delete from tbl_member_auth
+		where userId=#{userId}
+	</delete>
 </mapper>

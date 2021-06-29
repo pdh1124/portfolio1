@@ -81,4 +81,29 @@ public class MemberServiceImpl implements MemberService {
 		mapper.setUserPass(vo);
 	}
 
+	//마이페이지
+	@Override
+	public MemberVO getUser(String userId) {	
+		return mapper.getUser(userId);
+	}
+
+	//회원정보 수정(비밀번호 미포함)
+	@Override
+	public void updateInfoExPass(MemberVO vo) {
+		mapper.updateInfo(vo);	
+	}
+
+	//회원정보 수정(비밀번호 포함)
+	@Override
+	public void updateInfo(MemberVO vo) {
+		mapper.updateInfoExPass(vo);	
+	}
+
+	//회원탈퇴
+	@Override
+	public void deleteUser(MemberVO vo, AuthVO auth) {
+		mapper.deleteAuth(auth);
+		mapper.deleteUser(vo);	
+	}
+
 }

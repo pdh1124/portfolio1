@@ -2,6 +2,7 @@ package com.pila.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -203,10 +205,13 @@ public class CommonController {
 	
 	//비밀번호 찾기시 이메일로 임시번호 발급과 임시번호로 비밀번호 변경처리
 	@PostMapping("/findUserPassResult")
-	public String findUserPassResult(MemberVO vo, HttpServletRequest request, Model model) {
-		
+	public String findUserPassResult(MemberVO vo, HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
+		response.setContentType("text/html; charset=UTF-8"); //alert창을 위해 만듦
 		int result = service.findUserPassCheck(vo);
 		if(result == 0) { //찾는 계정이 없다면
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('아이디가 존재하지 않습니다.');</script>");
+			out.flush();
 			return "/member/findUserPass";
 		} else {
 			//랜덤 번호 만들기
@@ -226,15 +231,73 @@ public class CommonController {
 			String content = userId + "님의 비밀번호는 " + ranPw + " 입니다. 비밀번호를 변경하여 사용해주시기 바랍니다.";
 			
 			try {
+				//메일 보내기
 				MimeMessage message = mailSender.createMimeMessage();
 				MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 				
 				messageHelper.setFrom(setfrom); //보내는 사람
+				messageHelper.setTo(tomail); //받는사람 이메일
+				messageHelper.setSubject(title); //메일 제목(생략 가능)
+				messageHelper.setText(content); //메일 내용
+				
+				mailSender.send(message);
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 		
-		return "hi";
+		return "/member/findUserPassResult";
 	}
+	
+	//마이페이지로 이동(회원정보 수정 페이지)
+	@PreAuthorize("isAuthenticated()")
+	@GetMapping("/mypage")
+	public String mypage(MemberVO vo, Model model, Principal principal) {
+		
+		String userId = principal.getName();
+		vo.setUserId(userId);
+		model.addAttribute("member", service.getUser(userId));
+		//로그인된 유저의 정보를 가져온다.
+		
+		return "/member/mypage";
+	}
+	
+	
+	//회원정보 수정 처리
+	@PreAuthorize("isAuthenticated()")
+	@PostMapping("/updateInfo")
+	public String updateInfo(MemberVO vo) {
+		
+		String pw = vo.getUserPass();
+		
+		if(pw == "") { //패스워드가 비어있다면
+			service.updateInfoExPass(vo); //비밀번호를 제외한 수정 처리
+		}
+		else { //비밀번호까지 변경
+			String newPw = pwEncoder.encode(pw);
+			vo.setUserPass(newPw);
+			service.updateInfo(vo);
+		}
+		
+		return "redirect:/member/mypage";
+	}
+	
+	
+	//회원탈퇴 페이지 이동
+	@PreAuthorize("isAuthenticated()")
+	@GetMapping("/deleteuser")
+	public void deleteUser() {
+		
+	}
+	
+	//회원 탈퇴 처리
+	@PreAuthorize("isAuthenticated()")
+	@PostMapping("/deleteUser")
+	public String PostdeleteUser(MemberVO vo, AuthVO auth) {
+		
+		service.deleteUser(vo, auth);
+		
+		return "redirect:/member/logout";
+	}
+	
 }
