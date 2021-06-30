@@ -287,7 +287,7 @@ public class CommonController {
 	
 	//회원탈퇴 페이지 이동
 	@PreAuthorize("isAuthenticated()")
-	@GetMapping("/deleteuser")
+	@GetMapping("/deleteUser")
 	public void deleteUser() {
 		
 	}

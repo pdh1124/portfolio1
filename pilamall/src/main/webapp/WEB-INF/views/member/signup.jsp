@@ -33,21 +33,21 @@
 						<label>아이디<span>*</span></label>
 						<input type="text" id="userId" name="userId" placeholder="아이디를 입력하세요. (영문 소문자, 숫자만 입력 가능)" required/>
 						<input type="hidden" id="idCheckVal" value="N" />
-						<div class="text_fail" id="id-danger" style="color:red">이미 존재하는 ID입니다.</div>
-						<div class="text_fail" id="id-error" style="color:red">회원 ID는 띄어쓰기 없이 5~15자리의 영문자와 숫자만 가능합니다.</div>
-						<div class="text_success" id="id-success" style="color:blue">사용가능한 ID 입니다.</div>
+						<div class="text_fail" id="id-danger">이미 존재하는 ID입니다.</div>
+						<div class="text_fail" id="id-error">회원 ID는 띄어쓰기 없이 5~15자리의 영문자와 숫자만 가능합니다.</div>
+						<div class="text_success" id="id-success">사용가능한 ID 입니다.</div>
 
 
 						<label>비밀번호<span>*</span></label>
 						<input type="password" id="userPass" name="userPass" placeholder="비밀번호를 입력해주세요. (영문 대/소문자, 숫자를 모두 포함)" required/>
 						<input type="hidden" id="pwCheckVal" value="N" />
-						<div class="text_fail" id="pw-error" style="color:red">비밀번호는 영문,숫자,특수문자를 포함한 8자리 이상 작성해야 합니다.</div>
+						<div class="text_fail" id="pw-error">비밀번호는 영문,숫자,특수문자를 포함한 8자리 이상 작성해야 합니다.</div>
 						
 						<label>비밀번호확인<span>*</span></label>
 						<input type="password" id="userPass_comp" name="userPass_comp" placeholder="비밀번호를 입력해주세요. (영문 대/소문자, 숫자를 모두 포함)" required/>
 						<input type="hidden" id="pwcCheckVal" value="N" />
-						<div class="text_fail" id="pw-danger" style="color:red">비밀번호가 일치하지 않습니다.</div>
-						<div class="text_success" id="pw-success" style="color:blue">비밀번호가 일치합니다.</div>
+						<div class="text_fail" id="pw-danger">비밀번호가 일치하지 않습니다.</div>
+						<div class="text_success" id="pw-success">비밀번호가 일치합니다.</div>
 
 						<label>성함<span>*</span></label>
 						<input type="text" id="userName" name="userName" required />
@@ -55,9 +55,9 @@
 						<label>이메일<span>*</span></label>
 						<input type="text" id="userEmail" name="userEmail" required />
 						<input type="hidden" id="emCheckVal" value="N" />
-						<div class="text_fail" id="em-danger" style="color:red">이미 존재하는 E-mail입니다.</div>
-						<div class="text_fail" id="em-error" style="color:red">E-mail 형식에 맞도록 작성하여주시기 바랍니다.</div>
-						<div class="text_success" id="em-success" style="color:blue">사용가능한 E-mail 입니다.</div>
+						<div class="text_fail" id="em-danger">이미 존재하는 E-mail입니다.</div>
+						<div class="text_fail" id="em-error">E-mail 형식에 맞도록 작성하여주시기 바랍니다.</div>
+						<div class="text_success" id="em-success">사용가능한 E-mail 입니다.</div>
 						<button class="check-button" id="emCheck-button">본인인증하기</button>
 						
 						<input type="text" class="compare" placeholder="인증 키 입력" style="display:none" />
@@ -66,9 +66,9 @@
 						<label>핸드폰번호<span>*</span></label>
 						<input type="text" id="userPhone" name="userPhone" required />
 						<input type="hidden" id="phCheckVal" value="N" />
-						<div class="text_fail" id="ph-danger" style="color:red">이미 가입한 핸드폰 번호입니다.</div>
-						<div class="text_fail" id="ph-error" style="color:red">010을 포함한 11자리의 숫자로 입력해주시기바랍니다.</div>
-						<div class="text_success" id="ph-success" style="color:blue">사용가능한 핸드폰 번호 입니다.</div>
+						<div class="text_fail" id="ph-danger">이미 가입한 핸드폰 번호입니다.</div>
+						<div class="text_fail" id="ph-error">010을 포함한 11자리의 숫자로 입력해주시기바랍니다.</div>
+						<div class="text_success" id="ph-success">사용가능한 핸드폰 번호 입니다.</div>
 						
 						<label>주소<span></span></label>
 						<input type="text" id="userAddr1" name="userAddr1" placeholder="우편번호" required readonly="readonly"/>

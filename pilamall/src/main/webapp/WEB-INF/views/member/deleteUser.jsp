@@ -24,21 +24,19 @@
 			</div>
 			<div class="col-sm-6">
 				<div class="login">
-					<form id="findid-form" method="post" action="/member/deleteUser">
+					<form id="deleteid-form" method="post" action="/member/deleteUser">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 						<h2>계정 탈퇴하기</h2>
-						<p>가입하신 아이디와 이메일을 입력해 주시기 바랍니다.</p>
-						<label>성함<span>*</span></label>
-						<input type="text" id="userName" name="userName" placeholder="가입하신 성함을 입력해주세요" required/>
-						<input type="hidden" id="naCheckVal" value="N" />
-						<div class="text_fail" id="na-error" style="color:red">이름을 입력해주세요.</div>
+						<!-- p>그동안 필라몰을 이용해주셔서 감사합니다.<br>계정을 탈퇴하시려면 가입하신 아이디를 입력해주시기 바랍니다.</p -->
+						<p>정말로 탈퇴하시겠습니까?</p>
 						
-						<label>이메일<span>*</span></label>
-						<input type="text" id="userEmail" name="userEmail" placeholder="가입하신 이메일을 입력해주세요." required/>
-						<input type="hidden" id="emCheckVal" value="N" />
-						<div class="text_fail" id="em-error" style="color:red">이메일 형식에 맞게 작성해주세요.</div>
-					
-						<input class="findid-button" type="submit" value="아이디 찾기" />
+						<label>아이디<span>*</span></label>
+						<input type="text" id="userId" name="userId" required/>
+						<input type="hidden" id="idCheckVal" value="N" />
+						<div class="text_fail" id="id-danger">가입하신 id와 다릅니다.</div>
+						<div class="text_success" id="id-success">가입하신 id와 동일합니다.</div>
+						
+						<input class="deleteid-button" type="submit" value="계정 탈퇴하기" />
 					</form>
 				</div>
 			</div>
@@ -51,63 +49,76 @@
 
 <script>
 $(document).ready(function() {
-	/*이름 작성 확인*/
-	//해당 안내문구를 가린다.
-	$("#na-error").hide();
 	
-	//이름 작성 유무 확인
-	$("#userName").keyup(function() {
-		
-		if ($("#userName").val() == "") {
-			$("#na-error").show();
-			document.getElementById("naCheckVal").value = 'N';
-		} else {
-			$("#na-error").hide();
-			document.getElementById("naCheckVal").value = 'Y';
+	/*기본 셋팅*/
+	//post 형식에 토큰 처리 (하지 않으면 post를 못함)
+	var csrfHeaderName = "${_csrf.headerName}";
+	var csrfTokenValue = "${_csrf.token}";
+	
+	$(document).ajaxSend(function(e,xhr,options) {
+		xhr.setRequestHeader(csrfHeaderName,csrfTokenValue);
+	});
+	
+	//엔터키 누르면 넘어가는 이벤트 방지
+	$('input').keydown(function() {
+		if (event.keyCode === 13) {
+			console.log("엔터키!!!");
+			event.preventDefault();
 		}
 	});
 	
+	//페이지를 시작하면 userId를 입력하는 칸에 포커스를 두어라
+	$("#userId").focus();
 	
-	/*이메일 형식 검사*/
+	/*아이디 유효성 및 중복 체크*/
+	//아이디 a~z,0~9 5자리부터 15자리까지 한다.
+	var idReg = /^[a-za-z0-9]{5,15}$/;
+	
 	//해당 안내문구를 가린다.
-	$("#em-error").hide();
+	$("#id-danger").hide();
+	$("#id-success").hide();
 	
-	//이메일 유효성 및 중복 검사
-	var emReg = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
-	
-	$("#userEmail").keyup(function() {
-		if($("#userEmail").val() != " ") {
-			if (!emReg.test($("#userEmail").val())) {
-				$("#em-error").show();
-				document.getElementById("emCheckVal").value = 'N';
-			} else if(emReg.test($("#userEmail").val())) {
-				$("#em-error").hide();
-				document.getElementById("emCheckVal").value = 'Y';
-			}
-		}
+	$("#userId").keyup(function() { //keyup() : 키보드 입력할 때마다 감지한다.
+		//console.log("작동확인");
+		if(idReg.test($("#userId").val())) { //test() : 찾는 문자열이, 들어있는지 아닌지를 알려준다.
+			$.ajax({
+				url: "/member/idCheck",
+				data: {
+					"userId": $("#userId").val()
+				},
+				dataType: "json",
+				type: "post",
+				async: false, //async는 기본이 true고, false를 하면 비동기식이 아닌 동기식방식으로 ajax를 호출하여 서버에 응답을 기다렸다가 응답을 모두 완료 후 다음 로직을 실행하는 동기식으로 변경
+				success: function(data) {
+					//아이디 중복 검사
+					if(data == 1) { //이미 아이디가 있는 경우
+						$("#id-danger").hide();
+						$("#id-success").show();
+						document.getElementById("idCheckVal").value = "Y";
+					}
+					else if(data == 0) { //아이디가 없어서 가입 가능할 경우
+						$("#id-danger").show();
+						$("#id-success").hide();
+						document.getElementById("idCheckVal").value = "N";
+					}
+				}
+			});
+		} 
 	});
 	
+	var sendForm = $("#deleteid-form");
 	
-	/*검사를 통과하지 못했을 경우*/
-	var sendForm = $("#findid-form");
-	
-	$(".findid-button").on("click", function(e) {
+	$(".deleteid-button").on("click", function(e) {
 		e.preventDefault();
-
-		//이름이 비어있으면
-		if(document.getElementById("naCheckVal").value == 'N') {
-			alert("이름을 입력해 주세요.");
-			$("#userName").focus();
+		
+		if(document.getElementById("idCheckVal").value == "N") {
+			alert("아이디가 일치하지 않습니다.");
 			return false;
 		}
 		
-		//비밀번호 유효성 체크
-		if(document.getElementById("emCheckVal").value == 'N') {
-			alert("이메일을 제대로 입력해 주세요.");
-			$("#userEmail").focus();
-			return false;
-		}
+		alert("그동안 필라몰을 이용해주셔서 감사합니다.");
 		sendForm.submit();
+		
 	});
 });
 </script>

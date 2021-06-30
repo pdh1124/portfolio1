@@ -21,7 +21,7 @@ public interface MemberService {
 	public int findUserPassCheck(MemberVO vo); //비밀번호 찾기위해 아이디와 이메일 체크
 	public void setUserPass(MemberVO vo); //체크 후 비밀번호 변경
 	
-	public MemberVO getUser(String userId); 
+	public MemberVO getUser(String userId);  //마이페이지
 	
 	public void updateInfoExPass(MemberVO vo); //회원정보 수정(비밀번호 미포함)
 	

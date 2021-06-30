@@ -3216,6 +3216,12 @@ h4.heading {
 .user_modify {
   width:100%;
 }
+.text_fail {
+  color:red;
+}
+.text_success {
+  color:blue;
+}
 .user_modify tr td {
   border: 1px solid #cccccc;
   padding: 5px 15px 15px 15px;
@@ -3232,6 +3238,7 @@ h4.heading {
 .delete-user a {
   margin-top: 10px;
   background: #d10000 none repeat scroll 0 0;
+  border:1px solid #d10000; 
   color: #fff;
   display: inline-block;
   font-size: 14px;
@@ -3241,7 +3248,9 @@ h4.heading {
   float: right;
 }
 .delete-user a:hover {
-  background:#555555;
+  background:#ffffff;
+  border:1px solid #d10000; 
+  color: #d10000;
 }
 /*-----------------------
 	16. Cart Page
