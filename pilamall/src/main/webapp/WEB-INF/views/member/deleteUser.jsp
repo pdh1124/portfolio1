@@ -24,10 +24,10 @@
 			</div>
 			<div class="col-sm-6">
 				<div class="login">
-					<form id="findid-form" method="post" action="/member/findUserIdResult">
+					<form id="findid-form" method="post" action="/member/deleteUser">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-						<h2>아이디 찾기</h2>
-						<p>가입하신 성함과 이메일을 입력해 주시기 바랍니다.</p>
+						<h2>계정 탈퇴하기</h2>
+						<p>가입하신 아이디와 이메일을 입력해 주시기 바랍니다.</p>
 						<label>성함<span>*</span></label>
 						<input type="text" id="userName" name="userName" placeholder="가입하신 성함을 입력해주세요" required/>
 						<input type="hidden" id="naCheckVal" value="N" />

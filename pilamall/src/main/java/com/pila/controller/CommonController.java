@@ -271,9 +271,11 @@ public class CommonController {
 		String pw = vo.getUserPass();
 		
 		if(pw == "") { //패스워드가 비어있다면
+			log.info("비밀번호 제외");
 			service.updateInfoExPass(vo); //비밀번호를 제외한 수정 처리
 		}
 		else { //비밀번호까지 변경
+			log.info("비밀번호 포함");
 			String newPw = pwEncoder.encode(pw);
 			vo.setUserPass(newPw);
 			service.updateInfo(vo);

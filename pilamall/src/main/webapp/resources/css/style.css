@@ -3211,6 +3211,39 @@ h4.heading {
 }
 
 /*-----------------------
+	15-5 User Modify
+-------------------------*/
+.user_modify {
+  width:100%;
+}
+.user_modify tr td {
+  border: 1px solid #cccccc;
+  padding: 5px 15px 15px 15px;
+}
+.user_modify tr td input {
+  pointer-events: none;
+}
+#userAddr1 {
+  margin-bottom:8px;
+}
+#userAddr3 {
+  margin-top:8px;
+}
+.delete-user a {
+  margin-top: 10px;
+  background: #d10000 none repeat scroll 0 0;
+  color: #fff;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 10px 18px;
+  text-decoration: none;
+  float: right;
+}
+.delete-user a:hover {
+  background:#555555;
+}
+/*-----------------------
 	16. Cart Page
 -------------------------*/
 .table-responsive {

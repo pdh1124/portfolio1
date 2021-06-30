@@ -90,13 +90,14 @@ public class MemberServiceImpl implements MemberService {
 	//회원정보 수정(비밀번호 미포함)
 	@Override
 	public void updateInfoExPass(MemberVO vo) {
-		mapper.updateInfo(vo);	
+		mapper.updateInfoExPass(vo);	
 	}
 
 	//회원정보 수정(비밀번호 포함)
 	@Override
 	public void updateInfo(MemberVO vo) {
-		mapper.updateInfoExPass(vo);	
+		mapper.updateInfo(vo);
+			
 	}
 
 	//회원탈퇴
