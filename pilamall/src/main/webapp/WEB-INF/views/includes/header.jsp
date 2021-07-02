@@ -67,7 +67,7 @@
 							<li>어서오세요.&nbsp; ${userId } 님</li>
 							<li>/</li>
 							<sec:authorize access="hasRole('ROLE_ADMIN')">
-								<li><a href="#">관리자페이지</a></li>
+								<li><a href="/admin/main">관리자페이지</a></li>
 								<li>/</li>
 							</sec:authorize>
 							<sec:authorize access="hasRole('ROLE_USER')">

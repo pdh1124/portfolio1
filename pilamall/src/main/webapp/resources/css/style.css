@@ -3253,6 +3253,14 @@ h4.heading {
   color: #d10000;
 }
 /*-----------------------
+    15-6. goods register
+-------------------------*/
+.goods_cateCode {
+  padding: 12px 15px;
+  border: 1px solid #cccccc;
+  background-color:#ebebeb;
+}
+/*-----------------------
 	16. Cart Page
 -------------------------*/
 .table-responsive {
