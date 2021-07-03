@@ -69,7 +69,7 @@ public class AdminController {
 		}
 		
 		service.register(vo);
-		rttr.addFlashAttribute("result", vo.getGNum());
+		rttr.addFlashAttribute("result",vo.getGNum());
 		
 		return "redirect:/admin/goods/register";
 	}
