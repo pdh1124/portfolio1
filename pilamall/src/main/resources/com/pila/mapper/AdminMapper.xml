@@ -3,12 +3,12 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pila.mapper.AdminMapper">
-	
+
 	<!-- 관리자 상품 등록 -->
 	<insert id="register">
 		<![CDATA[
-		insert into tbl_goods (gNum, gName, cateCode, price, stock, gDes, gImg, ThumbImg)
-		values (tbl_goods_seq.nextval, #{gname}, #{catecode}, #{price}, #{stock}, #{gDes}, #{gImg}, #{ThumbImg})
+		insert into tbl_goods (gNum, gName, cateCode, price, stock, gDes, gImg, thumbImg)
+		values (tbl_goods_seq.nextval, #{gName}, #{cateCode}, #{price}, #{stock}, #{gDes}, #{gImg}, #{thumbImg})
 		]]>
 	</insert>
 	
@@ -17,11 +17,11 @@
 		<![CDATA[
 		 select *
 		 from (
-		 	select rownum rn, gNum, gName, cateCode, price, stock, gDes, gImg, regDate, sellcount, ThumbImg
+		 	select rownum rn, gNum, gName, cateCode, price, stock, gDes, gImg, regDate, sellCount, thumbImg
 		 	from tbl_goods
 		 	where rownum <= #{pageNum} * #{amount} order by gNum desc
 		 	)
-		 where rn < (#{pageNum}-1) * #{amount}
+		 where rn > (#{pageNum}-1) * #{amount}
 		]]>
 	</select>
 

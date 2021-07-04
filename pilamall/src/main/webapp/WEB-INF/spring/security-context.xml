@@ -55,10 +55,8 @@
 
 	<!-- DB 연동 설정 -->
 	<security:authentication-manager>
-		<security:authentication-provider
-			user-service-ref="customUserDetailsService">
-			<security:password-encoder
-				ref="bcryptPasswordEncoder" />
+		<security:authentication-provider user-service-ref="customUserDetailsService">
+			<security:password-encoder ref="bcryptPasswordEncoder" />
 		</security:authentication-provider>
 	</security:authentication-manager>
 

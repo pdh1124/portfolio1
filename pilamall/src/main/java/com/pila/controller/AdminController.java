@@ -58,11 +58,16 @@ public class AdminController {
 		log.info("ymdPath" + ymdPath);
 		
 		if(file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
-			//첨부파일이 있고, 파일명이 빈것이 아니라면
-			
+			//첨부파일이 있고, 파일명이 빈것이 아니라면	
 			log.info("파일명이 잘 넘어오는지 확인 :" + file.getOriginalFilename());
 			
 			fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
+			
+			vo.setGImg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+			vo.setThumbImg(File.separator + "images" + File.separator + "s" + File.separator + "s_" + fileName);
+			
+		} else {
+			fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
 			
 			vo.setGImg(fileName);
 			vo.setThumbImg(fileName);

@@ -19,15 +19,15 @@ public class AdminServiceImpl implements AdminService {
 	@Setter(onMethod_ = @Autowired)
 	private AdminMapper mapper;
 	
+	//상품 등록(관리자)
 	@Override
 	public void register(GoodsVO vo) {
-		mapper.register(vo);
-		
+		mapper.register(vo);	
 	}
 
+	//상품 등록리스트(관리자)
 	@Override
-	public List<GoodsVO> list(Criteria cri) {
-		
+	public List<GoodsVO> list(Criteria cri) {	
 		return mapper.list(cri);
 	}
 

@@ -83,7 +83,7 @@
 											<h5>썸네일</h5>
 										</td>
 										<td class="b_write_right">
-											<input type="file" id="gImg" name="gImg" required>
+											<input type="file" id="gImg" name="file" required>
 										</td>								
 									</tr>
 									<tr class="table-info">

@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class GoodsVO {
 	private int gNum; //상품번호
-	private String gNume; //상품 이름
+	private String gName; //상품 이름
 	private String cateCode; //분류코드
 	private int price; //가격
 	private int stock; //수량

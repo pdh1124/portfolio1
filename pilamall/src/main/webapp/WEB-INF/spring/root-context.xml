@@ -29,8 +29,10 @@
 
 	<mybatis-spring:scan base-package="com.pila.mapper" />
 	
-	<context:component-scan base-package="com.pila.service"></context:component-scan>
+	<context:component-scan base-package="com.pila.service" />
 	<!-- 스프링 프레임워크에서 해당 패키지를 살펴보고, 컴포넌트와 관련 어노테이션을 만나면 그 부분을 자동 객체화 처리 -->
+	<context:component-scan base-package="com.pila.utils" />
+	
 	
 	<!-- 이메일 발송을 위한 bean 설정 -->
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
