@@ -3261,6 +3261,46 @@ h4.heading {
   background-color:#ebebeb;
 }
 /*-----------------------
+	15-7. goods list
+-------------------------*/
+.table-info td {
+  text-align: center;
+  border: 1px solid #dddddd;
+  vertical-align: middle !important;
+}
+.g-num {
+  width: 12%;
+  padding: 15px;
+}
+.g-name {
+  width: 20%;
+  padding: 15px;
+  
+}
+.table-info .g-name {
+  text-align: left !important;
+}
+.g-img {
+  width: 20%;
+  padding: 15px;
+}
+.g-category {
+  width: 12%;
+  padding: 15px;
+}
+.g-price {
+  width: 12%;
+  padding: 15px;
+}
+.g-stock {
+  width: 12%;
+  padding: 15px;
+}
+.g-regdate {
+  width: 12%;
+  padding: 15px;
+}
+/*-----------------------
 	16. Cart Page
 -------------------------*/
 .table-responsive {

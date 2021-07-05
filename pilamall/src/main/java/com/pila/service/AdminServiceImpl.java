@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pila.domain.Criteria;
 import com.pila.domain.GoodsVO;
 import com.pila.mapper.AdminMapper;
 
@@ -27,8 +26,9 @@ public class AdminServiceImpl implements AdminService {
 
 	//상품 등록리스트(관리자)
 	@Override
-	public List<GoodsVO> list(Criteria cri) {	
-		return mapper.list(cri);
+	public List<GoodsVO> getList() {
+		log.info("serviceImpl");
+		return mapper.getList();
 	}
-
+	
 }

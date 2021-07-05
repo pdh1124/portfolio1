@@ -13,16 +13,22 @@
 	</insert>
 	
 	<!-- 관리자 상품 리스트 -->
-	<select id="list" resultType="com.pila.domain.GoodsVO">
-		<![CDATA[
+	<select id="getList" resultType="com.pila.domain.GoodsVO">
 		 select *
-		 from (
-		 	select rownum rn, gNum, gName, cateCode, price, stock, gDes, gImg, regDate, sellCount, thumbImg
-		 	from tbl_goods
-		 	where rownum <= #{pageNum} * #{amount} order by gNum desc
-		 	)
-		 where rn > (#{pageNum}-1) * #{amount}
-		]]>
+		 from tbl_goods order by regDate desc 	 
 	</select>
-
+	
+	<!-- 상품 조회 -->
+	<select id="read" resultType="com.pila.domain.GoodsVO">
+	
+	</select>
+	
+	<!-- 상품 수정 -->
+	<update id="update">
+		update tbl_goods
+		set gName=#{gName}, cateCode=#{cateCode}, price=#{price}, stock=#{stock}, gDes=#{gDes}, gImg=#{gImg}, thumbImg=#{thumbImg}
+		where gNum=#{gNum}
+	</update>
+	
+	
 </mapper>

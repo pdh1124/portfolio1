@@ -7,19 +7,21 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.pila.domain.GoodsVO;
 import com.pila.service.AdminService;
+import com.pila.utils.UploadFileUtils;
 
 import lombok.AllArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
-import utils.UploadFileUtils;
 
 @Controller
 @Log4j
@@ -47,7 +49,7 @@ public class AdminController {
 		
 	}
 	
-	//제품등록 페이지로 이동
+	//제품등록 실행
 	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/goods/register")
 	public String postRegister(GoodsVO vo, MultipartFile file, RedirectAttributes rttr) throws Exception {
@@ -64,7 +66,7 @@ public class AdminController {
 			fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
 			
 			vo.setGImg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
-			vo.setThumbImg(File.separator + "images" + File.separator + "s" + File.separator + "s_" + fileName);
+			vo.setThumbImg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
 			
 		} else {
 			fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
@@ -78,4 +80,17 @@ public class AdminController {
 		
 		return "redirect:/admin/goods/register";
 	}
+	
+	//제품목록페이지(관리자)
+	@PreAuthorize("isAuthenticated()")
+	@GetMapping("/goods/list")
+	public void list(Model model) {
+		
+		log.info("list");
+		
+		model.addAttribute("list", service.getList());
+		
+	}
+	
+	
 }
