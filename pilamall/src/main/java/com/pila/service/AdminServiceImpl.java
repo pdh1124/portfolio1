@@ -27,8 +27,21 @@ public class AdminServiceImpl implements AdminService {
 	//상품 등록리스트(관리자)
 	@Override
 	public List<GoodsVO> getList() {
-		log.info("serviceImpl");
 		return mapper.getList();
+	}
+	
+	//제품 읽기(관리자)
+	@Override
+	public GoodsVO read(int gNum) {
+		return mapper.read(gNum);
+	}
+
+	//제품 수정하기(관리자)
+	@Override
+	public boolean update(GoodsVO vo) {
+		log.info(vo);
+		log.info(mapper.update(vo));
+		return mapper.update(vo) == 1;
 	}
 	
 }

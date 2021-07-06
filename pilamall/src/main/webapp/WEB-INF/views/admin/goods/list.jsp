@@ -42,9 +42,9 @@
 					<tbody>
 						<c:forEach items="${list }" var="list">
 							<tr class="table-info">
-								<td class="g-num">${list.GNum }</td>
+								<td class="g-num">${list.gdsNum }</td>
 								<td class="g-img"><img src="${list.thumbImg }" width="100px" height="100px"></td>
-								<td class="g-name"><a href="admin/goods/modify?GNum=${list.GNum }">${list.GName }</a></td>
+								<td class="g-name"><a href="/admin/goods/modify?gdsNum=${list.gdsNum }">${list.gdsName }</a></td>
 								<td class="g-category">${list.cateCode }</td>
 								<td class="g-price">${list.price } 원</td>
 								<td class="g-stock">${list.stock } 개</td>

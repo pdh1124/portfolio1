@@ -29,9 +29,10 @@
 			</div>
 			<div class="col-sm-8 col-md-9">
 				<div class="login">
-					<form id="goodsRegister-form" name="goods-register" method="post" action="/admin/goods/register" enctype="multipart/form-data">
+					<form id="goodsRegister-form" name="goods-register" method="post" action="/admin/goods/modify" enctype="multipart/form-data">
 						<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token}">
-						<h2>상품 등록</h2>
+						<input type="hidden" name="gdsNum" value="${goods.gdsNum} "/>
+						<h2>상품 수정</h2>
 						<div class="table-responsive">
 							<table class="table cart-table board_table">
 								<tbody>
@@ -40,7 +41,7 @@
 											<h5>상품명</h5>
 										</td>
 										<td class="b_write_right">
-											<input type="text" id="gdsName" name="gdsName" required />
+											<input type="text" id="gdsName" name="gdsName" value="${goods.GName }" required />
 										</td>								
 									</tr>
 									<tr class="table-info">
@@ -48,7 +49,7 @@
 											<h5>상품가격</h5>
 										</td>
 										<td class="b_write_right">
-											<input type="text" id="price" name="price" required />
+											<input type="text" id="price" name="price" value="${goods.price }" required />
 										</td>								
 									</tr>
 									<tr class="table-info">
@@ -56,7 +57,7 @@
 											<h5>상품 수량</h5>
 										</td>
 										<td class="b_write_right">
-											<input type="text" id="stock" name="stock" required />
+											<input type="text" id="stock" name="stock" value="${goods.stock }" required />
 										</td>								
 									</tr>
 									<tr class="table-info">
@@ -65,8 +66,8 @@
 										</td>
 										<td class="b_write_right">
 											<select class="goods_cateCode" id="cateCode" name="cateCode" required>
-												<option value="요가복">요가복</option>
-												<option value="요가용품">요가용품</option>
+												<option <c:if test="${goods.cateCode eq '요가복' }">selected="selected"</c:if> value="요가복">요가복</option>
+												<option <c:if test="${goods.cateCode eq '요가용품' }">selected="selected"</c:if> value="요가용품">요가용품</option>
 											</select>
 										</td>								
 									</tr>
@@ -75,7 +76,7 @@
 											<h5>상품 설명</h5>
 										</td>
 										<td class="b_write_right">
-											<textarea rows="10" type="text" id="gdsDes" name="gdsDes" placeholder="상품 설명을 입력해주세요"></textarea>
+											<textarea rows="10" type="text" id="gdsDes" name="gdsDes">${goods.GDes }</textarea>
 										</td>								
 									</tr>
 									<tr class="table-info">
@@ -91,14 +92,17 @@
 											<h5>이미지</h5>
 										</td>
 										<td class="b_write_right" id="goods-thumbnail">
-											<img src="/resources/img/admin/goods_basic.jpg" />
-										</td>								
+											<img src="${goods.GImg }" width="300px" height="auto"/>
+											<input type="hidden" name="gdsImg" value="${goods.GImg }" />
+											<input type="hidden" name="thumbImg" value="${goods.thumbImg }" />
+										</td>							
 									</tr>				
 								</tbody>
 							</table>							
 							
 							<div class="board_bt">
-								<button class="board_bt_submit" type="submit">상품 등록</button>
+								<button class="board_bt_submit" type="submit">상품 수정</button>
+								<button class="board_bt_submit" type="submit">상품 삭제</button>
 							</div>
 						</div>
 	
@@ -115,7 +119,7 @@
 $(document).ready(function() {
 	
 	/*이미지 첨부시 이미지를 화면에 출력*/
-	$("#gdsImg").change(function() {
+	$("#gImg").change(function() {
 		if(this.files && this.files[0]) {
 			var reader = new FileReader;
 			
@@ -126,6 +130,9 @@ $(document).ready(function() {
 			reader.readAsDataURL(this.files[0]);
 		}
 	});
+	
+	
+	/*이미지 수정(바꾸기)*/
 	
 	/*수량과 가격에 한글이나 영어를 못치게 하기(숫자만 입력 가능)*/
 	var regExp = /[^0-9]/gi;
@@ -142,6 +149,18 @@ $(document).ready(function() {
 		var tempVal = selector.val();
 		selector.val(tempVal.replace(regExp, ""));
 	}
+	
+	
+	//버튼을 클릭하면 수정 및 삭제 실행
+	var fromObj = $("#goodsRegister-form");
+	
+	
+	$("button[type='remove']").on("click",  function(e) {
+		e.preventDefault();
+		fromObj.attr("action", "/admin/goods/remove");
+		
+		fromObj.submit();
+	});
 	
 });
 </script>

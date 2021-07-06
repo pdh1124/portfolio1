@@ -7,8 +7,8 @@
 	<!-- 관리자 상품 등록 -->
 	<insert id="register">
 		<![CDATA[
-		insert into tbl_goods (gNum, gName, cateCode, price, stock, gDes, gImg, thumbImg)
-		values (tbl_goods_seq.nextval, #{gName}, #{cateCode}, #{price}, #{stock}, #{gDes}, #{gImg}, #{thumbImg})
+		insert into tbl_goods (gdsNum, gdsName, cateCode, price, stock, gdsDes, gdsImg, thumbImg)
+		values (tbl_goods_seq.nextval, #{gdsName}, #{cateCode}, #{price}, #{stock}, #{gdsDes}, #{gdsImg}, #{thumbImg})
 		]]>
 	</insert>
 	
@@ -20,14 +20,14 @@
 	
 	<!-- 상품 조회 -->
 	<select id="read" resultType="com.pila.domain.GoodsVO">
-	
+		select * from tbl_goods where gdsNum=#{gdsNum}
 	</select>
 	
 	<!-- 상품 수정 -->
 	<update id="update">
 		update tbl_goods
-		set gName=#{gName}, cateCode=#{cateCode}, price=#{price}, stock=#{stock}, gDes=#{gDes}, gImg=#{gImg}, thumbImg=#{thumbImg}
-		where gNum=#{gNum}
+		set gdsName=#{gdsName}, cateCode=#{cateCode}, price=#{price}, stock=#{stock}, gdsDes=#{gdsDes}, gdsImg=#{gdsImg}, thumbImg=#{thumbImg}
+		where gdsNum=#{gdsNum}
 	</update>
 	
 	

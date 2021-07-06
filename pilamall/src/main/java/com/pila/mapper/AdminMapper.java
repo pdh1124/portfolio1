@@ -10,4 +10,8 @@ public interface AdminMapper {
 	
 	public List<GoodsVO> getList(); //관리자 상품 목록
 	
+	public GoodsVO read(int gNum); //조회하기
+	
+	public int update(GoodsVO vo); //수정하기
+	
 }

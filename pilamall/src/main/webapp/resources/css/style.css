@@ -1,3 +1,8 @@
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css); /*스포카*/
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,700); /*로보토*/
+
+body, table, div, p{ font-family: ‘Roboto’, ‘Spoqa Han Sans’, ‘Spoqa Han Sans JP’, ‘Sans-serif’; }
+
 /*------------------------------------------------------------------
 	Template Name:	Olongker - eCommerce Bootstrap Template
     Template URI: http://bootexperts.com

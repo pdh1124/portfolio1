@@ -3,6 +3,7 @@ package com.pila.controller;
 import java.io.File;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -65,18 +66,18 @@ public class AdminController {
 			
 			fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
 			
-			vo.setGImg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+			vo.setGdsImg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
 			vo.setThumbImg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
 			
 		} else {
 			fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
 			
-			vo.setGImg(fileName);
+			vo.setGdsImg(fileName);
 			vo.setThumbImg(fileName);
 		}
 		
 		service.register(vo);
-		rttr.addFlashAttribute("result",vo.getGNum());
+		rttr.addFlashAttribute("result",vo.getGdsNum());
 		
 		return "redirect:/admin/goods/register";
 	}
@@ -92,5 +93,49 @@ public class AdminController {
 		
 	}
 	
+	//제품 수정페이지로 이동
+	@GetMapping("/goods/modify")
+	public void get(@RequestParam("GdsNum") int gdsNum, Model model) {
+		model.addAttribute("goods", service.read(gdsNum));
+	}
+	
+	
+	//제품 수정 기능
+	@PreAuthorize("isAuthenticated()")
+	@PostMapping("/goods/modify")
+	public String modify(GoodsVO vo, MultipartFile file, RedirectAttributes rttr,HttpServletRequest req) throws Exception {
+
+		
+		if(file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
+			//첨부파일이 있고, 파일명이 빈것이 아니라면	
+			
+			log.info("if문이 돌아가는지 확인");
+			
+			//기존파일 삭제
+			new File(uploadPath + req.getParameter("gImg")).delete();
+			new File(uploadPath + req.getParameter("thumbImg")).delete();
+			
+			//새로 첨부하는 파일 등록
+			String imgUploadPath = uploadPath + File.separator + "imgUpload";
+			String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+			String fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
+			
+			vo.setGdsImg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+			vo.setThumbImg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+			
+		} else {
+			//기존 이미지 그대로 사용
+			vo.setGdsImg(req.getParameter("gImg"));
+			vo.setThumbImg(req.getParameter("thumbImg"));
+		}
+		
+		if(service.update(vo)) {
+			log.info("수정여부 확인");
+			rttr.addFlashAttribute("result", "success");
+		}
+
+		
+		return "redirect:/admin/goods/list";
+	}
 	
 }
