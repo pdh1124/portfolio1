@@ -63,7 +63,7 @@
 				<div class="comments-list">
 					<div class="div_line"></div>
 					<h4 class="heading">첨부파일</h4>
-					<div class="uploadResult">
+					<div class="uploadResult align-left">
 						<ul>
 						</ul>
 					</div>

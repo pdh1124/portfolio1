@@ -18,8 +18,8 @@
 
 	<security:http use-expressions="true" auto-config="true">
 		<security:csrf disabled="false" />
-		<!-- <security:intercept-url access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" 
-			pattern="/user/**" /> -->
+		<!-- 
+		<security:intercept-url pattern="/user/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"  /> -->
 
 		<!-- 모든페이지는 모든 유저가 접근 허용 -->
 		<security:intercept-url pattern="/**" access="permitAll" />

@@ -95,7 +95,7 @@ public class AdminController {
 	
 	//제품 수정페이지로 이동
 	@GetMapping("/goods/modify")
-	public void get(@RequestParam("GdsNum") int gdsNum, Model model) {
+	public void get(@RequestParam("gdsNum") int gdsNum, Model model) {
 		model.addAttribute("goods", service.read(gdsNum));
 	}
 	
@@ -106,13 +106,13 @@ public class AdminController {
 	public String modify(GoodsVO vo, MultipartFile file, RedirectAttributes rttr,HttpServletRequest req) throws Exception {
 
 		
-		if(file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
+		if(file.getOriginalFilename() != null && !file.getOriginalFilename().equals("")) {
 			//첨부파일이 있고, 파일명이 빈것이 아니라면	
 			
 			log.info("if문이 돌아가는지 확인");
 			
 			//기존파일 삭제
-			new File(uploadPath + req.getParameter("gImg")).delete();
+			new File(uploadPath + req.getParameter("gdsImg")).delete();
 			new File(uploadPath + req.getParameter("thumbImg")).delete();
 			
 			//새로 첨부하는 파일 등록
@@ -125,7 +125,8 @@ public class AdminController {
 			
 		} else {
 			//기존 이미지 그대로 사용
-			vo.setGdsImg(req.getParameter("gImg"));
+			log.info("그대로인지 확인");
+			vo.setGdsImg(req.getParameter("gdsImg"));
 			vo.setThumbImg(req.getParameter("thumbImg"));
 		}
 		
@@ -135,6 +136,18 @@ public class AdminController {
 		}
 
 		
+		return "redirect:/admin/goods/list";
+	}
+	
+	
+	//제품 삭제 기능
+	@PreAuthorize("isAuthenticated()")
+	@PostMapping("/goods/remove")
+	public String remove(@RequestParam("gdsNum") int gdsNum,RedirectAttributes rttr) {
+		log.info("삭제 실행확인");
+		if(service.remove(gdsNum)) {
+			rttr.addFlashAttribute("result", "success");
+		}
 		return "redirect:/admin/goods/list";
 	}
 	

@@ -32,8 +32,8 @@ public class AdminServiceImpl implements AdminService {
 	
 	//제품 읽기(관리자)
 	@Override
-	public GoodsVO read(int gNum) {
-		return mapper.read(gNum);
+	public GoodsVO read(int gdsNum) {
+		return mapper.read(gdsNum);
 	}
 
 	//제품 수정하기(관리자)
@@ -42,6 +42,12 @@ public class AdminServiceImpl implements AdminService {
 		log.info(vo);
 		log.info(mapper.update(vo));
 		return mapper.update(vo) == 1;
+	}
+	
+	//제품 삭제하기(관리자)
+	@Override
+	public boolean remove(int gdsNum) {
+		return mapper.delete(gdsNum) == 1;
 	}
 	
 }

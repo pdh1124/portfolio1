@@ -16,7 +16,7 @@
 	<title>필라몰 | pilamall</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Fav Icon -->
-	<link id="favicon" rel="icon" type="image/png" href="/resources/img/favicon.ico" />
+	<link id="favicon" rel="icon" href="/resources/img/favicon.ico" />
 	<!-- Google Font Raleway -->
 	<link href='https://fonts.googleapis.com/css?family=Raleway:200,300,500,400,600,700,800' rel='stylesheet' type='text/css'>
 	<!-- Google Font Dancing Script -->
@@ -66,18 +66,20 @@
 							<sec:authentication property="principal.username" var="userId"/>
 							<li>어서오세요.&nbsp; ${userId } 님</li>
 							<li>/</li>
-							<sec:authorize access="hasRole('ROLE_ADMIN')">
-								<li><a href="/admin/main">관리자페이지</a></li>
-								<li>/</li>
-							</sec:authorize>
-							<sec:authorize access="hasRole('ROLE_USER')">
-								<li><a href="/member/mypage">마이페이지</a></li>
-								<li>/</li>
-							</sec:authorize>
-							<li>
-							<form action="/member/logout" method="POST">
-								<a id="member_logout" href="/member/logout">로그아웃</a>
-							</form>
+							<li><a href="/member/mypage">회원관리</a>
+								<ul class="top_menu">
+									<sec:authorize access="hasRole('ROLE_ADMIN')">
+										<li><a href="/admin/main">관리자페이지</a></li>
+									</sec:authorize>
+									<sec:authorize access="permitAll">
+										<li><a href="/member/mypage">마이페이지</a></li>
+									</sec:authorize>
+									<li>
+									<form action="/member/logout" method="POST">
+										<a id="member_logout" href="/member/logout">로그아웃</a>
+									</form>
+									</li>
+								</ul>
 							</li>
 						</sec:authorize>
 						<sec:authorize access="isAnonymous()">

@@ -58,7 +58,7 @@
 										<td class="b_write_left">
 											<h5>첨부파일</h5>
 										</td>
-										<td class="b_write_right">
+										<td class="b_write_right align-left">
 											<input type="file" name="uploadFile" multiple>
 											<div class="uploadResult">
 												<ul>

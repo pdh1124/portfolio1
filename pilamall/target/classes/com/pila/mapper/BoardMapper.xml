@@ -66,7 +66,7 @@
 		<![CDATA[
 			select bno, title, content, writer, regdate, updatedate, replycnt, views, likeCnt
 			from (
-				select /*+INDEX_DESC(comm_loard pk_comm_board) */ rownum rn, bno, title, content, writer, regdate, updatedate, replycnt, views, likeCnt
+				select /*+INDEX_DESC(comm_board pk_comm_board) */ rownum rn, bno, title, content, writer, regdate, updatedate, replycnt, views, likeCnt
 				from (select * from comm_board where bno > 0 ORDER BY bno DESC)
 				where 
 				

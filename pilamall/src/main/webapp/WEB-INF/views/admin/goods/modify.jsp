@@ -9,8 +9,6 @@
 
 <%@ include file="../../includes/header.jsp"%>
 
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
 <section class="blog-page page fix"><!-- Start Blog Area-->
 	<div class="container">
 		<div class="row">
@@ -41,7 +39,7 @@
 											<h5>상품명</h5>
 										</td>
 										<td class="b_write_right">
-											<input type="text" id="gdsName" name="gdsName" value="${goods.GName }" required />
+											<input type="text" id="gdsName" name="gdsName" value="${goods.gdsName }" required />
 										</td>								
 									</tr>
 									<tr class="table-info">
@@ -64,7 +62,7 @@
 										<td class="b_write_left">
 											<h5>분류</h5>
 										</td>
-										<td class="b_write_right">
+										<td class="b_write_right align-left">
 											<select class="goods_cateCode" id="cateCode" name="cateCode" required>
 												<option <c:if test="${goods.cateCode eq '요가복' }">selected="selected"</c:if> value="요가복">요가복</option>
 												<option <c:if test="${goods.cateCode eq '요가용품' }">selected="selected"</c:if> value="요가용품">요가용품</option>
@@ -76,7 +74,7 @@
 											<h5>상품 설명</h5>
 										</td>
 										<td class="b_write_right">
-											<textarea rows="10" type="text" id="gdsDes" name="gdsDes">${goods.GDes }</textarea>
+											<textarea rows="10" type="text" id="gdsDes" name="gdsDes">${goods.gdsDes }</textarea>
 										</td>								
 									</tr>
 									<tr class="table-info">
@@ -84,25 +82,26 @@
 											<h5>썸네일</h5>
 										</td>
 										<td class="b_write_right">
-											<input type="file" id="gdsImg" name="file" required>
+											<input type="file" id="gdsImg" name="file">
 										</td>								
 									</tr>
 									<tr class="table-info">
 										<td class="b_write_left">
 											<h5>이미지</h5>
 										</td>
-										<td class="b_write_right" id="goods-thumbnail">
-											<img src="${goods.GImg }" width="300px" height="auto"/>
-											<input type="hidden" name="gdsImg" value="${goods.GImg }" />
+										<td class="b_write_right align-left" id="goods-thumbnail">
+											<img src="${goods.gdsImg }" width="300px" height="auto"/>
+											<input type="hidden" name="gdsImg" value="${goods.gdsImg }" />
 											<input type="hidden" name="thumbImg" value="${goods.thumbImg }" />
 										</td>							
 									</tr>				
 								</tbody>
 							</table>							
 							
-							<div class="board_bt">
-								<button class="board_bt_submit" type="submit">상품 수정</button>
-								<button class="board_bt_submit" type="submit">상품 삭제</button>
+							<div class="goods_modi_bt">
+								<button data-oper="list" class="modi-list" type="submit">목록보기</button>
+								<button data-oper="modify" class="modi-submit" type="submit">상품 수정</button>
+								<button data-oper="remove" class="modi-remove" type="submit">상품 삭제</button>
 							</div>
 						</div>
 	
@@ -119,7 +118,7 @@
 $(document).ready(function() {
 	
 	/*이미지 첨부시 이미지를 화면에 출력*/
-	$("#gImg").change(function() {
+	$("#gdsImg").change(function() {
 		if(this.files && this.files[0]) {
 			var reader = new FileReader;
 			
@@ -151,15 +150,28 @@ $(document).ready(function() {
 	}
 	
 	
+	
 	//버튼을 클릭하면 수정 및 삭제 실행
-	var fromObj = $("#goodsRegister-form");
+	var formObj = $("#goodsRegister-form");
 	
-	
-	$("button[type='remove']").on("click",  function(e) {
-		e.preventDefault();
-		fromObj.attr("action", "/admin/goods/remove");
+	$(".goods_modi_bt button").on("click", function(e) {
 		
-		fromObj.submit();
+		var operation = $(this).data("oper");
+		
+		//삭제 버튼
+		if (operation === 'remove') {
+			e.preventDefault();
+			alert("삭제되었습니다.");
+			formObj.attr("action","/admin/goods/remove");
+			formObj.submit();
+		}
+	
+		//리스트 버튼
+		else if (operation === 'list') {
+			e.preventDefault();
+			location.href="/admin/goods/list";
+		}
+			
 	});
 	
 });

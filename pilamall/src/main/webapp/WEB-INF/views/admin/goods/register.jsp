@@ -9,8 +9,6 @@
 
 <%@ include file="../../includes/header.jsp"%>
 
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
 <section class="blog-page page fix"><!-- Start Blog Area-->
 	<div class="container">
 		<div class="row">
@@ -63,7 +61,7 @@
 										<td class="b_write_left">
 											<h5>분류</h5>
 										</td>
-										<td class="b_write_right">
+										<td class="b_write_right align-left">
 											<select class="goods_cateCode" id="cateCode" name="cateCode" required>
 												<option value="요가복">요가복</option>
 												<option value="요가용품">요가용품</option>
@@ -90,7 +88,7 @@
 										<td class="b_write_left">
 											<h5>이미지</h5>
 										</td>
-										<td class="b_write_right" id="goods-thumbnail">
+										<td class="b_write_right align-left" id="goods-thumbnail">
 											<img src="/resources/img/admin/goods_basic.jpg" />
 										</td>								
 									</tr>				

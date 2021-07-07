@@ -10,7 +10,9 @@ public interface AdminService {
 
 	public List<GoodsVO> getList(); //관리자 상품 목록
 	
-	public GoodsVO read(int gNum); //조회하기
+	public GoodsVO read(int gdsNum); //조회하기
 	
 	public boolean update(GoodsVO vo); //수정하기
+	
+	public boolean remove(int gdsNum); //삭제하기
 }

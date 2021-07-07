@@ -42,14 +42,14 @@
 									<!--td class="b_title">
 										<h5><a href="/board/comm_get?bno=${board.bno }"><c:out value="${board.title }" /><span style="color:red"></span></a></h5>
 									</td-->
-									<td class="b_title">
+									<td class="b_title align-left">
 										<h5><a href="${board.bno }" class="move"><c:out value="${board.title }" />
 											<c:if test="${board.replyCnt ne 0 }">
 												<span style="color:red"><c:out value="[${board.replyCnt }]"/></span>
 											</c:if>
 										</a></h5>
 									</td>
-									<td class="b_writer">
+									<td class="b_writer align-left">
 										<h5><c:out value="${board.writer }" /></h5>
 									</td>
 									<td class="b_regdate">

@@ -197,6 +197,9 @@ img {
 .header-top {
   background: #666666 none repeat scroll 0 0;
 }
+.top_menu {
+
+}
 .info, .socials {
   margin-top: 17px;
 }
@@ -317,6 +320,7 @@ img {
   opacity: 1;
   transform: scaleY(1);
   z-index: 999;
+  width:120px;
 }
 /*----- 3.3 Header Area -----*/
 .header-area {
@@ -3304,6 +3308,48 @@ h4.heading {
 .g-regdate {
   width: 12%;
   padding: 15px;
+}
+.align-left {
+  text-align: left !important;	
+}
+.goods_cateCode {
+  width:40%;
+}
+.goods_modi_bt button {
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px 15px;
+  text-transform: uppercase;
+}
+.goods_modi_bt .modi-list {
+  background-color:#ebebeb;
+  border:1px solid #e09e25;
+  color: #e09e25;
+}
+.goods_modi_bt .modi-list:hover {
+  background-color:#ebebeb;
+  border:1px solid #c08b29;
+  color: #c08b29;
+}
+.goods_modi_bt .modi-submit {
+  background-color:#e09e25;
+  border:1px solid #e09e25;
+  color: #ffffff;
+}
+.goods_modi_bt .modi-submit:hover {
+  background-color:#c08b29;
+  border:1px solid #c08b29;
+  color: #ffffff;
+}
+.goods_modi_bt .modi-remove {
+  background-color:#cc0000;
+  border:1px solid #cc0000;
+  color: #ffffff;
+}
+.goods_modi_bt .modi-remove:hover {
+  background-color:#990000;
+  border:1px solid #990000;
+  color: #ffffff;
 }
 /*-----------------------
 	16. Cart Page
