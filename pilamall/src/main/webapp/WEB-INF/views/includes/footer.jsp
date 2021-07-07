@@ -135,9 +135,8 @@
 	</div>
 </div><!--Start Footer top area-->
 
-	
-<!-- jQuery 2.1.4 -->
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+
 <!-- Bootstrap JS -->
 <script type="text/javascript" src="/resources/js/bootstrap.min.js"></script>
 <!-- Owl Carousel JS -->
@@ -169,6 +168,8 @@
 <script type="text/javascript" src="/resources/js/main.js"></script>
 
 <script type="text/javascript" src="/resources/js/jquery.min.js"></script>
+
 </body>
 
 </html>
+

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.pila.domain.Criteria;
+import com.pila.domain.PageDTO;
 import com.pila.service.ProductService;
 
 import lombok.AllArgsConstructor;
@@ -35,5 +36,42 @@ public class ProductController {
 	@GetMapping("/all")
 	public void all(Model model, Criteria cri) {
 		
+		int total = service.getTotal(cri);
+		
+		model.addAttribute("list", service.PagingAll(cri));
+		model.addAttribute("pageMaker", new PageDTO(cri,total));
 	}
+	
+	//요가복상품 보기(페이징)
+	@GetMapping("/product1")
+	public void product1(Model model, Criteria cri) {
+		
+		int total = service.getTotal(cri);
+		
+		model.addAttribute("list", service.PagingProduct1(cri));
+		model.addAttribute("pageMaker", new PageDTO(cri,total));
+	}
+	
+	//요가용품상품 보기(페이징)
+	@GetMapping("/product2")
+	public void product2(Model model, Criteria cri) {
+		
+		int total = service.getTotal(cri);
+		
+		model.addAttribute("list", service.PagingProduct2(cri));
+		model.addAttribute("pageMaker", new PageDTO(cri,total));
+	}
+	
+	
+	//검색상품 보기(페이징)
+	@GetMapping("/search")
+	public void search(Model model, Criteria cri) {
+		
+		int total = service.getTotal(cri);
+		
+		model.addAttribute("list", service.searchList(cri));
+		model.addAttribute("pageMaker", new PageDTO(cri,total));
+	}
+	
+	
 }

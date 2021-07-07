@@ -4,6 +4,16 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pila.mapper.ProductMapper">
 
+	<!-- 키워드 검색 include -->
+	<sql id="criteria">
+		<if test="keyword != null">
+			gdsName like '%'||#{keyword}||'%' and
+		</if>
+		<if test="keyword == null">
+			gdsName like '%' and
+		</if>
+	</sql>
+
 	<!-- 메인페이지 새상품 -->
 	<select id="newProduct" resultType="com.pila.domain.GoodsVO">
 		<![CDATA[
@@ -41,6 +51,19 @@
 	</select>
 	
 	
+	<!-- 전체 상품 갯수 -->
+	<select id="getTotal" resultType="int">
+		<![CDATA[
+			select count(gdsNum)
+			from tbl_goods
+			where 
+		]]>
+		<include refid="criteria" />		
+		<![CDATA[
+			gdsNum > 0
+		]]>
+	</select>
+	
 	<!-- 전체상품 리스트 -->
 	<select id="PagingAll" resultType="com.pila.domain.GoodsVO">
 		<![CDATA[
@@ -54,6 +77,47 @@
 		]]>
 	</select>
 	<!-- 요가복 리스트 -->
+	<select id="PagingProduct1" resultType="com.pila.domain.GoodsVO">
+		<![CDATA[
+			select *
+			from (
+				select rownum rn, gdsNum, gdsName, cateCode, price, stock, gdsDes, gdsImg, regDate, sellcount, thumbImg
+				from tbl_goods
+				where rownum <= #{pageNum} * #{amount} order by gdsNum desc
+			)
+			where rn > (#{pageNum}-1) * #{amount} and cateCode = '요가복' 
+		]]>
+	</select>
+	
 	
 	<!-- 요가용품 리스트 -->
+	<select id="PagingProduct2" resultType="com.pila.domain.GoodsVO">
+		<![CDATA[
+			select *
+			from (
+				select rownum rn, gdsNum, gdsName, cateCode, price, stock, gdsDes, gdsImg, regDate, sellcount, thumbImg
+				from tbl_goods
+				where rownum <= #{pageNum} * #{amount} order by gdsNum desc
+			)
+			where rn > (#{pageNum}-1) * #{amount} and cateCode = '요가용품'
+		]]>
+	</select>
+	
+	<!-- 검색 페이지 -->
+	<select id="searchList" resultType="com.pila.domain.GoodsVO">
+		<![CDATA[
+			select *
+			from (
+				select rownum rn, gdsNum, gdsName, cateCode, price, stock, gdsDes, gdsImg, regDate, sellcount, thumbImg
+				from tbl_goods
+				where
+				]]>
+				<include refid="criteria" />				
+				<![CDATA[
+				rownum <= #{pageNum} * #{amount}
+			)
+			where rn > (#{pageNum}-1) * #{amount}
+		]]>
+	</select>
+	
 </mapper>

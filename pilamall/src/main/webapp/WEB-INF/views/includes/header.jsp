@@ -44,6 +44,8 @@
 	<!-- Responsive Stylesheet -->
 	<link rel="stylesheet" type="text/css" href="/resources/css/responsive.css" />
 	<!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<!-- jQuery 2.1.4 -->
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 </head>
 
 
@@ -103,13 +105,40 @@
 					</a>
 				</div>
 			</div>
+			<!-- 검색창 -->
 			<div class="col-sm-4 col-lg-6">
-				<div class="search float-right">
-					<input type="text" value="" placeholder="상품을 검색해 주세요...." />
-					<button class="submit"><i class="fa fa-search"></i></button>
-				</div>
-				
+				<form id="search-Form" action="/product/search" method="get">
+					<div class="search float-right">
+						<input type="text" name="keyword" value="${pageMaker.cri.keyword }" autocomplete="off" placeholder="상품을 검색해 주세요...." />
+						<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }" />
+						<input type="hidden" name="amount" value="${pageMaker.cri.amount }" />
+						<button class="submit"><i class="fa fa-search"></i></button>
+					</div>
+				</form>
 			</div>
+			
+			<script>
+			$(document).ready(function(){
+			
+				var goods_searchForm = $("#search-Form");
+				
+				$("#search-Form button").on("click", function(e) {
+					
+					//키워드가 빈값이면 키워드를 입력하라고 띄움.
+					if(!goods_searchForm.find("input[name='keyword']").val()) {
+						alert("검색어를 입력해 주세요.");
+						return false;
+					}
+					
+					//검색을 한후에는 1페이지로 이동해라.
+					goods_searchForm.find("input[name='pageNum']").val(1);
+					goods_searchForm.find("input[name='amount']").val(16);
+					e.preventDefault();
+					goods_searchForm.submit();
+				});
+			});
+			</script>
+			
 			<div class="col-sm-4 col-lg-3">
 				<sec:authorize access="isAuthenticated()">
 				<div class="cart-info float-right">
@@ -157,9 +186,9 @@
 					<nav>
 						<ul>
 							<li><a href="/product/main" class="active">메인페이지</a></li>
-							<li><a href="#">전체 상품</a></li>
-							<li><a href="#">요가복</a></li>
-							<li><a href="#">요가용품</a></li>
+							<li><a href="/product/all">전체 상품</a></li>
+							<li><a href="/product/product1">요가복</a></li>
+							<li><a href="/product/product2">요가용품</a></li>
 							<li><a href="#">게시판</a>
 								<ul class="sub-menu">
 									<li><a href="#">문의 게시판</a></li>

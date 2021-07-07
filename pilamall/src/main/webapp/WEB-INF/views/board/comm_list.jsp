@@ -77,7 +77,7 @@
 						<li class='pageMove ${pageMaker.cri.pageNum == num?"active":"" }'><a href="${num} "><span>${num }</span></a></li>
 					</c:forEach>
 					<c:if test="${pageMaker.next }">
-						<li class="pageMove"><a href="${pageMaker.endPage-1 }"><i class="fa fa-angle-right"></i></a></li>
+						<li class="pageMove"><a href="${pageMaker.endPage+1 }"><i class="fa fa-angle-right"></i></a></li>
 					</c:if>
 				</ul>
 			</div>
@@ -118,7 +118,6 @@
 <script>
 $(document).ready(function() {
 	
-	
 	//페이징 버튼과 상세페이지 이동-------------------- 시작
 	var actionForm = $("#actionForm");
 	
@@ -142,7 +141,7 @@ $(document).ready(function() {
 	//검색버튼 -----------------시작
 	var board_searchForm = $("#board_searchForm");
 	
-	$("board_searchForm button").on("click", function(e) {
+	$("#board_searchForm button").on("click", function(e) {
 		
 		//옵션이 빈값이면 검색종류를 선택하라고 띄움.
 		if(!board_searchForm.find("option:selected").val()) {
@@ -161,7 +160,6 @@ $(document).ready(function() {
 		board_searchForm.submit();
 	});
 	//검색버튼 -----------------끝
-	
 	
 });
 </script>

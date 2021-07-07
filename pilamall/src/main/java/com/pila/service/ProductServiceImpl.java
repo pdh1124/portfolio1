@@ -37,13 +37,34 @@ public class ProductServiceImpl implements ProductService {
 		return mapper.main_2();
 	}
 	
+	//상품 총 갯수 파악
+	@Override
+	public int getTotal(Criteria cri) {	
+		return mapper.getTotal(cri);
+	}
+		
 	//전체상품 보기
 	@Override
 	public List<GoodsVO> PagingAll(Criteria cri) {
-		
 		return mapper.PagingAll(cri);
 	}
-	
-	
+
+	//요가복상품 보기
+	@Override
+	public List<GoodsVO> PagingProduct1(Criteria cri) {
+		return mapper.PagingProduct1(cri);
+	}
+
+	//요가용품상품 보기
+	@Override
+	public List<GoodsVO> PagingProduct2(Criteria cri) {
+		return mapper.PagingProduct2(cri);
+	}
+
+	//검색상품 보기
+	@Override
+	public List<GoodsVO> searchList(Criteria cri) {
+		return mapper.searchList(cri);
+	}
 
 }
