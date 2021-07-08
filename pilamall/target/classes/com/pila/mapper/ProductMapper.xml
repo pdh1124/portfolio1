@@ -120,4 +120,28 @@
 		]]>
 	</select>
 	
+	<!-- 검색 페이지 -->
+	<select id="goods_view" resultType="com.pila.domain.GoodsVO">
+		<![CDATA[
+			select *
+			from (
+				select rownum rn, gdsNum, gdsName, cateCode, price, stock, gdsDes, gdsImg, regDate, sellcount, thumbImg
+				from tbl_goods
+				where
+				]]>
+				<include refid="criteria" />				
+				<![CDATA[
+				rownum <= #{pageNum} * #{amount}
+			)
+			where rn > (#{pageNum}-1) * #{amount}
+		]]>
+	</select>
+	
+	<!-- 상품 뷰페이지 -->
+	<select id="view" resultType="com.pila.domain.GoodsVO">
+		select *
+		from tbl_goods
+		where gdsNum=#{gdsNum}
+	</select>
+	
 </mapper>

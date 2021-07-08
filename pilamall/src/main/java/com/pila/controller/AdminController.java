@@ -38,6 +38,7 @@ public class AdminController {
 	
 	
 	//관리자 메인페이지로 이동
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/main")
 	public void adminMain() {
 			
@@ -94,6 +95,7 @@ public class AdminController {
 	}
 	
 	//제품 수정페이지로 이동
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/goods/modify")
 	public void get(@RequestParam("gdsNum") int gdsNum, Model model) {
 		model.addAttribute("goods", service.read(gdsNum));

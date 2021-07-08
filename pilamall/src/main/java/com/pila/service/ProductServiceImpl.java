@@ -67,4 +67,9 @@ public class ProductServiceImpl implements ProductService {
 		return mapper.searchList(cri);
 	}
 
+	@Override
+	public GoodsVO view(int gdsNum) {
+		return mapper.view(gdsNum);
+	}
+
 }

@@ -22,4 +22,6 @@ public interface ProductMapper {
 	public List<GoodsVO> PagingProduct2(Criteria cri); //요가용품 상품 보기(페이징 처리)
 	
 	public List<GoodsVO> searchList(Criteria cri); //검색 목록 표시
+	
+	public GoodsVO view(int gdsNum); //상품 뷰페이지
 }

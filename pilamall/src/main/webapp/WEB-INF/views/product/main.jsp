@@ -33,10 +33,10 @@
 						<div class="product-item fix">
 							<div class="product-img-hover">
 								<!-- Product image -->
-								<a href="#" class="pro-image fix"><img src="${product.thumbImg }" alt="featured" /></a>
+								<a href="/product/view?gdsNum=${product.gdsNum }" class="pro-image fix"><img src="${product.thumbImg }" alt="featured" /></a>
 								<!-- Product action Btn -->
 								<div class="product-action-btn">
-									<a class="quick-view" href="#"><i class="fa fa-search"></i></a>
+									<a class="quick-view" href="/product/view?gdsNum=${product.gdsNum }"><i class="fa fa-search"></i></a>
 									<a class="favorite" href="#"><i class="fa fa-heart-o"></i></a>
 									<a class="add-cart" href="#"><i class="fa fa-shopping-cart"></i></a>
 								</div>
@@ -44,7 +44,7 @@
 							<div class="pro-name-price-ratting">
 								<!-- Product Name -->
 								<div class="pro-name">
-									<a href="#">${product.gdsName }</a>
+									<a href="/product/view?gdsNum=${product.gdsNum }">${product.gdsName }</a>
 								</div>
 								<!-- Product Ratting -->
 								<div class="pro-ratting">
@@ -87,10 +87,10 @@
 								<div class="product-item fix">
 									<div class="product-img-hover">
 										<!-- Product image -->
-										<a href="#" class="pro-image fix"><img src="${main1.thumbImg }" alt="product" /></a>
+										<a href="/product/view?gdsNum=${main1.gdsNum }" class="pro-image fix"><img src="${main1.thumbImg }" alt="product" /></a>
 										<!-- Product action Btn -->
 										<div class="product-action-btn">
-											<a class="quick-view" href="#"><i class="fa fa-search"></i></a>
+											<a class="quick-view" href="/product/view?gdsNum=${main1.gdsNum }"><i class="fa fa-search"></i></a>
 											<a class="favorite" href="#"><i class="fa fa-heart-o"></i></a>
 											<a class="add-cart" href="#"><i class="fa fa-shopping-cart"></i></a>
 										</div>
@@ -98,7 +98,7 @@
 									<div class="pro-name-price-ratting">
 										<!-- Product Name -->
 										<div class="pro-name">
-											<a href="#">${main1.gdsName }</a>
+											<a href="/product/view?gdsNum=${main1.gdsNum }">${main1.gdsName }</a>
 										</div>
 										<!-- Product Ratting -->
 										<div class="pro-ratting">
@@ -127,10 +127,10 @@
 								<div class="product-item fix">
 									<div class="product-img-hover">
 										<!-- Product image -->
-										<a href="#" class="pro-image fix"><img src="${main2.thumbImg }" alt="product" /></a>
+										<a href="/product/view?gdsNum=${main2.gdsNum }" class="pro-image fix"><img src="${main2.thumbImg }" alt="product" /></a>
 										<!-- Product action Btn -->
 										<div class="product-action-btn">
-											<a class="quick-view" href="#"><i class="fa fa-search"></i></a>
+											<a class="quick-view" href="/product/view?gdsNum=${main2.gdsNum }"><i class="fa fa-search"></i></a>
 											<a class="favorite" href="#"><i class="fa fa-heart-o"></i></a>
 											<a class="add-cart" href="#"><i class="fa fa-shopping-cart"></i></a>
 										</div>
@@ -138,7 +138,7 @@
 									<div class="pro-name-price-ratting">
 										<!-- Product Name -->
 										<div class="pro-name">
-											<a href="#">${main2.gdsName }</a>
+											<a href="/product/view?gdsNum=${main2.gdsNum }">${main2.gdsName }</a>
 										</div>
 										<!-- Product Ratting -->
 										<div class="pro-ratting">

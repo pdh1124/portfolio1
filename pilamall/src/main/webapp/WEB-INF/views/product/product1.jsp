@@ -24,10 +24,10 @@
 						<div class="product-item fix">
 							<div class="product-img-hover">
 								<!-- Product image -->
-								<a href="#" class="pro-image fix"><img src="${list.thumbImg }" alt="product" /></a>
+								<a href="/product/view?gdsNum=${list.gdsNum }" class="pro-image fix"><img src="${list.thumbImg }" alt="product" /></a>
 								<!-- Product action Btn -->
 								<div class="product-action-btn">
-									<a class="quick-view" href="#"><i class="fa fa-search"></i></a>
+									<a class="quick-view" href="/product/view?gdsNum=${list.gdsNum }"><i class="fa fa-search"></i></a>
 									<a class="favorite" href="#"><i class="fa fa-heart-o"></i></a>
 									<a class="add-cart" href="#"><i class="fa fa-shopping-cart"></i></a>
 								</div>
@@ -35,7 +35,7 @@
 							<div class="pro-name-price-ratting">
 								<!-- Product Name -->
 								<div class="pro-name">
-									<a href="#">${list.gdsName }</a>
+									<a href="/product/view?gdsNum=${list.gdsNum }">${list.gdsName }</a>
 								</div>
 								<!-- Product Ratting -->
 								<div class="pro-ratting">
