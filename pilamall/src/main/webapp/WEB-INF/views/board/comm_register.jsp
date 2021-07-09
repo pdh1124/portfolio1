@@ -10,6 +10,10 @@
 
 <%@ include file="../includes/header.jsp"%>
 
+ 
+
+
+
 <div class="page-title fix"><!--Start Title-->
 	<div class="overlay section">
 		<h2>커뮤니티 게시판</h2>
@@ -51,8 +55,8 @@
 											<h5>글 내용</h5>
 										</td>
 										<td class="b_write_right">
-											<textarea rows="10" type="text" name="content" placeholder="글 내용을 입력해주세요."></textarea>
-										</td>								
+											<textarea rows="10" type="text" name="content"></textarea>
+										</td>
 									</tr>
 									<tr class="table-info">
 										<td class="b_write_left">
@@ -111,6 +115,7 @@ $(document).ready(function(e) {
 			str += "<input type='hidden' name='attachList[" + i + "].uploadPath' value='" + jobj.data("path") + "'>";
 			str += "<input type='hidden' name='attachList[" + i + "].fileType' value='" + jobj.data("type") + "'>";
 		});
+		
 		formObj.append(str).submit();
 	});
 	

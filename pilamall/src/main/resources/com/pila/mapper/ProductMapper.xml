@@ -144,4 +144,37 @@
 		where gdsNum=#{gdsNum}
 	</select>
 	
+	<!-- 상품 리뷰 작성 -->
+	<insert id="registReply">
+		insert into goods_reply (gdsNum, userId, repNum, repCon, star)
+		values (#{gdsNum}, #{userId}, goods_reply_seq.nextval, #{repCon}, star)
+	</insert>
+	
+	<!-- 상품 리뷰 리스트 -->
+	<select id="replyList" resultType="com.pila.domain.GoodsReplyVO">
+		select r.gdsNum, r.userId, r.repNum, r.repCon, r.star, m.userName
+		from goods_reply r inner join tbl_member m on r.userId = m.userId
+		where gdsNum = #{gdsNum} order by r.repDate desc 
+	</select>
+	
+	<!-- 리뷰 삭제 -->
+	<delete id="deleteReply">
+		delete goods_reply
+		where repNum = #{repNum} and userId = #{userId}
+	</delete>
+	
+	<!-- 아이디 체크 -->
+	<select id="idCheck" resultType="String">
+		select userId
+		from goods_reply
+		where repNum = #{repNum}
+	</select>
+	
+	<!-- 리뷰 수정 -->
+	<update id="modifyReply">
+		update goods_reply
+		set repCon = #{repCon}, star = #{star}
+		where repNum = #{repNum} and userId = #{userId}
+	</update>
+	
 </mapper>

@@ -1,13 +1,19 @@
 package com.pila.controller;
 
+import java.security.Principal;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pila.domain.Criteria;
+import com.pila.domain.GoodsReplyVO;
 import com.pila.domain.PageDTO;
 import com.pila.service.ProductService;
 
@@ -82,4 +88,34 @@ public class ProductController {
 	}
 	
 	
+	//상품에 리뷰 작성
+	@ResponseBody
+	@RequestMapping(value="/view/registReply", method = RequestMethod.POST)
+	public void registReply(GoodsReplyVO reply, Principal principal) throws Exception {
+		log.info("댓글 리뷰 작성");
+		String userId = principal.getName();
+		reply.setUserId(userId);
+		service.registerReply(reply);
+	}
+	
+	//리뷰 목록보기
+	@ResponseBody
+	@RequestMapping(value="/view/replyList", method = RequestMethod.GET)
+	public List<GoodsReplyVO> getReplyList(@RequestParam("gdsNum") int gdsNum, Principal principal) throws Exception {
+		log.info("리뷰 보기");
+		List<GoodsReplyVO> reply = service.replyList(gdsNum);
+		return reply;
+	}
+		
+	//리뷰 삭제
+	@ResponseBody
+	@RequestMapping(value="/view/deleteReply", method = RequestMethod.POST)
+	public ResponseEntity<String> deleteReply(GoodsReplyVO reply, Principal principal) throws Exception {
+		
+		log.info("리뷰 삭제");
+		
+		int result = 0;
+		log.info("리뷰 번호 : " + reply.getRepNum());
+		String userId = principal.getName(); // 현재 로그인한 member 세션을 가져옴
+	}
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pila.domain.Criteria;
+import com.pila.domain.GoodsReplyVO;
 import com.pila.domain.GoodsVO;
 import com.pila.mapper.ProductMapper;
 
@@ -67,9 +68,46 @@ public class ProductServiceImpl implements ProductService {
 		return mapper.searchList(cri);
 	}
 
+	//제품 상세페이지
 	@Override
 	public GoodsVO view(int gdsNum) {
 		return mapper.view(gdsNum);
+	}
+
+	
+	
+	//리뷰 작성
+	@Override
+	public void registerReply(GoodsReplyVO reply) throws Exception {
+		mapper.registerReply(reply);
+		
+	}
+
+	//리뷰 리스트
+	@Override
+	public List<GoodsReplyVO> replyList(int gdsNum) throws Exception {
+		
+		return mapper.replyList(gdsNum);
+	}
+
+	//리뷰 삭제
+	@Override
+	public void deleteReply(GoodsReplyVO reply) throws Exception {
+		mapper.deleteReply(reply);
+		
+	}
+
+	//아이디 체크
+	@Override
+	public String idCheck(int repNum) throws Exception {
+		
+		return mapper.idCheck(repNum);
+	}
+
+	//리뷰 수정
+	@Override
+	public void modifyReply(GoodsReplyVO reply) throws Exception {
+		mapper.modifyReply(reply);
 	}
 
 }

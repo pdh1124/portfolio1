@@ -2848,9 +2848,9 @@ h4.heading {
   margin-bottom: 20px;
 }
 .shop-details > p {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 400;
-  margin-bottom: 25px;
+  margin-bottom: 60px;
 }
 .select-menu .sort {
   background: #fff none repeat scroll 0 0;
@@ -2899,18 +2899,17 @@ h4.heading {
   width: 100%;
 }
 .action-btn {
-  margin-bottom: 20px;
+  margin: 20px 0;
 }
 .action-btn a {
   background: #fff none repeat scroll 0 0;
   color: #e09e25;
   display: inline-block;
   font-size: 16px;
-  height: 40px;
-  line-height: 40px;
+  font-weight: bold;
   margin-right: 5px;
   text-align: center;
-  width: 40px;
+  padding: 20px 48px;
 }
 .action-btn a:hover {
   background:#e09e25;

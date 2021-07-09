@@ -3,6 +3,7 @@ package com.pila.mapper;
 import java.util.List;
 
 import com.pila.domain.Criteria;
+import com.pila.domain.GoodsReplyVO;
 import com.pila.domain.GoodsVO;
 
 public interface ProductMapper {
@@ -24,4 +25,15 @@ public interface ProductMapper {
 	public List<GoodsVO> searchList(Criteria cri); //검색 목록 표시
 	
 	public GoodsVO view(int gdsNum); //상품 뷰페이지
+	
+	
+	public void registerReply(GoodsReplyVO reply) throws Exception; //리뷰 작성
+	
+	public List<GoodsReplyVO> replyList(int gdsNum) throws Exception; //리뷰 리스트
+	
+	public void deleteReply(GoodsReplyVO reply) throws Exception; //리뷰 삭제
+	
+	public String idCheck(int repNum) throws Exception; //아이디 체크(삭제, 수정을 위함)
+	
+	public void modifyReply(GoodsReplyVO reply) throws Exception; //리뷰 수정
 }
