@@ -4,6 +4,8 @@ import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -117,5 +119,39 @@ public class ProductController {
 		int result = 0;
 		log.info("리뷰 번호 : " + reply.getRepNum());
 		String userId = principal.getName(); // 현재 로그인한 member 세션을 가져옴
+		String Id = service.idCheck(reply.getRepNum());
+		
+		if(userId.equals(Id)) {
+			//로그인한 아이디가 작성한 아이디와 같다면
+			reply.setUserId(userId); //reply에 userId를 저장
+			service.deleteReply(reply); //서비스의 deleteReply 메소드를 실행
+			
+			result = 1;
+		}
+		
+		return new ResponseEntity<>("result", HttpStatus.OK);
+	}
+	
+	//리뷰 수정
+	@ResponseBody
+	@RequestMapping(value="/view/modifyReply", method = RequestMethod.POST)
+	public int modifyReply(GoodsReplyVO reply, Principal principal) throws Exception {
+		log.info("리뷰 수정");
+		
+		int result = 0;
+		
+		String userId = principal.getName();
+		
+		String Id = service.idCheck(reply.getRepNum());
+		
+		if (userId.equals(Id)) {
+			reply.setUserId(userId);
+			service.modifyReply(reply);
+			result = 1;
+		}
+		
+		log.info("result값 : " + result);
+		return result;
+		
 	}
 }

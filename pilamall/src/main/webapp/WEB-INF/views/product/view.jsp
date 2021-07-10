@@ -9,6 +9,49 @@
 
 <%@ include file="../includes/header.jsp"%>
 
+<script>
+//리뷰 리스트
+function replyList() {
+	
+	var gdsNum = ${product.gdsNum};
+	
+	//비동기식 데이터를 요청한다.
+	$.getJSON("/product/view/replyList" + "?gdsNum=" + gdsNum, function(data) {
+		
+		var str = "";
+		
+		$(data).each(function() {
+			 console.log(data);
+			 
+			 //날짜 변환
+			 var repDate = new Date(this.repDate);
+			 repDate = repDate.toLocaleDateString("ko-US");
+			 
+			 var star = this.star;
+			 
+			 
+			 //리뷰 리스트 만들기
+			 
+			 str += "<li class='reply_List' data-repNum='" + this.repNum + "'>";
+			 str += "<div class='userInfo'>";
+			 str += "<span class='userName'>" + this.userName + "</span><br />";
+			 str += "<span class='date'>" + repDate + "</span>";
+			 
+			 if(star == 1) {
+				 str += "";
+			 }
+			 if(star == 1) {
+				 str += "";
+			 }
+			 str += "</div>";
+			 str += "</li>";
+		});
+		
+	});
+}
+
+</script>
+
 <div class="page-title fix"><!--Start Title-->
 	<div class="overlay section">
 		<h2>Product Details</h2>
@@ -65,14 +108,63 @@
 					<!-- Tab panes -->
 					<div class="tab-content">
 						<div id="description" class="tab-pane fade active in" role="tabpanel">
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco aboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepte.</p>
+							<div>
+								<script>
+									replyList();
+								</script>
+							</div>
 						</div>
 						
 					</div>
 				</div>
 			</div>
+			
+			<sec:authorize access='isAuthenticated()'>
+				<div>
+
+					<h4 class="heading">리뷰 작성</h4>
+					
+					<div id="commentform">
+						<div class="row">
+							<div class="form-input" id="reply_form">
+								<label for="title">별점<span>*</span></label>
+								<select class="review-star" name="star">
+									<option value="5">★★★★★</option>
+									<option value="4">★★★★☆</option>
+									<option value="3">★★★☆☆</option>
+									<option value="2">★★☆☆☆</option>
+									<option value="1">★☆☆☆☆</option>
+								</select>
+								<input type="hidden" value="${product.gdsNum}" name="gdsNum" id="gdsNum">
+								<input type="hidden" value="repDate" name="repDate" id="repDate">
+								
+								<input type="hidden" aria-required="true" value="<sec:authentication property="principal.username"/>" name="userId" id="userId" readonly="readonly"><br>
+								<label for="comment" class="field-label">내용<span>*</span></label>
+								<textarea aria-required="true" name="repCon" id="repCon" rows="4"></textarea><br>
+								<button type="submit" id="submit" name="submit">댓글 등록</button>
+							</div>
+						</div>
+					</div>
+				</div><!-- end commentform -->
+			</sec:authorize>
 		</div>
 	</div>
 </section><!--End Product Details Area-->
 
 <%@ include file="../includes/footer.jsp"%>
+
+
+<script>
+$(document).ready(function() {
+	
+	//시큐리티 처리
+	var csrfHeaderName = "${_csrf.headerName}";
+	var csrfTokenValue = "${_csrf.token}";
+	
+	$(document).ajaxSend(function(e,xhr,options) {
+		xhr.setRequestHeader(csrfHeaderName,csrfTokenValue);
+	});
+	
+	
+});
+</script>

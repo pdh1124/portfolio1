@@ -147,7 +147,7 @@
 	<!-- 상품 리뷰 작성 -->
 	<insert id="registReply">
 		insert into goods_reply (gdsNum, userId, repNum, repCon, star)
-		values (#{gdsNum}, #{userId}, goods_reply_seq.nextval, #{repCon}, star)
+		values (#{gdsNum}, #{userId}, goods_reply_seq.nextval, #{repCon}, #{star})
 	</insert>
 	
 	<!-- 상품 리뷰 리스트 -->
