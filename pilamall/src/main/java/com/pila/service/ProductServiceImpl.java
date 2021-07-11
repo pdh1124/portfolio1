@@ -78,8 +78,8 @@ public class ProductServiceImpl implements ProductService {
 	
 	//리뷰 작성
 	@Override
-	public void registerReply(GoodsReplyVO reply) throws Exception {
-		mapper.registerReply(reply);
+	public void registReply(GoodsReplyVO reply) throws Exception {
+		mapper.registReply(reply);
 		
 	}
 

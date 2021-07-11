@@ -2117,7 +2117,7 @@ img {
 }
 .div_line {
   width:100%;
-  border-top:1px solid #BBBBBB;
+  border-top:1px solid #dddddd;
   margin: 10px 0;
 }
 h4.heading {
@@ -3379,16 +3379,81 @@ h4.heading {
 .review_bt {
   color:#999999;
 }
-.review_bt a {
+.review_bt b {
  color:#999999;
 }
-.review_bt a:hover {
+.review_bt b:hover {
   color:blue;
 }
 .review-star {
   padding: 6px 12px;
   border: 1px solid #cccccc;
   line-height: 10px;
+  background: #ebebeb;
+}
+#repCon {
+  resize: none;
+}
+.field-label {
+ margin-top: 15px;
+}
+#modal {
+  position:absolute;
+  width:100%;
+  z-index:1;
+  display: none;
+  border-radius: 15px;      
+}
+
+#modal h2 {
+  margin:0;   
+}
+
+#modal button {
+  	display:inline-block;
+	width:100px; 	        
+  	text-decoration: none;
+	color: #e09e25;
+	background: #ebebeb;
+	font-size: 14px;
+	padding: 7px;
+	border-radius: 10px;
+	border: 1px solid #e09e25;
+	outline: none;
+}
+#modal button:hover {
+  	color: #ffffff;
+  	background: #e09e25;
+}
+       
+#modal .modal_content {
+  width:700px;
+  height : 700px;
+  margin:100px auto;
+  padding:20px 10px;
+  background:#ebebeb;
+  border:2px solid #e09e25;        
+  border-radius: 15px;  
+}
+#reply_modal {
+  border:1px solid #cccccc;
+  background:#ebebeb;
+  resize: none;
+}
+#modal .modal_layer {
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0, 0, 0, 0.5);
+  z-index:-1;
+}
+#reply_modal {
+	width: 90%;
+	height: 380px;
+	text-indent: 3px;
+	padding: 10px;
 }
 /*-----------------------
 	16. Cart Page

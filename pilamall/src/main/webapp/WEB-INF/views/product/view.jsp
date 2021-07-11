@@ -21,13 +21,12 @@ function replyList() {
 		var str = "";
 		
 		$(data).each(function() {
-			 console.log(data);
-			 
-
+			 //console.log(data);
+		
 			 var star = this.star;
 			 
 			 //리뷰 리스트 만들기
-			 str += "<li class='reply_List' data-repNum='" + this.repNum + "'>";
+			 str += "<li class='reply_List' data-repnum='" + this.repNum + "'>";
 			 str += "<div class='userInfo'>";
 			 str += "<span class='review_userId'>" + this.userId + "</span> ㆍ ";
 			 
@@ -47,12 +46,12 @@ function replyList() {
 				 str += "<span class='review_star'>★★★★★</span>";
 			 }
 			 str += "</div>";
-			 str += "<div class='replyContent'>" + this.repCon + "</div><br />";
+			 str += "<div id='review_con_" + this.repNum + "' class='replyContent'>" + this.repCon + "</div><br />";
 			 //str += "<div class='replyContent'>" + this.userName + "</div><br />";
 			 //str += "<div class='replyContent'>" + this.repNum + "</div><br />";
+			 str += "<input type='hidden' class='reviewId' value=" + this.userId + ">";
 			 str += "<div class='review_bt'>";
-			 str += "<a href='#' data-repNum=" + this.repNum + ">수정</a> / ";
-			 str += "<a href='#' data-repNum=" + this.repNum + ">삭제</a>";
+			 str += "<b class='review_modify' id='review_modify_" + this.repNum + "' data-repnum='" + this.repNum + "' data-id='" + this.userId + "'>수정/삭제</b>";
 			 str += "</div>";
 			 str += "<div class='div_line'></div>";
 			 str += "</li>";
@@ -65,6 +64,40 @@ function replyList() {
 }
 
 </script>
+
+<div id="modal">
+	<div class="modal_content">
+    	<input type="hidden" id="modalRepNum" name="repNum">
+    	<input type="hidden" id="modalUserId" name="userId"> 
+        <h2>리뷰 수정</h2>   
+       	<br>
+       	
+
+       	<label for="title">별점</label><br>
+		<select class="review-star" name="star" id="star">
+			<option value="5">★★★★★</option>
+			<option value="4">★★★★☆</option>
+			<option value="3">★★★☆☆</option>
+			<option value="2">★★☆☆☆</option>
+			<option value="1">★☆☆☆☆</option>
+		</select>
+
+		<br><br>					
+        <p class="cont">    
+			<label>댓글</label>
+			<div class="form-group">
+				<textarea class="modal_repCon" id="reply_modal" name="modal_repCon"></textarea>
+			</div>
+        </p>
+        <br>
+        
+		<button type="button" class="modal_modify_btn">수정</button>
+	    <button type='button' class='delete'>삭제</button>	         
+		<button type="button" class="modal_close_btn" >취소</button>
+        
+    </div>
+    <div class="modal_layer"></div>
+</div>
 
 <div class="page-title fix"><!--Start Title-->
 	<div class="overlay section">
@@ -84,27 +117,12 @@ function replyList() {
 							</div>
 						</div>
 					</div>
-					<!-- Nav tabs -->
-					<ul class="tabs-list details-pro-tab-list" role="tablist">
-						<li class="active"><a href="#image-1" data-toggle="tab"><img src="img/single-product/thumb-1.jpg" alt="" /></a></li>
-						<li><a href="#image-2" data-toggle="tab"><img src="img/single-product/thumb-2.jpg" alt="" /></a></li>
-						<li><a href="#image-3" data-toggle="tab"><img src="img/single-product/thumb-3.jpg" alt="" /></a></li>
-						<li><a href="#image-4" data-toggle="tab"><img src="img/single-product/thumb-4.jpg" alt="" /></a></li>
-					</ul>
 				</div>
 			</div>
 			<div class="col-sm-6">
 				<div class="shop-details">
 					<!-- Product Name -->
 					<h2>${product.gdsName }</h2>
-					<!-- Product Ratting -->
-					<div class="pro-ratting">
-						<i class="on fa fa-star"></i>
-						<i class="on fa fa-star"></i>
-						<i class="on fa fa-star"></i>
-						<i class="on fa fa-star"></i>
-						<i class="on fa fa-star-half-o"></i>
-					</div>
 					<h3 style="font-size:24px; font-weight:bold;">${product.price } 원</h3>
 					<p>${product.gdsDes }</p>
 					<div class="action-btn">
@@ -144,24 +162,24 @@ function replyList() {
 					<h4 class="heading">리뷰 작성</h4>
 					
 					<div id="commentform">
-						<div class="row">
-							<div class="form-input" id="reply_form">
+						<div class="row review_form">
+							<form class="form-input" id="reply_form" role="form" method="post" autocomplete="off">
+								<input type="hidden" value="${product.gdsNum}" name="gdsNum" id="gdsNum">
+								<input type="hidden" value="${userId}" name="userId" id="userId">
+								
 								<label for="title">별점<span>*</span></label>
-								<select class="review-star" name="star">
+								<select class="review-star" name="star" id="star">
 									<option value="5">★★★★★</option>
 									<option value="4">★★★★☆</option>
 									<option value="3">★★★☆☆</option>
 									<option value="2">★★☆☆☆</option>
 									<option value="1">★☆☆☆☆</option>
 								</select>
-								<input type="hidden" value="${product.gdsNum}" name="gdsNum" id="gdsNum">
-								<input type="hidden" value="repDate" name="repDate" id="repDate">
-								
-								<input type="hidden" aria-required="true" value="<sec:authentication property="principal.username"/>" name="userId" id="userId" readonly="readonly"><br>
+								<br><br>
 								<label for="comment" class="field-label">내용<span>*</span></label>
-								<textarea aria-required="true" name="repCon" id="repCon" rows="4"></textarea><br>
-								<button type="submit" id="submit" name="submit">댓글 등록</button>
-							</div>
+								<textarea aria-required="true" name="repCon" id="repCon" rows="4"></textarea>
+								<button type="button" id="review_submit">댓글 등록</button>
+							</form>
 						</div>
 					</div>
 				</div><!-- end commentform -->
@@ -183,6 +201,164 @@ $(document).ready(function() {
 	$(document).ajaxSend(function(e,xhr,options) {
 		xhr.setRequestHeader(csrfHeaderName,csrfTokenValue);
 	});
+	
+	
+	//리뷰 등록
+	$("#review_submit").on("click", function(e) {
+		
+		var reviewId = $(".reviewId");
+		var userId = $("#userId").val();
+		
+		//이미 등록한 리뷰가 있는지 확인
+		if(reviewId.val() == userId) {
+			e.preventDefault();
+			alert("이미 리뷰를 등록하셨습니다.");
+			return;
+		}
+		
+		e.preventDefault();
+		
+		var formObj = $("#review_form form[role='form']");
+		var gdsNum = $("#gdsNum").val();
+		var repCon = $("#repCon").val();
+		var star = $("#star").val();
+			
+		var data = {
+			gdsNum : gdsNum,
+			userId : userId,
+			repCon : repCon,
+			star : star
+		}
+		
+		$.ajax({
+			url: "/product/view/registReply",
+			type: "post",
+			data: data,
+			success: function() {
+				replyList(); //리스트 새로고침
+				$("#repCon").val("");
+			}
+		});
+	});
+	
+	
+	//리뷰 수정/삭제 및 모달창 띄우기
+	$(document).on("click", ".review_modify", function() {
+		
+		var repNum = $(this).data("repnum");
+		var reviewId = $(this).data("id");
+		var userId = $("#userId").val();
+		
+		//console.log(repNum);
+		//console.log(reviewId);
+		//console.log(userId);
+		
+		//로그인이 되어 있지 않는지 확인
+		if(!userId) {
+			alert("리뷰를 수정하시려면 로그인을 하셔야 합니다.");
+			return;
+		}
+		
+		//이미 등록한 리뷰가 있는지 확인
+		if(reviewId != userId) {
+			alert("리뷰를 등록한 이용자만 수정할 수 있습니다.");
+			return;
+		}
+		
+		$("#modal").css("display", "block");
+		$('html').scrollTop(0);
+		
+		var content = $("#review_con_" + repNum).text();
+		
+		console.log(repNum);
+		console.log(content);
+		
+		$("#modalRepNum").val(repNum);
+		$("#modalUserId").val(userId);
+		$(".modal_repCon").val(content);
+		
+	});
+	
+	
+	//모달창 수정
+	$(".modal_modify_btn").on("click", function() {
+		
+		var modifyConfirm = confirm("정말 수정하시겠습니까?");
+		var repNum = $("#modalRepNum").val();
+		var repCon = $("#reply_modal").val();
+		var star = $("#star").val();
+		
+		console.log("repNum : " + repNum);
+		console.log(star);
+		console.log(repCon);
+		
+		if(modifyConfirm) {
+			var data = {
+				repNum : repNum,
+				repCon : repCon,
+				star : star
+			};
+			
+			$.ajax({
+				url: "/product/view/modifyReply",
+				type: "post",
+				data: data,
+				success: function(result) {
+					console.log("result : " + result);
+					if(result == 1) {
+						replyList();
+						$("#modal").css("display", "none");
+					} else {
+						replyList();
+						$("#modal").css("display", "none");
+					}
+				},
+				error : function() {
+					alert("로그인하셔야 합니다.");
+				}
+			});
+		}
+	});
+	
+	//모달창 삭제
+	$(".delete").on("click", function() {
+		
+		var removeConfirm = confirm("정말 삭제하시겠습니까?");
+		var repNum = $("#modalRepNum").val();
+		
+		console.log(repNum);
+		
+		if(removeConfirm) {
+			
+			var data = {
+				repNum : repNum
+			}
+			
+			$.ajax({
+				url: "/product/view/deleteReply",
+				type: "post",
+				data: data,
+				success: function(result) {
+					if(result == 1) {
+						replyList();
+					} else if (result != 1) {
+						replyList();
+					} 
+				},
+				error: function() {
+					alert("로그인하셔야합니다.");
+				}
+			});
+			$("#modal").css("display", "none");
+		}
+	});
+	
+	
+	//수정창 닫기
+	$(".modal_close_btn").on("click", function() {
+		$("#modal").css("display", "none");
+	});
+	
 	
 	
 });

@@ -27,7 +27,7 @@ public interface ProductService {
 	public GoodsVO view(int gdsNum); //상품 뷰페이지
 	
 	
-	public void registerReply(GoodsReplyVO reply) throws Exception; //리뷰 작성
+	public void registReply(GoodsReplyVO reply) throws Exception; //리뷰 작성
 	
 	public List<GoodsReplyVO> replyList(int gdsNum) throws Exception; //리뷰 리스트
 	

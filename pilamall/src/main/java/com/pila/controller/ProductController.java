@@ -97,7 +97,7 @@ public class ProductController {
 		log.info("댓글 리뷰 작성");
 		String userId = principal.getName();
 		reply.setUserId(userId);
-		service.registerReply(reply);
+		service.registReply(reply);
 	}
 	
 	//리뷰 목록보기
