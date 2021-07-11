@@ -23,29 +23,43 @@ function replyList() {
 		$(data).each(function() {
 			 console.log(data);
 			 
-			 //날짜 변환
-			 var repDate = new Date(this.repDate);
-			 repDate = repDate.toLocaleDateString("ko-US");
-			 
+
 			 var star = this.star;
 			 
-			 
 			 //리뷰 리스트 만들기
-			 
 			 str += "<li class='reply_List' data-repNum='" + this.repNum + "'>";
 			 str += "<div class='userInfo'>";
-			 str += "<span class='userName'>" + this.userName + "</span><br />";
-			 str += "<span class='date'>" + repDate + "</span>";
+			 str += "<span class='review_userId'>" + this.userId + "</span> ㆍ ";
 			 
 			 if(star == 1) {
-				 str += "";
+				 str += "<span class='review_star'>★☆☆☆☆</span>";
 			 }
-			 if(star == 1) {
-				 str += "";
+			 if(star == 2) {
+				 str += "<span class='review_star'>★★☆☆☆</span>";
+			 }
+			 if(star == 3) {
+				 str += "<span class='review_star'>★★★☆☆</span>";
+			 }
+			 if(star == 4) {
+				 str += "<span class='review_star'>★★★★☆</span>";
+			 }
+			 if(star == 5) {
+				 str += "<span class='review_star'>★★★★★</span>";
 			 }
 			 str += "</div>";
+			 str += "<div class='replyContent'>" + this.repCon + "</div><br />";
+			 //str += "<div class='replyContent'>" + this.userName + "</div><br />";
+			 //str += "<div class='replyContent'>" + this.repNum + "</div><br />";
+			 str += "<div class='review_bt'>";
+			 str += "<a href='#' data-repNum=" + this.repNum + ">수정</a> / ";
+			 str += "<a href='#' data-repNum=" + this.repNum + ">삭제</a>";
+			 str += "</div>";
+			 str += "<div class='div_line'></div>";
 			 str += "</li>";
 		});
+		
+		// 조립한 HTML코드를 추가
+		$("section.replyList ul").html(str);
 		
 	});
 }
@@ -109,8 +123,13 @@ function replyList() {
 					<div class="tab-content">
 						<div id="description" class="tab-pane fade active in" role="tabpanel">
 							<div>
+								<section class="replyList">
+									<ul>
+										<!-- 리뷰 리스트 목록이 들어갈 위치 -->
+									</ul>
+								</section>
 								<script>
-									replyList();
+									replyList(); <!--리스트 스크립트문 실행-->
 								</script>
 							</div>
 						</div>

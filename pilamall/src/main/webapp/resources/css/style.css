@@ -1,7 +1,10 @@
 @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css); /*스포카*/
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,100,700); /*로보토*/
 
-body, table, div, p{ font-family: ‘Roboto’, ‘Spoqa Han Sans’, ‘Spoqa Han Sans JP’, ‘Sans-serif’; }
+body, table, div, p{ 
+  font-family: ‘Roboto’, ‘Spoqa Han Sans’, ‘Spoqa Han Sans JP’, ‘Sans-serif’;
+  letter-spacing:-0.05px;
+}
 
 /*------------------------------------------------------------------
 	Template Name:	Olongker - eCommerce Bootstrap Template
@@ -3358,6 +3361,34 @@ h4.heading {
   background-color:#990000;
   border:1px solid #990000;
   color: #ffffff;
+}
+/*-----------------------
+	15-8. gooos review
+-------------------------*/
+.review_userId {
+  font-weight: bold;
+}
+.review_star {
+  font-weight: bold;
+  color:#e09e25;
+}
+.replyContent {
+  font-size: 16px;
+  line-height: 36px;
+}
+.review_bt {
+  color:#999999;
+}
+.review_bt a {
+ color:#999999;
+}
+.review_bt a:hover {
+  color:blue;
+}
+.review-star {
+  padding: 6px 12px;
+  border: 1px solid #cccccc;
+  line-height: 10px;
 }
 /*-----------------------
 	16. Cart Page
