@@ -943,13 +943,14 @@ img {
   color: #E09E25;
 }
 .pro-price {
-  float: right;
+  float: left;
 }
+
 .pro-price p{}
 .pro-price p span {
   display: inline-block;
   font-weight: 600;
-  margin: 0 5px;
+  font-size:18px;
 }
 .pro-price p .old {
   text-decoration: line-through;
@@ -2853,7 +2854,7 @@ h4.heading {
 .shop-details > p {
   font-size: 14px;
   font-weight: 400;
-  margin-bottom: 60px;
+  margin-bottom: 30px;
 }
 .select-menu .sort {
   background: #fff none repeat scroll 0 0;
@@ -2904,7 +2905,7 @@ h4.heading {
 .action-btn {
   margin: 20px 0;
 }
-.action-btn a {
+.action-btn b {
   background: #fff none repeat scroll 0 0;
   color: #e09e25;
   display: inline-block;
@@ -2914,9 +2915,10 @@ h4.heading {
   text-align: center;
   padding: 20px 48px;
 }
-.action-btn a:hover {
+.action-btn b:hover {
   background:#e09e25;
   color:#fff;
+  cursor:pointer;
 } 
 .product-page .description {
   margin-bottom: 30px;
@@ -3362,8 +3364,13 @@ h4.heading {
   border:1px solid #990000;
   color: #ffffff;
 }
+#stock {
+  padding:8px 0;
+  border: 1px solid #cccccc;
+  margin-bottom: 20px;
+}
 /*-----------------------
-	15-8. gooos review
+	15-8. goods review
 -------------------------*/
 .review_userId {
   font-weight: bold;
@@ -3493,10 +3500,25 @@ h4.heading {
 .namedes {
   width: 25%;
 }
+.table-info .c-img {
+  padding: 5px 3px;
+}
 .table-info td h2 {
   font-size: 14px;
   font-weight: 700;
   margin-bottom: 10px;
+}
+.table-info td img {
+  width: 100px;
+}
+.table-info .c-name {
+  text-align: left;
+}
+.table-info .c-remove button {
+  color:#ffffff;
+  background: #dd0000;
+  padding: 4px 8px;
+  border:none;
 }
 .table-info p {
   font-size: 12px;

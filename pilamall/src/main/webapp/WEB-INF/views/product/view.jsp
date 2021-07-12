@@ -122,12 +122,17 @@ function replyList() {
 			<div class="col-sm-6">
 				<div class="shop-details">
 					<!-- Product Name -->
+					<input type="hidden" value="${product.gdsNum }" name="gdsNum" id="gdsNum">
 					<h2>${product.gdsName }</h2>
 					<h3 style="font-size:24px; font-weight:bold;">${product.price } 원</h3>
 					<p>${product.gdsDes }</p>
+					<div class="cartSotck">
+						<span>구매 수량 : </span>
+						<input name="stock" id="stock" type="number" value="1" min="1" max="${product.stock}"/>
+					</div>
 					<div class="action-btn">
-						<a href="#"><i class="fa fa-shopping-cart"></i> 장바구니 </a>
-						<a href="#"><i class="fa fa-refresh"></i> 구매하기 </a>
+						<b class="addToCart"><i class="fa fa-shopping-cart"></i> 장바구니 </b>
+						<b class="addToBuy"><i class="fa fa-refresh"></i> 구매하기 </b>
 					</div>
 				</div>
 			</div>
@@ -360,6 +365,47 @@ $(document).ready(function() {
 	});
 	
 	
+	//재고량을 넘을 시 최대 재고량으로 리턴
+	$("#stock").change(function(e) {
+		
+		e.preventDefault();
+		
+		var max = $(this).attr("max");
+		var now = $(this).val();
+		
+		var maxVal = parseInt(max);
+		var nowVal = parseInt(now);
+		
+		if(maxVal < nowVal) {
+			nowVal = maxVal;
+		}
+		
+		return $(this).val(nowVal);
+	});
 	
+	//장바구니 담기
+	$(".addToCart").on("click", function() {
+		var gdsNum = $("#gdsNum").val();
+		var stock = $("#stock").val();
+		
+		console.log(gdsNum);
+		console.log(stock);
+		
+		$.ajax({
+			url: "/cart/addToCart",
+			type: "post",
+			data: {
+				gdsNum: gdsNum,
+				stock: stock
+			},
+			success: function() {
+				alert("상품을 장바구니에 추가했습니다.");
+				$("#stock").val("1");
+			},
+			error: function() {
+				alert("카드에 담질 못했습니다.");
+			}
+		});
+	});
 });
 </script>

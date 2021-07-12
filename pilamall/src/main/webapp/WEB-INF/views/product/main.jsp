@@ -34,25 +34,11 @@
 							<div class="product-img-hover">
 								<!-- Product image -->
 								<a href="/product/view?gdsNum=${product.gdsNum }" class="pro-image fix"><img src="${product.thumbImg }" alt="featured" /></a>
-								<!-- Product action Btn -->
-								<div class="product-action-btn">
-									<a class="quick-view" href="/product/view?gdsNum=${product.gdsNum }"><i class="fa fa-search"></i></a>
-									<a class="favorite" href="#"><i class="fa fa-heart-o"></i></a>
-									<a class="add-cart" href="#"><i class="fa fa-shopping-cart"></i></a>
-								</div>
 							</div>
 							<div class="pro-name-price-ratting">
 								<!-- Product Name -->
 								<div class="pro-name">
 									<a href="/product/view?gdsNum=${product.gdsNum }">${product.gdsName }</a>
-								</div>
-								<!-- Product Ratting -->
-								<div class="pro-ratting">
-									<i class="on fa fa-star"></i>
-									<i class="on fa fa-star"></i>
-									<i class="on fa fa-star"></i>
-									<i class="on fa fa-star"></i>
-									<i class="on fa fa-star-half-o"></i>
 								</div>
 								<!-- Product Price -->
 								<div class="pro-price fix">
@@ -88,25 +74,11 @@
 									<div class="product-img-hover">
 										<!-- Product image -->
 										<a href="/product/view?gdsNum=${main1.gdsNum }" class="pro-image fix"><img src="${main1.thumbImg }" alt="product" /></a>
-										<!-- Product action Btn -->
-										<div class="product-action-btn">
-											<a class="quick-view" href="/product/view?gdsNum=${main1.gdsNum }"><i class="fa fa-search"></i></a>
-											<a class="favorite" href="#"><i class="fa fa-heart-o"></i></a>
-											<a class="add-cart" href="#"><i class="fa fa-shopping-cart"></i></a>
-										</div>
 									</div>
 									<div class="pro-name-price-ratting">
 										<!-- Product Name -->
 										<div class="pro-name">
 											<a href="/product/view?gdsNum=${main1.gdsNum }">${main1.gdsName }</a>
-										</div>
-										<!-- Product Ratting -->
-										<div class="pro-ratting">
-											<i class="on fa fa-star"></i>
-											<i class="on fa fa-star"></i>
-											<i class="on fa fa-star"></i>
-											<i class="on fa fa-star"></i>
-											<i class="on fa fa-star-half-o"></i>
 										</div>
 										<!-- Product Price -->
 										<div class="pro-price fix">
@@ -128,25 +100,11 @@
 									<div class="product-img-hover">
 										<!-- Product image -->
 										<a href="/product/view?gdsNum=${main2.gdsNum }" class="pro-image fix"><img src="${main2.thumbImg }" alt="product" /></a>
-										<!-- Product action Btn -->
-										<div class="product-action-btn">
-											<a class="quick-view" href="/product/view?gdsNum=${main2.gdsNum }"><i class="fa fa-search"></i></a>
-											<a class="favorite" href="#"><i class="fa fa-heart-o"></i></a>
-											<a class="add-cart" href="#"><i class="fa fa-shopping-cart"></i></a>
-										</div>
 									</div>
 									<div class="pro-name-price-ratting">
 										<!-- Product Name -->
 										<div class="pro-name">
 											<a href="/product/view?gdsNum=${main2.gdsNum }">${main2.gdsName }</a>
-										</div>
-										<!-- Product Ratting -->
-										<div class="pro-ratting">
-											<i class="on fa fa-star"></i>
-											<i class="on fa fa-star"></i>
-											<i class="on fa fa-star"></i>
-											<i class="on fa fa-star"></i>
-											<i class="on fa fa-star-half-o"></i>
 										</div>
 										<!-- Product Price -->
 										<div class="pro-price fix">

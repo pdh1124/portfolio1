@@ -28,87 +28,47 @@
 			</div>
 			<div class="col-sm-8 col-md-9">
 				<div class="login">
-					<form id="info-form" name="updateInfo" method="post" action="/member/updateInfo">
-						<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token}">
-						<h2>회원정보 수정</h2>
-						<table class="user_modify">
-						<tr>
-							<td>
-								<label>아이디</label>
-								<input type="text" id="userId" name="userId" value="${member.userId }" readonly="readonly"/>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<label>비밀번호</label>
-								<input type="password" id="userPass" name="userPass" placeholder="비밀번호를 입력해주세요. (영문 대/소문자, 숫자를 모두 포함)" readonly="readonly" />
-								<input type="hidden" id="pwCheckVal" value="Y" />
-								<div class="text_fail" id="pw-error" style="color:red">비밀번호는 영문,숫자,특수문자를 포함한 8자리 이상 작성해야 합니다.</div>
-								<button class="check-button" id="mo_password">수정</button>
-								
-								<input type="password" id="userPass_comp" name="userPass_comp" placeholder="비밀번호 확인" required style="margin-top:8px;"/>
-								<input type="hidden" id="pwcCheckVal" value="Y" />
-								<div class="text_fail" id="pw-danger" style="color:red">비밀번호가 일치하지 않습니다.</div>
-								<div class="text_success" id="pw-success" style="color:blue">비밀번호가 일치합니다.</div>
-								<input class="signup-button" id="pw_submit" type="submit" value="수정완료" />
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<label>성함</label>
-								<input type="text" id="userName" name="userName" value="${member.userName }" readonly="readonly" required />
-								<input type="hidden" id="naCheckVal" value="Y" />
-								<button class="check-button" id="mo_name">수정</button>
-								<input class="signup-button" id="na_submit" type="submit" value="수정완료" />
-							</td>
-						</tr>
-						<tr>
-							<td>
-							<label>이메일</label>
-							<input type="text" id="userEmail" name="userEmail" value="${member.userEmail }" readonly="readonly" required />
-							<input type="hidden" id="emCheckVal" value="Y" />
-							<div class="text_fail" id="em-danger" style="color:red">이미 존재하는 E-mail입니다.</div>
-							<div class="text_fail" id="em-error" style="color:red">E-mail 형식에 맞도록 작성하여주시기 바랍니다.</div>
-							<div class="text_success" id="em-success" style="color:blue">사용가능한 E-mail 입니다.</div>
-							<button class="check-button" id="mo_email">수정</button>
-							<button class="check-button" id="emCheck-button">본인인증하기</button>
-						
-							<input type="text" id="compare" class="compare" placeholder="인증 키 입력" />
-							<button class="check-button" id="emNumCheck-button">인증 키 확인</button>
-							
-							<input class="signup-button" id="em_submit" type="submit" value="수정완료" />
-							</td>
-						</tr>
-						<tr>
-							<td>
-							<label>핸드폰번호</label>
-							<input type="text" id="userPhone" name="userPhone" value="${member.userPhone }" readonly="readonly" required />
-							<input type="hidden" id="phCheckVal" value="Y" />
-							<div class="text_fail" id="ph-danger" style="color:red">이미 가입한 핸드폰 번호입니다.</div>
-							<div class="text_fail" id="ph-error" style="color:red">010을 포함한 11자리의 숫자로 입력해주시기바랍니다.</div>
-							<div class="text_success" id="ph-success" style="color:blue">사용가능한 핸드폰 번호 입니다.</div>
-							<button class="check-button" id="mo_phone">수정</button>
-							<input class="signup-button" id="ph_submit" type="submit" value="수정완료" />
-							</td>
-						</tr>
-						<tr>
-							<td>
-							<label>주소<span></span></label>
-							<input type="text" id="userAddr1" name="userAddr1" placeholder="우편번호" value="${member.userAddr1 }" readonly="readonly" required/>
-							<button class="check-button" id="execDaumPostcode">우편번호 찾기</button>
-											
-							<input type="text" id="userAddr2" name="userAddr2" placeholder="주소" value="${member.userAddr2 }" readonly="readonly" required/>
-							
-							<input type="text" id="userAddr3" name="userAddr3" placeholder="상세주소" value="${member.userAddr3 }" readonly="readonly" required/>
-							
-							<button class="check-button" id="mo_addr">수정</button>
-							<input class="signup-button" id="ad_submit" type="submit" value="수정완료" />
-							</td>
-						</tr>
+					<form id="info-form" name="updateInfo" method="post" action="/order/info">
+						<h2>장바구니</h2>
+						<!-- 장바구니 리스트 -->
+						<table class="table cart-table goods-table">
+							<thead class="table-title">
+								<tr>
+									<th class="c-img">이미지</th>
+									<th class="c-name">제품명</th>
+									<th class="c-stock">수량</th>
+									<th class="c-price">가격</th>
+									<th class="c-total">총 가격</th>
+									<th class="c-remove">삭제</th>
+								</tr>													
+							</thead>
+							<c:set var="sum" value="0" />
+							<tbody>
+								<c:forEach items="${cart }" var="cart">
+								<input type="hidden" name="userId" id="userId" value="${cart.userId }">
+									<tr class="table-info">
+										<td class="c-img"><img src="${cart.thumbImg }"></td>
+										<td class="c-name">${cart.gdsName }</td>
+										<td class="c-stock"><strong>${cart.cartStock }</strong> 개</td>
+										<td class="c-price"><strong>${cart.price }</strong> 원</td>
+										<td class="c-total"><strong>${cart.cartStock * cart.price }</strong> 원</td>
+										<td class="c-remove"><button type="submit" class="cart_delete" value="${cart.gdsNum }" id="gdsNum">삭제</button></td>
+									</tr>
+									<c:set var="sum" value="${sum + (cart.price * cart.cartStock) }" />
+								</c:forEach>
+							</tbody>
 						</table>
-						<div class="delete-user">
-							<a href="/member/deleteUser">계정 탈퇴</a>
-						</div>	
+						
+						<!-- 총 가격 -->
+						<div class="listResult">
+							<div class="cart_sum">
+								<fieldset>
+									<c:if test="${sum < 50000 && sum != 0}">
+										<legend>배송비 3000원</legend>
+									</c:if>
+								</fieldset>
+							</div>
+						</div>
 					</form>
 				</div>
 			</div>

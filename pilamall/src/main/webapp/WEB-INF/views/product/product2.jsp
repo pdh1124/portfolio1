@@ -25,25 +25,11 @@
 							<div class="product-img-hover">
 								<!-- Product image -->
 								<a href="/product/view?gdsNum=${list.gdsNum }" class="pro-image fix"><img src="${list.thumbImg }" alt="product" /></a>
-								<!-- Product action Btn -->
-								<div class="product-action-btn">
-									<a class="quick-view" href="/product/view?gdsNum=${list.gdsNum }"><i class="fa fa-search"></i></a>
-									<a class="favorite" href="#"><i class="fa fa-heart-o"></i></a>
-									<a class="add-cart" href="#"><i class="fa fa-shopping-cart"></i></a>
-								</div>
 							</div>
 							<div class="pro-name-price-ratting">
 								<!-- Product Name -->
 								<div class="pro-name">
 									<a href="/product/view?gdsNum=${list.gdsNum }">${list.gdsName }</a>
-								</div>
-								<!-- Product Ratting -->
-								<div class="pro-ratting">
-									<i class="on fa fa-star"></i>
-									<i class="on fa fa-star"></i>
-									<i class="on fa fa-star"></i>
-									<i class="on fa fa-star"></i>
-									<i class="on fa fa-star-half-o"></i>
 								</div>
 								<!-- Product Price -->
 								<div class="pro-price fix">

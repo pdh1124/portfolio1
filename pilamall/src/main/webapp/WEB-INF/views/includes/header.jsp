@@ -142,28 +142,10 @@
 			<div class="col-sm-4 col-lg-3">
 				<sec:authorize access="isAuthenticated()">
 				<div class="cart-info float-right">
-					<a href="cart.html">
-						<h5>My cart <span>2</span> items - <span>$390</span></h5>
+					<a href="/cart/list">
+						<h5>장바구니</h5>
 						<i class="fa fa-shopping-cart"></i>
 					</a>
-					<div class="cart-hover">
-						<ul class="header-cart-pro">
-							<li>
-								<div class="image"><a href="#"><img alt="cart item" src="/resources/img/cart-1.jpg"></a></div>
-								<div class="content fix"><a href="#">Product Name</a><span class="price">Price: $130</span><span class="quantity">Quantity: 1</span></div>
-								<i class="fa fa-trash delete"></i>
-							</li>
-							<li>
-								<div class="image"><a href="#"><img alt="cart item" src="/resources/img/cart-2.jpg"></a></div>
-								<div class="content fix"><a href="#">Product Name</a><span class="price">Price: $130</span><span class="quantity">Quantity: 2</span></div>
-								<i class="fa fa-trash delete"></i>
-							</li>
-						</ul>
-						<div class="header-button-price">
-							<a href="checkout.html"><i class="fa fa-sign-out"></i><span>Check Out</span></a>
-							<div class="total-price"><h3>Total Price : <span>$390</span></h3></div>
-						</div>
-					</div>
 				</div>
 				</sec:authorize>
 				<sec:authorize access="isAnonymous()">	
