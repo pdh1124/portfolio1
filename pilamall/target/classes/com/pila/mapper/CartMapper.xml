@@ -20,4 +20,16 @@
 		where c.userId = #{userId}
 	</select>	
 	
+	<!-- 카트 하나 삭제 -->
+	<delete id="delete">
+		delete from cart
+		where cartNum = #{cartNum} and userId = #{userId}
+	</delete>
+	
+	<!-- 카트 비우기 -->
+	<delete id="cartAllDelete">
+		delete cart
+		where userId = #{userId}
+	</delete>
+	
 </mapper>

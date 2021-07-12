@@ -30,5 +30,19 @@ public class CartServiceImpl implements CartService {
 	public List<CartListVO> list(CartListVO vo) {
 		return mapper.list(vo);
 	}
+	
+	//장바구니 하나 삭제
+	@Override
+	public void delete(CartListVO vo) {
+		mapper.delete(vo);
+		
+	}
+	
+	//장바구니 비우기
+	@Override
+	public void cartAllDelete(String userId) {
+		mapper.cartAllDelete(userId);
+		
+	}
 
 }

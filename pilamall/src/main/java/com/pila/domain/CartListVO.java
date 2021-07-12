@@ -11,7 +11,7 @@ public class CartListVO {
 	private String userId; //유저 아이디
 	private int gdsNum; //상품 번호
 	private int cartStock; //상품 담은 수량
-	private Date addDate; //카드 등록 일
+	private Date addDate; //카트 등록 일자
 	
 	private int num; //장바구니에 리스트로 정렬할 번호
 	private String gdsName; //상품 이름

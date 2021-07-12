@@ -3697,6 +3697,39 @@ h4.heading {
 .wishlist-table {
   margin-bottom: 0;
 }
+.cart_sum table {
+  width:100%;
+  background:#ffffff;
+}
+.cart_sum table tr td {
+  text-align: center;
+  font-size: 16px;
+  padding: 36px 8px;
+  width: 33.3%;
+  line-height: 24px;
+}
+.cart_sum table tr td:nth-child(2) {
+	border-left:1px dashed #cccccc;
+	border-right:1px dashed #cccccc;
+}
+.cart_sum table tr td legend {
+  text-align: center;
+  font-size: 16px;
+}
+.orderButton button {
+  width: 100%;
+  padding: 16px;
+  border: 1px solid #e09e25;
+  color:#e09e25;
+  font-size: 18px;
+  font-weight: bold;
+  background:#ffffff;
+  margin-top: 24px;
+}
+.orderButton button:hover {
+  background:#e09e25;
+  color:#ffffff;
+}
 /*-----------------------
 	17. Checkout Page
 -------------------------*/

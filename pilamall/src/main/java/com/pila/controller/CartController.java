@@ -58,4 +58,16 @@ public class CartController {
 		model.addAttribute("cart", service.list(vo));
 		model.addAttribute("member", memberService.getUser(userId));
 	}
+	
+	// 장바구니 품목 삭제처리
+	@PreAuthorize("isAuthenticated()")
+	@ResponseBody
+	@PostMapping("/delete")
+	public String cartDelete(CartListVO vo, Principal principal) {
+		String userId = principal.getName();
+		vo.setUserId(userId);
+		log.info("장바구니 목록 삭제..." + vo);
+		service.delete(vo);
+		return "redirect:/cart/list";
+	}
 }
