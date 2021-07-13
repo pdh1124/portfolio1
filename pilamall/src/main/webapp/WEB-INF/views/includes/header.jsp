@@ -77,7 +77,8 @@
 										<li><a href="/member/mypage">마이페이지</a></li>
 									</sec:authorize>
 									<li>
-									<form action="/member/logout" method="POST">
+									<form action="/member/logout" method="GET">
+										<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 										<a id="member_logout" href="/member/logout">로그아웃</a>
 									</form>
 									</li>

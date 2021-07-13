@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pila.mapper.OrderMapper">
+
+	<!-- 주문 정보 -->
+	<insert id="orderInfo">
+		insert into tbl_order(orderId, userId, receiver, userAddr1, userAddr2, userAddr3, orderPhone, amount)
+		values (#{orderId}, #{userId}, #{receiver}, #{userAddr1}, #{userAddr2}, #{userAddr3}, #{orderPhone}, #{amount})
+	</insert>
+	
+	<!-- 주문 상세 정보 -->
+	<insert id="orderInfo_detail">
+		insert into tbl_order_details(orderDetailsNum, orderId, gdsNum, cartStock)
+		select tbl_order_details_seq.nextval, #{orderId}, gdsNum, cartStock from cart
+	</insert>
+	
+	<!-- 유저 구매목록 -->
+	<select id="orderList" resultType="com.pila.domain.OrderVO">
+		select orderId, userId, receiver, userAddr1, userAddr2, userAddr3, orderPhone, amount, orderDate, delivery
+		from tbl_order
+		where userId = #{userId} order by orderDate desc 
+	</select>
+	
+</mapper>

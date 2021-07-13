@@ -38,4 +38,19 @@
 		where gdsNum = #{gdsNum}
 	</delete>
 	
+	<!-- 고객 주문 상세보기 -->
+	<select id="orderView" resultType="com.pila.domain.OrderListVO">
+		select o.orderId, o.userId, o.receiver, o.userAddr1, o.userAddr2, o.userAddr3, o.orderPhone, o.orderDate, o.delivery,
+			d.orderDetailsNum, d.gdsNum, d.cartStock, g.gdsName, g.thumbImg, g.price
+		from tbl_order o inner join tbl_order_details d on o.orderId = d.orderId 
+						inner join tbl_goods g on d.gdsNum = g.gdsNum
+		where o.orderId = #{orderId}
+	</select>
+	
+	<!-- 구매후 재고량 감소 -->
+	<update id="updateStock">
+		update tbl_goods set stock = stock-#{stock}, sellCount = sellCount + 1
+		where gdsNum = #{gdsNum}
+	</update>
+	
 </mapper>

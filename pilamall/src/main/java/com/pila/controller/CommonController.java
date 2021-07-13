@@ -83,7 +83,7 @@ public class CommonController {
 	}
 	
 	//로그아웃
-	@RequestMapping(value="/logout", method= RequestMethod.GET)
+	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate(); //세션에 전체를 날려버린다. 
 		logger.info("로그아웃");

@@ -139,4 +139,6 @@
 		delete from tbl_member_auth
 		where userId=#{userId}
 	</delete>
+	
+
 </mapper>

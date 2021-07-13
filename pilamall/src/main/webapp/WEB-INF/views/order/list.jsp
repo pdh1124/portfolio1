@@ -30,122 +30,41 @@
 			
 			<div class="col-sm-8 col-md-9">
 				<div class="login">
-					<h2>장바구니</h2>
-					
-					<form role="form" id="orderForm" name="updateInfo" method="post" action="/order/info">
-						<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token}">
-						<!-- 장바구니 리스트 -->
-						<table class="table cart-table goods-table">
-							<thead class="table-title">
-								<tr>
-									<th class="c-img">이미지</th>
-									<th class="c-name">제품명</th>
-									<th class="c-stock">수량</th>
-									<th class="c-price">가격</th>
-									<th class="c-total">총 가격</th>
-									<th class="c-remove">삭제</th>
-								</tr>													
-							</thead>
-							<c:set var="sum" value="0" />
-							<tbody>
-								<c:forEach items="${cart }" var="cart">
-								<input type="hidden" name="userId" id="userId" value="${cart.userId }">
+					<h2>구매 내역</h2>
+					<table class="table cart-table goods-table">
+						<thead class="table-title">
+							<tr>
+								<th class="o-num">주문번호</th>
+								<th class="o-name">수령인</th>
+								<th class="o-addr">주소</th>
+								<th class="o-total">가격</th>
+								<th class="o-stats">상태</th>
+							</tr>													
+						</thead>
+						<tbody>
+							<c:forEach items="${order}" var="order">
+								<c:if test="${order.delivery != '환불대기' && order.delivery != '환불완료' }">
 									<tr class="table-info">
-										<td class="c-img"><img src="${cart.thumbImg }"></td>
-										<td class="c-name">${cart.gdsName }</td>
-										<td class="c-stock"><strong>${cart.cartStock }</strong> 개</td>
-										<td class="c-price"><strong>${cart.price }</strong> 원</td>
-										<td class="c-total"><strong>${cart.cartStock * cart.price }</strong> 원</td>
-										<td class="c-remove"><button type="submit" class="cart_delete" id="cartNum" value="${cart.cartNum }">삭제</button></td>
-									</tr>
-									<c:set var="sum" value="${sum + (cart.price * cart.cartStock) }" />
-								</c:forEach>
-							</tbody>
-						</table>
-						
-						<!-- 총 가격 -->
-						<div class="listResult">
-							<div class="cart_sum">
-								<fieldset class="cart_sum">
-								<table>
-									<tr>
-										<td>
-											총 제품 가격<br>
-											<strong><fmt:formatNumber pattern="###,###,###" value="${sum }"/></strong> 원
-										</td>
-										<td>
-											<c:if test="${sum < 50000 && sum != 0}">
-												배송비<br>
-												<strong>3000</strong>원
-											</c:if>	
-											<c:if test="${sum >= 50000 && sum != 0}">
-												배송비<br>
-												<strong>무료</strong>
+										<td class="o-num"><a href="/order/view?num=${order.orderId }"><strong style="color:#0000f1;">${order.orderId }</strong></a></td>
+										<td class="o-name"><c:out value="${order.receiver }" /></td>
+										<td class="o-addr"><c:out value="(${order.userAddr1 }) ${order.userAddr2 } ${order.userAddr3 }" /></td>
+										<td class="o-total"><strong><fmt:formatNumber pattern="###,###,###" value="${order.amount }" /></strong> 원</td>
+										<td class="o-stats">
+											<c:if test="${order.delivery == '배송준비' }">
+												<span style="color:#f10000;">${order.delivery }</span>
 											</c:if>
-										</td>
-										<td>
-											총 합계<br> 
-											<c:if test="${sum < 50000 && sum != 0}">
-												<strong><fmt:formatNumber pattern="###,###,###" value="${sum + 3000 }"/></strong> 원
-											</c:if>	
-											<c:if test="${sum >= 50000 && sum != 0}">
-												<strong><fmt:formatNumber pattern="###,###,###" value="${sum}" /></strong> 원
+											<c:if test="${order.delivery == '배송중' }">
+												<span style="color:#0000f1;">${order.delivery }</span>
+											</c:if>
+											<c:if test="${order.delivery == '배송완료' }">
+												<span style="color:#00f100;">${order.delivery }</span>
 											</c:if>
 										</td>
 									</tr>
-								</table>
-								</fieldset>
-							</div>
-						</div>
-							
-						<!-- 주문버튼 -->
-						<c:if test="${sum != 0 }">
-							<div class="orderButton">
-								<button type="button">주문하기</button>
-							</div>
-						</c:if>
-							
-							
-						<!-- 상품 주문(성함 및 주소등 입력) -->
-						<table class="orderInfo" style="display:none">
-							<c:if test="${sum < 50000 && sum != 0 }">	
-								<input type="hidden" name="amount" value="${sum + 3000 }" />
-							</c:if>
-							<c:if test="${sum >= 50000 && sum != 0 }">
-								<input type="hidden" name="amount" value="${sum}" />
-							</c:if>
-							<tr>
-								<td>
-									<label>수령인</label>
-									<input type="text" id="receiver" name="receiver" value="${member.userName }" required />
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<label>핸드폰번호</label>
-									<input type="text" id="orderPhone" name="orderPhone" value="${member.userPhone }" required />
-									<input type="hidden" id="phCheckVal" value="Y" />
-									<div class="text_fail" id="ph-error" style="color:red">010을 포함한 11자리의 숫자로 입력해주시기바랍니다.</div>
-									<div class="text_success" id="ph-success" style="color:blue">사용가능한 연락처 입니다.</div>
-									
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<label>주소<span></span></label>
-									<input type="text" id="userAddr1" name="userAddr1" placeholder="우편번호" value="${member.userAddr1 }" readonly="readonly" required/>
-									<button class="check-button" id="execDaumPostcode">우편번호 찾기</button>
-													
-									<input type="text" id="userAddr2" name="userAddr2" placeholder="주소" value="${member.userAddr2 }" readonly="readonly" required/>
-									
-									<input type="text" id="userAddr3" name="userAddr3" placeholder="상세주소" value="${member.userAddr3 }" required />
-									
-									<input class="signup-button" id="ad_submit" type="submit" value="구매하기" />
-								</td>
-							</tr>
-						</table>						
-					</form>
-					
+								</c:if>
+							</c:forEach>
+						</tbody>
+					</table>
 				</div>		
 			</div>
 			

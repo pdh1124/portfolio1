@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pila.domain.GoodsVO;
+import com.pila.domain.OrderListVO;
+import com.pila.domain.OrderVO;
 import com.pila.mapper.AdminMapper;
 
 import lombok.Setter;
@@ -48,6 +50,20 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public boolean remove(int gdsNum) {
 		return mapper.delete(gdsNum) == 1;
+	}
+	
+	
+	//관리자 주문 목록 보기
+	@Override
+	public List<OrderListVO> orderView(OrderVO vo) {
+		return mapper.orderView(vo);
+	}
+
+	//구매 후 재고량 감소
+	@Override
+	public void updateStock(GoodsVO vo) {
+		mapper.updateStock(vo);
+		
 	}
 	
 }

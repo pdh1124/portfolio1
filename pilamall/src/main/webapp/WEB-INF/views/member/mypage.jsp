@@ -20,7 +20,7 @@
 					<ul>
 						<li><a href="/member/mypage">회원정보 수정</a></li>
 						<li><a href="/cart/list">장바구니</a></li>
-						<li><a href="#">구매내역</a></li>
+						<li><a href="/order/list">구매내역</a></li>
 						<li><a href="#">환불내역</a></li>
 						<li><a href="#">내 문의 내역</a></li>
 					</ul>
