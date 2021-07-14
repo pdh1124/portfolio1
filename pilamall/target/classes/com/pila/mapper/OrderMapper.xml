@@ -23,4 +23,13 @@
 		where userId = #{userId} order by orderDate desc 
 	</select>
 	
+	<!-- 구매 정보 상세 -->
+	<select id="orderView" resultType="com.pila.domain.OrderListVO">
+		select o.orderId, o.userId, o.receiver, o.userAddr1, o.userAddr2, o.userAddr3, o.orderPhone, o.amount, o.orderDate, o.delivery,
+			d.orderDetailsNum, d.gdsNum, d.cartStock, g.gdsName, g.thumbImg, g.price
+		from tbl_order o inner join tbl_order_details d on o.orderId = d.orderId
+			inner join tbl_goods g on d.gdsNum = g.gdsNum
+		where o.userId = #{userId} and o.orderId = #{orderId}
+	</select>
+	
 </mapper>

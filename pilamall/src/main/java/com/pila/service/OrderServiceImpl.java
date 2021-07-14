@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pila.domain.OrderDetailVO;
+import com.pila.domain.OrderListVO;
 import com.pila.domain.OrderVO;
 import com.pila.mapper.OrderMapper;
 
@@ -35,6 +36,12 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public List<OrderVO> orderList(OrderVO vo) {
 		return mapper.orderList(vo);
+	}
+
+	//구매 내용
+	@Override
+	public List<OrderListVO> orderView(OrderVO vo) {
+		return mapper.orderView(vo);
 	}
 
 }

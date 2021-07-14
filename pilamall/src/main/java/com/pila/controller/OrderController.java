@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.pila.domain.GoodsVO;
 import com.pila.domain.OrderDetailVO;
@@ -96,5 +97,17 @@ public class OrderController {
 		log.info(orderList);
 		
 		model.addAttribute("order", orderList);
+	}
+	
+	//구매 내용 내역
+	@GetMapping("/view")
+	public void orderView(@RequestParam("num") String orderId, OrderVO vo, Model model, Principal principal) {
+		String userId = principal.getName();
+		vo.setUserId(userId);
+		vo.setOrderId(orderId);
+		
+		List<OrderListVO> orderView = service.orderView(vo);
+		
+		model.addAttribute("order", orderView);
 	}
 }
