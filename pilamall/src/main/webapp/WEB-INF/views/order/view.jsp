@@ -52,7 +52,7 @@
 								</c:if>
 							</form>
 						</c:if>
-					</c:forEach>
+					</c:forEach> 
 					
 					
 					<!-- 장바구니 리스트 -->
