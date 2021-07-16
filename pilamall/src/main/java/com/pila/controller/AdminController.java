@@ -1,6 +1,7 @@
 package com.pila.controller;
 
 import java.io.File;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.pila.domain.Criteria;
 import com.pila.domain.GoodsVO;
+import com.pila.domain.OrderVO;
+import com.pila.domain.PageDTO;
 import com.pila.service.AdminService;
 import com.pila.utils.UploadFileUtils;
 
@@ -153,4 +157,31 @@ public class AdminController {
 		return "redirect:/admin/goods/list";
 	}
 	
+	//제품 배송 상태별 리스트	
+	@PreAuthorize("isAuthenticated()")
+	@GetMapping("/order/list")
+	public void OrderListGet(Model model, Criteria cri) {
+		
+		//배송대기
+		List<OrderVO> orderList_wait = service.orderList_wait(cri);
+		int total_wait = service.getTotal_wait(cri);
+		
+		//배송중
+		List<OrderVO> orderList_deli = service.orderList_deli(cri);
+		int total_deli = service.getTotal_deli(cri);
+		
+		//배송완료
+		List<OrderVO> orderList_comp = service.orderList_comp(cri);
+		int total_comp = service.getTotal_comp(cri);
+		
+		model.addAttribute("order_wait", orderList_wait);
+		model.addAttribute("pageMaker_wait", new PageDTO(cri, total_wait));
+		
+		model.addAttribute("order_deli", orderList_deli);
+		model.addAttribute("pageMaker_deli", new PageDTO(cri, total_deli));
+		
+		model.addAttribute("order_comp", orderList_comp);
+		model.addAttribute("pageMaker_comp", new PageDTO(cri, total_comp));
+
+	}
 }

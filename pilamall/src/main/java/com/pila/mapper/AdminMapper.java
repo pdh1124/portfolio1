@@ -2,6 +2,7 @@ package com.pila.mapper;
 
 import java.util.List;
 
+import com.pila.domain.Criteria;
 import com.pila.domain.GoodsVO;
 import com.pila.domain.OrderListVO;
 import com.pila.domain.OrderVO;
@@ -22,5 +23,17 @@ public interface AdminMapper {
 	public List<OrderListVO> orderView(OrderVO vo); //관리자 주문 목록 보기
 	
 	public void updateStock(GoodsVO vo); //구매 후 재고량 감소
+	
+	public void delivery(OrderVO vo); //배송 상태 변경
+	
+	public List<OrderVO> orderList_wait(Criteria cri); //관리자 배송 대기 목록보기
+	public int getTotal_wait(Criteria cri); //배송대기 갯수 확인
+	
+	public List<OrderVO> orderList_deli(Criteria cri); //관리자 배송중 목록보기
+	public int getTotal_deli(Criteria cri); //배송중 갯수 확인
+	
+	public List<OrderVO> orderList_comp(Criteria cri); //관리자 배송완료 목록보기
+	public int getTotal_comp(Criteria cri); //배송완료 갯수 확인
+	
 	
 }

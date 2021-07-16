@@ -32,4 +32,41 @@
 		where o.userId = #{userId} and o.orderId = #{orderId}
 	</select>
 	
+	<!-- 주문 취소 -->
+	<delete id="orderCancel">
+		delete from tbl_order
+		where orderId = #{orderId}
+	</delete>
+	
+	<!-- 주문 취소 시 디테일 삭제 -->
+	<delete id="orderCancel_detail">
+		delete from tbl_order_details
+		where orderId = #{orderId}
+	</delete>
+	
+	<!-- 주문 취소 시 상품 수량 증가 -->
+	<delete id="stockPlus">
+		update tbl_goods
+		set stock = stock + #{stock}
+		where gdsNum = #{gdsNum}
+	</delete>
+	
+	<!-- 환불 처리 -->
+	<insert id="orderRefund">
+		insert into refund (refundNum, orderId, userId, gdsNum, cartStock)
+		values (refundNum_seq.nextval, #{orderId}, #{userId}, #{gdsNum}, #{cartStock})
+	</insert>
+	
+	<!-- 환불 목록 -->
+	<select id="refundList" resultType="com.pila.domain.RefundVO">
+		select *
+		from refund
+		where userId = #{userId} order by refundDate desc
+	</select>
+	
+	<!-- 환불 취소 -->
+	<delete id="refundCancel">
+		delete from refund
+		where orderId = #{orderId}
+	</delete>
 </mapper>

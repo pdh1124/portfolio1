@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pila.domain.Criteria;
 import com.pila.domain.GoodsVO;
 import com.pila.domain.OrderListVO;
 import com.pila.domain.OrderVO;
@@ -64,6 +65,49 @@ public class AdminServiceImpl implements AdminService {
 	public void updateStock(GoodsVO vo) {
 		mapper.updateStock(vo);
 		
+	}
+	
+	//배송 상태 변경
+	@Override
+	public void delivery(OrderVO vo) {
+		mapper.delivery(vo);
+	}
+	
+	//배송 대기 목록 표시
+	@Override
+	public List<OrderVO> orderList_wait(Criteria cri) {
+		return mapper.orderList_wait(cri);
+	}
+
+	//배송 대기 갯수 파악
+	@Override
+	public int getTotal_wait(Criteria cri) {
+		// TODO Auto-generated method stub
+		return mapper.getTotal_wait(cri);
+	}
+
+	//배송중 목록 표시
+	@Override
+	public List<OrderVO> orderList_deli(Criteria cri) {
+		return mapper.orderList_deli(cri);
+	}
+
+	//배송중 갯수 파악
+	@Override
+	public int getTotal_deli(Criteria cri) {
+		return mapper.getTotal_deli(cri);
+	}
+
+	//배송 완료 목록 표시
+	@Override
+	public List<OrderVO> orderList_comp(Criteria cri) {
+		return mapper.orderList_comp(cri);
+	}
+
+	//배송 완료 갯수 파악
+	@Override
+	public int getTotal_comp(Criteria cri) {
+		return mapper.getTotal_comp(cri);
 	}
 	
 }

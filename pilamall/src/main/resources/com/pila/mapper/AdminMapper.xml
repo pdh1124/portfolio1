@@ -53,4 +53,70 @@
 		where gdsNum = #{gdsNum}
 	</update>
 	
+	<!-- 배송 상태 변경 -->
+	<update id="delivery">
+		update tbl_order set delivery = #{delivery}
+		where orderId = #{orderId}
+	</update>
+	
+	<!-- 배송 대기 목록 -->
+	<select id="orderList_wait" resultType="com.pila.domain.OrderVO">
+	<![CDATA[
+		select *
+		from (
+			select rownum rn, orderId, userId, receiver, userAddr1, userAddr2, userAddr3, orderPhone, amount, orderDate, delivery
+			from tbl_order
+			where ROWNUM <= #{pageNum} * #{amount} and delivery = '배송준비' order by orderdate desc
+		)
+		where rn > (#{pageNum}-1) * #{amount}
+	]]>
+	</select>
+	
+	<!-- 배송 대기 목록 총 갯수 파악하기 -->
+	<select id="getTotal_wait" resultType="int">
+		select count(*)
+		from tbl_order
+		where delivery = '배송준비'
+	</select>
+	
+	<!-- 배송 중인 목록 -->
+	<select id="orderList_deli" resultType="com.pila.domain.OrderVO">
+	<![CDATA[
+		select *
+		from (
+			select rownum rn, orderId, userId, receiver, userAddr1, userAddr2, userAddr3, orderPhone, amount, orderDate, delivery
+			from tbl_order
+			where ROWNUM <= #{pageNum} * #{amount} and delivery = '배송중' order by orderdate desc
+		)
+		where rn > (#{pageNum}-1) * #{amount}
+	]]>
+	</select>
+	
+	<!-- 배송 중인 목록 총 갯수 파악하기 -->
+	<select id="getTotal_deli" resultType="int">
+		select count(*)
+		from tbl_order
+		where delivery = '배송중'
+	</select>
+	
+	<!-- 배송 완료 목록 -->
+	<select id="orderList_comp" resultType="com.pila.domain.OrderVO">
+	<![CDATA[
+		select *
+		from (
+			select rownum rn, orderId, userId, receiver, userAddr1, userAddr2, userAddr3, orderPhone, amount, orderDate, delivery
+			from tbl_order
+			where ROWNUM <= #{pageNum} * #{amount} and delivery = '배송완료' order by orderdate desc
+		)
+		where rn > (#{pageNum}-1) * #{amount}
+	]]>
+	</select>
+	
+	<!-- 배송 완료 목록 총 갯수 파악하기 -->
+	<select id="getTotal_comp" resultType="int">
+		select count(*)
+		from tbl_order
+		where delivery = '배송완료'
+	</select>
+	
 </mapper>

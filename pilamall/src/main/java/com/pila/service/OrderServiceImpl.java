@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pila.domain.GoodsVO;
 import com.pila.domain.OrderDetailVO;
 import com.pila.domain.OrderListVO;
 import com.pila.domain.OrderVO;
+import com.pila.domain.RefundVO;
 import com.pila.mapper.OrderMapper;
 
 import lombok.Setter;
@@ -42,6 +44,43 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public List<OrderListVO> orderView(OrderVO vo) {
 		return mapper.orderView(vo);
+	}
+
+	//구매 취소
+	@Override
+	public void orderCancel(OrderVO vo) {
+		mapper.orderCancel(vo);
+		
+	}
+
+	//구매 취소 시 디테일 삭제
+	@Override
+	public void orderCancel_detail(OrderDetailVO vo) {
+		mapper.orderCancel_detail(vo);
+	}
+
+	//구매 취소 시 재고량 증가
+	@Override
+	public void stockPlus(GoodsVO vo) {
+		mapper.stockPlus(vo);
+	}
+
+	//환불 처리
+	@Override
+	public void orderRefund(RefundVO vo) {
+		mapper.orderRefund(vo);
+	}
+
+	//환불 목록
+	@Override
+	public List<RefundVO> refundList(RefundVO vo) {
+		return mapper.refundList(vo);
+	}
+
+	//환불 취소
+	@Override
+	public void refundCancel(RefundVO vo) {
+		mapper.refundCancel(vo);
 	}
 
 }

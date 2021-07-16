@@ -35,6 +35,7 @@
 					<c:forEach items="${order }" var="order" varStatus="status">
 						<c:if test="${status.first }">
 							<form id="cancelForm" role="form" action="/order/cancel" method="post">
+								<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token}">
 								<input type="hidden" name="orderId" id="orderId" value="${order.orderId }">
 								<input type="hidden" name="gdsNum" id="gdsNum" value="${order.gdsNum }">
 								<input type="hidden" name="cartStock" id="cartStock" value="${order.cartStock }">
@@ -127,8 +128,17 @@
 <script>
 $(document).ready(function() {
 	
+	//시큐리티 처리
+	var csrfHeaderName = "${_csrf.headerName}";
+	var csrfTokenValue = "${_csrf.token}";
+	
+	$(document).ajaxSend(function(e,xhr,options) {
+		xhr.setRequestHeader(csrfHeaderName,csrfTokenValue);
+	});
+	
+	//취소 및 환불 기능 실행
 	var form = $("#cancelForm");
-	var delivery = (".deli").html();
+	var delivery = $(".deli").html();
 	
 	$(".btn-default").on("click", function(e) {
 		e.preventDefault();

@@ -11,6 +11,9 @@
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
+<sec:authorize access="hasRole('ROLE_ADMIN')"> 
+<sec:authentication property="principal.username" var="userid" />
+
 <section class="blog-page page fix"><!-- Start Blog Area-->
 	<div class="container">
 		<div class="row">
@@ -21,7 +24,7 @@
 						<li><a href="/admin/main">매출</a></li>
 						<li><a href="/admin/goods/register">상품 등록</a></li>
 						<li><a href="/admin/goods/list">상품 목록</a></li>
-						<li><a href="#">주문 목록</a></li>
+						<li><a href="/admin/order/list">주문 목록</a></li>
 						<li><a href="#">환불 목록</a></li>
 						<li><a href="#">문의 내역</a></li>
 					</ul>
@@ -40,5 +43,7 @@
 		</div>
 	</div>
 </section><!-- Start Blog Area-->
+
+</sec:authorize>
 
 <%@ include file="../includes/footer.jsp"%>

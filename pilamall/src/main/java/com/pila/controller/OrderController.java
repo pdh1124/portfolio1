@@ -17,6 +17,7 @@ import com.pila.domain.GoodsVO;
 import com.pila.domain.OrderDetailVO;
 import com.pila.domain.OrderListVO;
 import com.pila.domain.OrderVO;
+import com.pila.domain.RefundVO;
 import com.pila.service.AdminService;
 import com.pila.service.CartService;
 import com.pila.service.OrderService;
@@ -110,4 +111,44 @@ public class OrderController {
 		
 		model.addAttribute("order", orderView);
 	}
+	
+	//구매 취소
+	@PostMapping("/cancel")
+	public String orderCencal(OrderDetailVO detail, OrderVO vo, GoodsVO goods) {
+		
+		List<OrderListVO> orderView = adminService.orderView(vo);
+		
+		for(OrderListVO i : orderView) {
+			goods.setGdsNum(i.getGdsNum());
+			goods.setStock(i.getCartStock());
+			service.stockPlus(goods);
+		}
+		
+		service.orderCancel_detail(detail);
+		service.orderCancel(vo);
+		
+		return "redirect:/order/list";
+	}
+	
+	//환불 신청
+	@PostMapping("/refund")
+	public String orderRefund(OrderDetailVO detail, OrderVO vo, GoodsVO goods, RefundVO refund, Principal principal) {
+		
+		String userId = principal.getName();
+		refund.setUserId(userId);
+		
+		List<OrderListVO> orderView = adminService.orderView(vo);
+		
+		for(OrderListVO i : orderView) {
+			goods.setGdsNum(i.getGdsNum());
+			goods.setStock(i.getCartStock());
+			service.stockPlus(goods);
+		}
+		
+		adminService.delivery(vo);
+		service.orderRefund(refund);
+		
+		return "redirect:/order/refundList";
+	} 
+	
 }
