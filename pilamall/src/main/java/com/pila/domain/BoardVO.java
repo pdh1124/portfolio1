@@ -24,5 +24,6 @@ public class BoardVO {
 
 	private List<BoardAttachVO> attachList; //첨부파일
 	
+	private String notice; //공지사항 여부
 	
 }

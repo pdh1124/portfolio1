@@ -34,6 +34,22 @@
 									</tr>													
 								</thead>
 								<tbody>
+									<sec:authorize access="hasRole('ROLE_USER')">
+										<input type="hidden" name="notice" value="일반" />
+									</sec:authorize>
+									<sec:authorize access="hasRole('ROLE_ADMIN')">
+									<tr class="table-info">
+										<td class="b_write_left">
+											<h5>공지사항 등록</h5>
+										</td>
+										<td class="b_write_right">
+											<select class="board_notice" name="notice">
+												<option value="일반" ${board.notice == "일반"?"selected":"" }>일반</option>
+												<option value="공지사항" ${board.notice == "공지사항"?"selected":"" }>공지사항</option>
+											</select>
+										</td>
+									</tr>											
+									</sec:authorize>
 									<tr class="table-info">
 										<td class="b_write_left">
 											<h5>글제목</h5>

@@ -3124,6 +3124,21 @@ h4.heading {
   color: #999999;
   font-weight: bold;
 }
+.board_notice {
+  float:left;
+  border: 1px solid #ccc;
+  background-color:#ebebeb;
+}
+.board_list_notice {
+  
+}
+.board_list_notice td {
+  background:#f1e5d0;
+  
+}
+.board_list_notice td h5 {
+  font-weight: bold;
+}
 /*-----------------------
 	15-2. board modify
 -------------------------*/
@@ -3533,7 +3548,7 @@ h4.heading {
 }
 .table-info h5 {
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 400;
 }
 .quantity {
   text-align: center;

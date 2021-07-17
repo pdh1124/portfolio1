@@ -35,7 +35,7 @@
 	
 	<!-- 글쓰기 -->
 	<insert id="insert">
-		insert into comm_board(bno,title,content,writer) values (seq_comm_board.nextval, #{title}, #{content}, #{writer})
+		insert into comm_board(bno,title,content,writer,notice) values (seq_comm_board.nextval, #{title}, #{content}, #{writer}, #{notice})
 	</insert>
 	
 	<!-- 글번호 받기 -->
@@ -43,7 +43,7 @@
 		<selectKey keyProperty="bno" order="BEFORE" resultType="long">
 			select seq_comm_board.nextval from dual
 		</selectKey>
-		insert into comm_board(bno,title,content,writer) values (#{bno}, #{title}, #{content}, #{writer})
+		insert into comm_board(bno,title,content,writer, notice) values (#{bno}, #{title}, #{content}, #{writer}, #{notice})
 	</insert>
 	
 	<!-- 글읽기 -->
@@ -58,15 +58,15 @@
 
 	<!-- 글 수정 -->
 	<update id="update">
-		update comm_board set title=#{title}, content=#{content}, writer=#{writer}, updateDate=sysdate where bno=#{bno}
+		update comm_board set title=#{title}, content=#{content}, writer=#{writer}, updateDate=sysdate, notice = #{notice} where bno=#{bno}
 	</update>
 	
 	<!-- 페이징 하기 -->
 	<select id="getListWithPaging" resultType="com.pila.domain.BoardVO">
 		<![CDATA[
-			select bno, title, content, writer, regdate, updatedate, replycnt, views, likeCnt
+			select bno, title, content, writer, regdate, updatedate, replycnt, views, likeCnt, notice
 			from (
-				select /*+INDEX_DESC(comm_board pk_comm_board) */ rownum rn, bno, title, content, writer, regdate, updatedate, replycnt, views, likeCnt
+				select /*+INDEX_DESC(comm_board pk_comm_board) */ rownum rn, bno, title, content, writer, regdate, updatedate, replycnt, views, likeCnt, notice
 				from (select * from comm_board where bno > 0 ORDER BY bno DESC)
 				where 
 				

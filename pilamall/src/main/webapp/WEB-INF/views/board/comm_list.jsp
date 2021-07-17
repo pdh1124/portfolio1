@@ -35,6 +35,35 @@
 						</thead>
 						<tbody>
 							<c:forEach var="board" items="${list }">
+								<c:if test="${board.notice == '공지사항'}">
+									<tr class="table-info board_list_notice">
+										<td class="b_bno">
+											<h5>공지</h5>
+										</td>
+										<td class="b_title align-left">
+											<h5><a href="${board.bno }" class="move"><c:out value="${board.title }" />
+												<c:if test="${board.replyCnt ne 0 }">
+													<span style="color:red"><c:out value="[${board.replyCnt }]"/></span>
+												</c:if>
+											</a></h5>
+										</td>
+										<td class="b_writer align-left">
+											<h5>필라몰 관리자</h5>
+										</td>
+										<td class="b_regdate">
+											<h5><fmt:formatDate pattern="yyyy-MM-dd" value="${board.regdate }" /></h5>
+										</td>
+										<td class="b_views">
+											<h5><c:out value="${board.views }"/></h5>
+										</td>
+										<td class="b_re_up">
+											<h5><c:out value="${board.likeCnt }"/></h5>
+										</td>
+									</tr>
+								</c:if>
+							</c:forEach>
+							<c:forEach var="board" items="${list }">
+								<c:if test="${board.notice == '일반'}">
 								<tr class="table-info">
 									<td class="b_bno">
 										<h5><c:out value="${board.bno }" /></h5>
@@ -62,6 +91,7 @@
 										<h5><c:out value="${board.likeCnt }"/></h5>
 									</td>
 								</tr>
+								</c:if>
 							</c:forEach>					
 						</tbody>
 					</table>

@@ -110,17 +110,20 @@ public class AdminServiceImpl implements AdminService {
 	public int getTotal_comp(Criteria cri) {
 		return mapper.getTotal_comp(cri);
 	}
-
+	
+	//환불 대기 목록
 	@Override
 	public List<RefundVO> refundList_wait() {
 		return mapper.refundList_wait();
 	}
 
+	//환불 완료 목록
 	@Override
 	public List<RefundVO> refundList_comp() {
 		return mapper.refundList_comp();
 	}
 
+	//환불상태 변경
 	@Override
 	public void refundStats(RefundVO vo) {
 		mapper.refundStats(vo);
