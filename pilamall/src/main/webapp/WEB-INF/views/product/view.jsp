@@ -132,7 +132,7 @@ function replyList() {
 					</div>
 					<div class="action-btn">
 						<b class="addToCart"><i class="fa fa-shopping-cart"></i> 장바구니 </b>
-						<b class="addToBuy"><i class="fa fa-refresh"></i> 구매하기 </b>
+						<b class="addToBuy"><i class="fa fa-refresh"></i> 바로구매 </b>
 					</div>
 				</div>
 			</div>
@@ -406,6 +406,32 @@ $(document).ready(function() {
 				alert("카드에 담질 못했습니다.");
 			}
 		});
+	});
+	
+	//장바구니 담기 후 바로 구매
+	$(".addToBuy").on("click", function() {
+		var gdsNum = $("#gdsNum").val();
+		var stock = $("#stock").val();
+		
+		console.log(gdsNum);
+		console.log(stock);
+		
+		$.ajax({
+			url: "/cart/addToCart",
+			type: "post",
+			data: {
+				gdsNum: gdsNum,
+				stock: stock
+			},
+			success: function() {
+				location.href = '/cart/list';
+			},
+			error: function() {
+				alert("카드에 담질 못했습니다.");
+			}
+		});
+		
+		
 	});
 });
 </script>

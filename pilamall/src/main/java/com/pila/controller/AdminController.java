@@ -19,9 +19,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.pila.domain.Criteria;
 import com.pila.domain.GoodsVO;
+import com.pila.domain.OrderDetailVO;
+import com.pila.domain.OrderListVO;
 import com.pila.domain.OrderVO;
 import com.pila.domain.PageDTO;
+import com.pila.domain.RefundVO;
 import com.pila.service.AdminService;
+import com.pila.service.OrderService;
 import com.pila.utils.UploadFileUtils;
 
 import lombok.AllArgsConstructor;
@@ -36,6 +40,9 @@ public class AdminController {
 
 	@Setter(onMethod_ = @Autowired)
 	private AdminService service;
+	
+	@Setter(onMethod_ = @Autowired)
+	private OrderService orderService;
 	
 	@Resource(name = "uploadPath")
 	private String uploadPath;
@@ -182,6 +189,67 @@ public class AdminController {
 		
 		model.addAttribute("order_comp", orderList_comp);
 		model.addAttribute("pageMaker_comp", new PageDTO(cri, total_comp));
-
+	}
+	
+	//제품 배송 상세보기
+	@GetMapping("/order/view")
+	public void orderView(@RequestParam("num") String orderId, OrderVO vo, Model model) {
+		vo.setOrderId(orderId);
+		List<OrderListVO> orderView = service.orderView(vo);
+		
+		model.addAttribute("order", orderView);	
+	}
+	
+	//주문 상세보기 - 상태 변경
+	@PreAuthorize("isAuthenticated()")
+	@PostMapping("/order/delivery")
+	public String delivery(OrderVO vo) {
+		service.delivery(vo);
+		
+		return "redirect:/admin/order/list";
+	}
+	
+	
+	//환불 리스트
+	@GetMapping("/order/refundList")
+	public void refundList(Model model) {
+		
+		List<RefundVO> refundList_wait = service.refundList_wait(); //환불대기 목록
+		List<RefundVO> refundList_comp = service.refundList_comp(); //환불대기 목록
+		
+		model.addAttribute("refund_wait", refundList_wait);
+		model.addAttribute("refund_comp", refundList_comp);
+		
+	}
+	
+	//환불 상태 상세보기
+	@GetMapping("/order/refundView")
+	public void refundView(@RequestParam("id") String orderId, OrderVO vo, Model model) {
+		
+		vo.setOrderId(orderId);
+		List<OrderListVO> orderView = service.orderView(vo);
+		
+		model.addAttribute("order", orderView);
+	}
+	
+	//환불 상태 변경
+	@PostMapping("/order/refund")
+	public String refund(OrderVO order, RefundVO refund, OrderDetailVO detail, GoodsVO goods) {
+		
+		String refundState = order.getDelivery();
+		refund.setRefundState(refundState);
+		
+		List<OrderListVO> orderView = service.orderView(order);
+		
+		for(OrderListVO i : orderView) {
+			goods.setGdsNum(i.getGdsNum());
+			goods.setStock(i.getCartStock());
+			orderService.stockPlus(goods);
+		}
+		
+		service.delivery(order);
+		service.refundStats(refund);
+		
+		return "redirect:/admin/order/refundList";
 	}
 }

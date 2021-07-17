@@ -119,4 +119,25 @@
 		where delivery = '배송완료'
 	</select>
 	
+	
+	<!-- 환불 대기 목록 -->
+	<select id="refundList_wait" resultType="com.pila.domain.RefundVO">
+		select *
+		from refund
+		where refundState = '환불대기'
+	</select>
+	
+	<!-- 환불 완료 목록 -->
+	<select id="refundList_comp" resultType="com.pila.domain.RefundVO">
+		select *
+		from refund
+		where refundState = '환불완료'
+	</select>
+	
+	<!-- 환불 상태 변경 -->
+	<update id="refundStats">
+		update refund set refundState = #{refundState}
+		where orderId = #{orderId}
+	</update>
+	
 </mapper>

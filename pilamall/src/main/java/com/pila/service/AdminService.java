@@ -6,6 +6,7 @@ import com.pila.domain.Criteria;
 import com.pila.domain.GoodsVO;
 import com.pila.domain.OrderListVO;
 import com.pila.domain.OrderVO;
+import com.pila.domain.RefundVO;
 
 public interface AdminService {
 	
@@ -34,4 +35,8 @@ public interface AdminService {
 	
 	public List<OrderVO> orderList_comp(Criteria cri); //관리자 배송완료 목록보기
 	public int getTotal_comp(Criteria cri); //배송완료 갯수 확인
+	
+	public List<RefundVO> refundList_wait(); //환불 대기 목록
+	public List<RefundVO> refundList_comp(); //환불 완료 목록
+	public void refundStats(RefundVO vo); //환불상태 변경
 }

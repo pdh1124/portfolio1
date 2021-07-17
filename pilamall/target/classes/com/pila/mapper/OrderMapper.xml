@@ -54,7 +54,7 @@
 	<!-- 환불 처리 -->
 	<insert id="orderRefund">
 		insert into refund (refundNum, orderId, userId, gdsNum, cartStock)
-		values (refundNum_seq.nextval, #{orderId}, #{userId}, #{gdsNum}, #{cartStock})
+		values (refund_seq.nextval, #{orderId}, #{userId}, #{gdsNum}, #{cartStock})
 	</insert>
 	
 	<!-- 환불 목록 -->

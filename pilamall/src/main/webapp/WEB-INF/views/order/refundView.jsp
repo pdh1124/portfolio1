@@ -30,32 +30,26 @@
 			
 			<div class="col-sm-8 col-md-9">
 				<div class="login">
-					<h2>구매 내역 상세</h2>
+					<h2>환불 내역 상세</h2>
 	
 					<c:forEach items="${order }" var="order" varStatus="status">
 						<c:if test="${status.first }">
-							<form id="cancelForm" role="form" action="/order/cancel" method="post">
+							<form id="cancelForm" role="form" action="/order/refundcancel" method="post">
 								<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token}">
 								<input type="hidden" name="orderId" id="orderId" value="${order.orderId }">
-								<input type="hidden" name="gdsNum" id="gdsNum" value="${order.gdsNum }">
 								<input type="hidden" name="cartStock" id="cartStock" value="${order.cartStock }">
-								<input type="hidden" name="delivery" id="delivery" value="">
+								<input type="hidden" name="delivery" id="delivery" value="${order.delivery }">
 								<p><strong>수령인 : </strong>${order.receiver }</p>
-								<p><strong>핸드폰번호 : </strong><c:out value="${order.orderPhone }"/></p>
 								<p><strong>주소 : </strong><c:out value="(${order.userAddr1 }) ${order.userAddr2 } ${order.userAddr3 }" /></p>
-								<p><strong>배송 상태 : </strong><b class="deli">${order.delivery }</b></p>
+								<p><strong>상태 : </strong>
+									<b class="deli"><c:if test="${order.delivery == '환불대기-준비' || order.delivery == '환불대기-완료'}">환불대기</c:if></b>
+								</p>
 								
-								<c:if test="${order.delivery != '배송중' && order.delivery != '환불대기-준비' && order.delivery != '환불대기-완료'}">
-									<button class="btn-default" type="submit" data-oper="refund">환불 요청</button>
+								<c:if test="${order.delivery == '환불대기-준비' || order.delivery == '환불대기-완료'}">
+									<button class="btn-default" type="submit" data-oper="refundCancel">환불 취소</button>
 								</c:if>
-								<c:if test="${order.delivery == '입금대기' }">
-									<button class="btn-default" type="submit" data-oper="cancel">구매 취소</button>
-								</c:if>
-								<c:if test="${order.delivery == '배송중' }">
-									<div class="deli-text">
-										<p>배송중일 때에는 환불 신청이 불가합니다.</p>
-										<p>배송이 완료되면 신청해주시기 바랍니다.</p>
-									</div>
+								<c:if test="${order.delivery == '환불완료' }">
+									<br>
 								</c:if>
 							</form>
 						</c:if>
@@ -144,27 +138,22 @@ $(document).ready(function() {
 	
 	//취소 및 환불 기능 실행
 	var form = $("#cancelForm");
-	var delivery = $(".deli").html();
+	var delivery = $("#delivery").val();
 	
-	console.log(delivery);
-	
-	$(".btn-default").on("click", function(e) {
+	$("button").on("click", function(e) {
 		e.preventDefault();
 		var oper = $(this).data("oper");
 		
-		if(oper === 'cancel') {
-			alert("구매가 취소 되었습니다.");
-			form.submit();
-		}
-		else if(oper === 'refund') {
-			if(delivery == "배송완료") {
-				$("#delivery").val("환불대기-완료");
+		if(oper === 'refundCancel') {
+			if(delivery == "환불대기-준비") {
+				$("#delivery").val("배송준비");
+			} else if(delivery == "환불대기-완료") {
+				$("#delivery").val("배송완료");		
 			}
-			else {
-				$("#delivery").val("환불대기-준비");
-			}
-			alert("환불 신청이 되었습니다.");
-			form.attr("action", "/order/refund").submit();
+			
+			alert("환불 취소되었습니다.");
+			form.attr("action", "/order/refundCancel").submit();
+			
 		}
 	});
 });

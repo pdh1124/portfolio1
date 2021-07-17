@@ -23,7 +23,7 @@
 						<li><a href="/admin/goods/register">상품 등록</a></li>
 						<li><a href="/admin/goods/list">상품 목록</a></li>
 						<li><a href="/admin/order/list">주문 목록</a></li>
-						<li><a href="#">환불 목록</a></li>
+						<li><a href="/admin/order/refundList">환불 목록</a></li>
 						<li><a href="#">문의 내역</a></li>
 					</ul>
 				</div>

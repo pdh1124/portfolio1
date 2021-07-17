@@ -151,4 +151,51 @@ public class OrderController {
 		return "redirect:/order/refundList";
 	} 
 	
+	//환불 신청 리스트
+	@GetMapping("/refundList")
+	public void refundList(RefundVO vo, OrderVO order, Model model, Principal principal) {
+		String userId = principal.getName();
+		vo.setUserId(userId);
+		
+		List<RefundVO> refundList = service.refundList(vo);
+		
+		model.addAttribute("refund", refundList);
+	}
+	
+	//환불 신청 상세페이지
+	@GetMapping("/refundView")
+	public void refundView(@RequestParam("num") String orderId, OrderVO vo, Model model, Principal principal) {
+		
+		String userId = principal.getName();
+		vo.setUserId(userId);
+		vo.setOrderId(orderId);
+		
+		List<OrderListVO> orderView = service.orderView(vo);
+		
+		model.addAttribute("order", orderView);
+	}
+			
+	
+	//환불 취소 처리
+	@PostMapping("/refundCancel")
+	public String refundCencel(OrderDetailVO detetail, OrderVO vo, GoodsVO goods, RefundVO refund) {
+		
+		String delivery = vo.getDelivery();
+		log.info("환불 할 당시 상태 : " + delivery);
+		adminService.delivery(vo);
+		
+		List<OrderListVO> orderView = adminService.orderView(vo);
+		
+		for(OrderListVO i : orderView) {
+			goods.setGdsNum(i.getGdsNum());
+			goods.setStock(i.getCartStock());
+			adminService.updateStock(goods);
+		}
+		
+		service.refundCancel(refund);
+		
+		return "redirect:/order/refundList";
+	}
+
+	
 }

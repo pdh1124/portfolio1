@@ -9,6 +9,7 @@ import com.pila.domain.Criteria;
 import com.pila.domain.GoodsVO;
 import com.pila.domain.OrderListVO;
 import com.pila.domain.OrderVO;
+import com.pila.domain.RefundVO;
 import com.pila.mapper.AdminMapper;
 
 import lombok.Setter;
@@ -108,6 +109,22 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int getTotal_comp(Criteria cri) {
 		return mapper.getTotal_comp(cri);
+	}
+
+	@Override
+	public List<RefundVO> refundList_wait() {
+		return mapper.refundList_wait();
+	}
+
+	@Override
+	public List<RefundVO> refundList_comp() {
+		return mapper.refundList_comp();
+	}
+
+	@Override
+	public void refundStats(RefundVO vo) {
+		mapper.refundStats(vo);
+		
 	}
 	
 }
