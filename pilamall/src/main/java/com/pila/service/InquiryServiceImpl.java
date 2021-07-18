@@ -4,8 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.pila.domain.InquiryAttachVO;
 import com.pila.domain.InquiryVO;
+import com.pila.mapper.InquiryAttachMapper;
 import com.pila.mapper.InquiryMapper;
 
 import lombok.Setter;
@@ -18,11 +21,24 @@ public class InquiryServiceImpl implements InquiryService {
 	@Setter(onMethod_ = @Autowired)
 	private InquiryMapper mapper;
 	
+	@Setter(onMethod_ = @Autowired)
+	private InquiryAttachMapper attachMapper;
+	
 	
 	//문의 등록
 	@Override
+	@Transactional
 	public void register(InquiryVO vo) {
 		mapper.registerSelectKey(vo);
+		
+		if(vo.getAttachList() == null || vo.getAttachList().size() <= 0) {
+		//첨부파일이 업거나 용량이 0이하라면 
+			return; //끝내라
+		}
+		vo.getAttachList().forEach(attach -> { //첨부파일을 반복해서 생성
+			attach.setInqNum(vo.getInqNum());
+			attachMapper.insert(attach);
+		});
 	}
 
 	//문의 리스트
@@ -40,14 +56,32 @@ public class InquiryServiceImpl implements InquiryService {
 	//문의 수정
 	@Override
 	public void modify(InquiryVO vo) {
+		
+		attachMapper.deleteAll(vo.getInqNum());
 		mapper.modify(vo);
-
+		
+		if(vo.getAttachList() == null || vo.getAttachList().size() <= 0) {
+		//첨부파일이 업거나 용량이 0이하라면 
+			return; //끝내라
+		}
+		vo.getAttachList().forEach(attach -> { //첨부파일을 반복해서 생성
+			attach.setInqNum(vo.getInqNum());
+			attachMapper.insert(attach);
+		});
 	}
 
 	//문의 삭제
 	@Override
+	@Transactional
 	public void delete(InquiryVO vo) {
+		attachMapper.deleteAll(vo.getInqNum());
 		mapper.delete(vo);
+	}
+
+	//문의내용 + 첨부파일정보
+	@Override
+	public List<InquiryAttachVO> getAttachList(int inqNum) {
+		return attachMapper.findByInqNum(inqNum);
 	}
 
 }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pila.mapper.InquiryAttachMapper">
+
+	<!-- 문의 작성 시 첨부파일 추가 -->
+	<insert id="insert">
+		insert into inquiry_attach (uuid, uploadPath, fileName, fileType, inqNum)
+		values (#{uuid}, #{uploadPath}, #{fileName}, #{fileType}, #{inqNum})
+	</insert>
+	
+	<!-- 첨부파일 삭제 -->
+	<delete id="delete">
+		delete 
+		from inquiry_attach
+		where uuid = #{uuid} 
+	</delete>
+	
+	<!-- 게시물의 첨부파일 리스트 보이기 -->
+	<select id="findByInqNum" resultType="com.pila.domain.InquiryAttachVO">
+		select *
+		from inquiry_attach 
+		where inqNum = #{inqNum}
+	</select>
+	
+	<!-- 첨부파일 전체 삭제(글 삭제시) -->
+	<delete id="deleteAll">
+		delete
+		from inquiry_attach
+		where inqNum = #{inqNum}
+	</delete>
+
+</mapper>

@@ -2,6 +2,7 @@ package com.pila.service;
 
 import java.util.List;
 
+import com.pila.domain.InquiryAttachVO;
 import com.pila.domain.InquiryVO;
 
 public interface InquiryService {
@@ -11,5 +12,7 @@ public interface InquiryService {
 	public InquiryVO view(int inqNum); //문의 상세보기
 	public void modify(InquiryVO vo); //문의 내용 수정
 	public void delete(InquiryVO vo); //문의 내용 삭제
+	
+	public List<InquiryAttachVO> getAttachList(int inqNum); //문의내용+첨부파일 정보
 	
 }

@@ -1,8 +1,15 @@
 package com.pila.controller;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +17,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.pila.domain.InquiryAttachVO;
 import com.pila.domain.InquiryVO;
 import com.pila.service.InquiryService;
 
@@ -74,8 +83,40 @@ public class InquiryController {
 	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/delete")
 	public String deletePost(InquiryVO vo) {
+		
+		List<InquiryAttachVO> attachList = service.getAttachList(vo.getInqNum());
+		deleteFiles(attachList);
+		
 		service.delete(vo);
 		
 		return "redirect:/inquiry/list";
+	}
+	
+	//게시물 삭제시 첨부파일 모두 삭제하는 메소드
+	private void deleteFiles(List<InquiryAttachVO> attachList) {
+		//게시물당 첨부된 파일을 찾아 디스크에서 삭제(데이터베이스는 아님)
+		
+		if(attachList == null || attachList.size() == 0) {
+			return;
+		}
+		
+		attachList.forEach(attach -> {
+			try {
+				Path file = Paths.get("c:\\pilaupload\\" + attach.getUploadPath() + "\\" + attach.getUuid() + "_" + attach.getFileName());
+				//경로를 가지고 옴
+				Files.deleteIfExists(file);
+				//만약 경로에 파일이 존재한다면 파일 삭제
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
+	}
+	
+	//첨부파일 목록 불러오기
+	@GetMapping(value="/getAttachList", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public ResponseEntity<List<InquiryAttachVO>> getAttachList(int inqNum) {
+		
+		return new ResponseEntity<>(service.getAttachList(inqNum), HttpStatus.OK);
 	}
 }
