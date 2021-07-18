@@ -76,6 +76,7 @@
 									<sec:authorize access="permitAll">
 										<li><a href="/member/mypage">마이페이지</a></li>
 									</sec:authorize>
+									<li><a href="/inquiry/register">1:1문의</a></li>
 									<li>
 									<form action="/member/logout" method="GET">
 										<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">

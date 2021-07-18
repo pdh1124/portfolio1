@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pila.mapper.InquiryMapper">
+
+	<!-- 문의 작성(seq_inquiry를 selectKey로 받고 inqNum을 넘김 -->
+	<insert id="registerSelectKey">
+		<selectKey keyProperty="inqNum" order="BEFORE" resultType="int">
+			select seq_inquiry.nextval from dual
+		</selectKey>
+		insert into inquiry (inqNum, inqTitle, inqContent, userId)
+		values (#{inqNum}, #{inqTitle}, #{inqContent}, #{userId})
+	</insert>
+	
+	<!-- 문의 리스트 -->
+	<select id="list" resultType="com.pila.domain.InquiryVO">
+		select *
+		from inquiry
+		where userId = #{userId} order by regDate desc
+	</select>
+	
+	<!-- 문의 상세 -->
+	<select id="view" resultType="com.pila.domain.InquiryVO">
+		select *
+		from inquiry 
+		where inqNum = #{inqNum}
+	</select>
+	
+	<!-- 수정하기 -->
+	<update id="modify">
+		update inquiry 
+		set inqTitle = #{inqTitle}, inqContent = #{inqContent}, regDate = sysdate
+		where inqNum = #{inqNum}
+	</update>
+	
+	<!-- 삭제하기 -->
+	<delete id="delete">
+		delete
+		from inquiry
+		where inqNum = #{inqNum}
+	</delete>
+
+</mapper>

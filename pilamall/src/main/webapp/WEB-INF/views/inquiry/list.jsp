@@ -30,27 +30,39 @@
 			
 			<div class="col-sm-8 col-md-9">
 				<div class="login">
-					<h2>환불 내역</h2>
+					<h2>내 문의 내역<a id="inq_register" href="/inquiry/register">1:1 문의하기</a></h2>
+					
 					<table class="table cart-table goods-table">
 						<thead class="table-title">
 							<tr>
-								<th class="r-num">주문번호</th>
-								<th class="r-sta">상태</th>
-								<th class="r-date">환불 신청일</th>
+								<th class="o-name">제목</th>
+								<th class="o-addr">작성일</th>
+								<th class="o-total">상태</th>
+								<th class="o-stats">답변일</th>
 							</tr>													
 						</thead>
 						<tbody>
-							<c:forEach items="${refund}" var="refund">
+							<c:forEach items="${inquiry}" var="inquiry">
 								<tr class="table-info">
-									<td class="r-num"><a href="/order/refundView?num=${refund.orderId }"><strong style="color:#0000f1;">${refund.orderId }</strong></a></td>
-									<c:if test="${refund.refundState == '환불대기' }">
-										<td class="r-sta" style="color:#f10000;"><c:out value="${refund.refundState }" /></td>
-									</c:if>
-									<c:if test="${refund.refundState == '환불완료' }">
-										<td class="r-sta" style="color:#00f100;"><c:out value="${refund.refundState }" /></td>
-									</c:if>
-									<td class="r-date"><fmt:formatDate value="${refund.refundDate }" pattern="yyyy-MM-dd" /></td>
-								</tr>
+									<td class="o-name" style="text-align:left;"><strong><a href="/inquiry/view?inqNum=${inquiry.inqNum }">${inquiry.inqTitle }</a></strong></td>
+									<td class="o-addr"><fmt:formatDate value="${inquiry.regDate }" pattern="yyyy-MM-dd" /></td>
+									<td class="o-total">
+										<c:if test="${inquiry.inqState == '답변대기' }">
+											<strong style="color:#f10000;">${inquiry.inqState}</strong>
+										</c:if>
+										<c:if test="${inquiry.inqState == '답변완료' }">
+											<strong style="color:#0000f1;">${inquiry.inqState}</strong>
+										</c:if>
+									</td>
+									<td class="o-stats">
+										<c:if test="${inquiry.inqState == '답변대기' }">
+											-
+										</c:if>
+										<c:if test="${inquiry.inqState == '답변완료' }">
+											<fmt:formatDate value="${inquiry.inqDate }" pattern="yyyy-MM-dd" />
+										</c:if>
+									</td>
+								</tr>		
 							</c:forEach>
 						</tbody>
 					</table>

@@ -5,7 +5,9 @@ body, table, div, p{
   font-family: ‘Roboto’, ‘Spoqa Han Sans’, ‘Spoqa Han Sans JP’, ‘Sans-serif’;
   letter-spacing:-0.05px;
 }
-
+textarea {
+  resize: none;
+}
 /*------------------------------------------------------------------
 	Template Name:	Olongker - eCommerce Bootstrap Template
     Template URI: http://bootexperts.com
@@ -4154,4 +4156,70 @@ h4.heading {
   font-size:13px !important; 
   color:#999999; 
   line-height:20px !important;
+}
+/*------------------------
+	18-2. inquiry
+--------------------------*/
+.inquiry_modify {
+  width:100%;
+}
+.inquiry_modify tr td {
+  border: 1px solid #cccccc;
+  padding: 5px 15px 15px 15px;
+}
+#inq_modify {
+  display: inline-block;
+  margin-top: 18px;
+  background: #00D100 none repeat scroll 0 0;
+  border: 1px solid #00D100;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px 15px;
+  text-decoration:none;
+  text-transform: uppercase;
+}
+
+#inq_modify:hover {
+  background: #ebebeb none repeat scroll 0 0;
+  border: 1px solid #00D100;
+  color: #00D100;
+}
+#inq_delete {
+  display: inline-block;
+  margin-top: 18px;
+  background: #D10000 none repeat scroll 0 0;
+  border: 1px solid #D10000;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px 15px;
+  text-decoration:none;
+  text-transform: uppercase;
+  float: right;
+}
+
+#inq_delete:hover {
+  background: #ebebeb none repeat scroll 0 0;
+  border: 1px solid #D10000;
+  color: #D10000;
+}
+
+#inq_register {
+  display: inline-block;
+  background: #e09e25 none repeat scroll 0 0;
+  border: 1px solid #e09e25;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px 15px;
+  text-decoration:none;
+  text-transform: uppercase;
+  float: right;
+}
+
+#inq_register:hover {
+  background: #ebebeb none repeat scroll 0 0;
+  border: 1px solid #e09e25;
+  color: #e09e25;
 }
