@@ -431,7 +431,7 @@ $(document).ready(function() {
 			$(arr).each(function(i,attach){
 				str += "<li data-path='" + attach.uploadPath + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.fileName + "' data-type='" + attach.fileType + "'>";
 				str += "<div>";
-				str += "<img src='/resources/img/attach.png' width='20px'>";
+				str += "<img src='/resources/img/attach.png' width='100px'>";
 				str += "<span>&nbsp;" + attach.fileName + "</span><br />";
 				str += "</div>";
 				str += "</li>";

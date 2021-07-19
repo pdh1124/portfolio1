@@ -19,12 +19,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.pila.domain.Criteria;
 import com.pila.domain.GoodsVO;
+import com.pila.domain.InquiryVO;
 import com.pila.domain.OrderDetailVO;
 import com.pila.domain.OrderListVO;
 import com.pila.domain.OrderVO;
 import com.pila.domain.PageDTO;
 import com.pila.domain.RefundVO;
 import com.pila.service.AdminService;
+import com.pila.service.InquiryService;
 import com.pila.service.OrderService;
 import com.pila.utils.UploadFileUtils;
 
@@ -43,6 +45,9 @@ public class AdminController {
 	
 	@Setter(onMethod_ = @Autowired)
 	private OrderService orderService;
+	
+	@Setter(onMethod_ = @Autowired)
+	private InquiryService inquiryService;
 	
 	@Resource(name = "uploadPath")
 	private String uploadPath;
@@ -251,5 +256,38 @@ public class AdminController {
 		service.refundStats(refund);
 		
 		return "redirect:/admin/order/refundList";
+	}
+	
+	//1:1문의 리스트
+	@PreAuthorize("isAuthenticated()")
+	@GetMapping("/inquiry/list")
+	public void inquiryList(Model model, Criteria cri) {
+	
+		int total = inquiryService.getTotal(cri);
+		int totalFin =inquiryService.getTotalfin(cri);
+		
+		//답변대기 리스트
+		model.addAttribute("inquiry", inquiryService.adminList(cri));
+		model.addAttribute("pageMaker", new PageDTO(cri,total));
+		
+		//답변완료 리스트
+		model.addAttribute("inquiryFin", inquiryService.adminListfin(cri));
+		model.addAttribute("pageMakerFin", new PageDTO(cri,totalFin));
+	}
+	
+	//답변입력 페이지 이동
+	@PreAuthorize("isAuthenticated()")
+	@GetMapping("/inquiry/reply")
+	public void replyGet(@RequestParam("inqNum") int inqNum, Model model) {
+		model.addAttribute("inquiry", inquiryService.view(inqNum));
+	}
+	
+	//답변 입력하기
+	@PreAuthorize("isAuthenticated()")
+	@PostMapping("/inquiry/reply")
+	public String replyPost(InquiryVO vo) {
+		inquiryService.update(vo);
+		
+		return "redirect:/admin/inquiry/list";
 	}
 }

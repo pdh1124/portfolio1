@@ -26,7 +26,7 @@
 						<li><a href="/admin/goods/list">상품 목록</a></li>
 						<li><a href="/admin/order/list">주문 목록</a></li>
 						<li><a href="/admin/order/refundList">환불 목록</a></li>
-						<li><a href="#">문의 내역</a></li>
+						<li><a href="/admin/inquiry/list">문의 내역</a></li>
 					</ul>
 				</div>
 			</div>

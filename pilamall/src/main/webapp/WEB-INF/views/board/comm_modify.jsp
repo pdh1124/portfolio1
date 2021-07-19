@@ -186,7 +186,7 @@ $(document).ready(function() {
 				
 				str += "<li data-path='" + attach.uploadPath + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.fileName + "' data-type='" + attach.fileType + "'>";
 				str += "<div>";
-				str += "<img src='/resources/img/attach.png' width='20px'>";
+				str += "<img src='/resources/img/attach.png' width='100px'>";
 				str += "<span>&nbsp;" + attach.fileName + "</span>&nbsp;&nbsp;";
 				str += "<b data-file='" + fileCallPath + "' data-type='file'>[x]</b>";
 				str += "</div>";

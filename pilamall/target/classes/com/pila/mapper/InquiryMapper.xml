@@ -42,4 +42,41 @@
 		where inqNum = #{inqNum}
 	</delete>
 
+
+
+	<!-- 관리자 문의 답변대기 중인 리스트 -->
+	<select id="adminList" resultType="com.pila.domain.InquiryVO">
+		select *
+		from inquiry
+		where inqState = '답변대기'
+	</select>
+	
+	<!-- 답변대기중인 리스트의 총갯수 -->
+	<select id="getTotal" resultType="int">
+		select count(*)
+		from inquiry
+		where inqNum > 0 and inqState = '답변대기'
+	</select>
+	
+	<!-- 관리자 문의 답변완료인 리스트 -->
+	<select id="adminListfin" resultType="com.pila.domain.InquiryVO">
+		select *
+		from inquiry
+		where inqState = '답변완료'
+	</select>
+	
+	<!-- 답변완료인 리스트의 총갯수 -->
+	<select id="getTotalfin" resultType="int">
+		select count(*)
+		from inquiry
+		where inqNum > 0 and inqState = '답변완료'
+	</select>
+	
+	<!-- 답변 달기 -->
+	<update id="update">
+		update inquiry 
+		set reply=#{reply}, inqState = #{inqState}
+		where inqNum = #{inqNum}
+	</update>
+	
 </mapper>

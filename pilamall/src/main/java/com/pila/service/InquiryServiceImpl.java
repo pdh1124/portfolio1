@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.pila.domain.Criteria;
 import com.pila.domain.InquiryAttachVO;
 import com.pila.domain.InquiryVO;
 import com.pila.mapper.InquiryAttachMapper;
@@ -82,6 +83,37 @@ public class InquiryServiceImpl implements InquiryService {
 	@Override
 	public List<InquiryAttachVO> getAttachList(int inqNum) {
 		return attachMapper.findByInqNum(inqNum);
+	}
+	
+	//관리자 답변대기 리스트
+	@Override
+	public List<InquiryVO> adminList(Criteria cri) {
+		return mapper.adminList(cri);
+	}
+
+	//답변대기 갯수 
+	@Override
+	public int getTotal(Criteria cri) {
+		return mapper.getTotal(cri);
+	}
+
+	//관리자 답변완료 리스트
+	@Override
+	public List<InquiryVO> adminListfin(Criteria cri) {
+		return mapper.adminListfin(cri);
+	}
+
+	//답변완료 갯수
+	@Override
+	public int getTotalfin(Criteria cri) {
+		// TODO Auto-generated method stub
+		return mapper.getTotalfin(cri);
+	}
+
+	//문의 답글 수정
+	@Override
+	public void update(InquiryVO vo) {
+		mapper.update(vo);
 	}
 
 }
