@@ -34,10 +34,10 @@
 			
 			<div class="col-sm-8 col-md-9">
 				<div class="login">
-					<form class="inq_form" id="info-form" name="updateInfo" method="post" action="/inquiry/reply">
+					<form class="inq_form" id="info-form" name="updateInfo" method="post" action="reply">
 						<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token}">
 						<input type="hidden" name="inqNum" value="${inquiry.inqNum}">
-						<input type="hidden" name="inqState" value="배송완료">
+						<input type="hidden" name="inqState" value="답변완료">
 						<h2>내 문의내역 상세보기</h2>
 						<table class="inquiry_modify">
 						<tr>
@@ -50,13 +50,7 @@
 								
 								<label>내용</label>
 								<textarea type="text" rows="10" id="inqContent" name="inqContent" readonly="readonly">${inquiry.inqContent }</textarea>
-								
-								<c:if test="${inquiry.inqState != '답변대기' }">
-									<label>답변</label>
-									<textarea type="text" rows="10" id="inqContent" name="inqContent"  readonly="readonly">${inquiry.inqReply }</textarea>
-								</c:if>
-								
-						
+													
 								<label>첨부파일 <span style="color:#bbbbbb;">파일을 클릭하면 다운로드가 가능합니다.</span></label>
 								<div class="uploadResult">
 									<ul>
@@ -64,7 +58,7 @@
 								</div>							
 								
 								<label>답변</label>
-								<textarea type="text" rows="10" id="reply" name="reply"></textarea>
+								<textarea type="text" rows="10" id="inqReply" name="inqReply"></textarea>
 								
 							</td>
 						</table>
@@ -87,37 +81,14 @@
 <script>
 $(document).ready(function() {
 	
-	//수정 버튼, 삭제 버튼 submit 하기
-	var formObj = $(".inq_form");
+	var formObj = $("form");
 	
-	$('.inq_bt').on("click", function(e) {
-		
+	$("button").on("click", function(e) {
 		e.preventDefault();
 		
-		var oper = $(this).data("oper");
-
-		
-		if(oper == 'delete') {
-			alert("삭제 완료.");
-			formObj.attr("action", "/inquiry/delete").submit();
-		} 
-		else if(oper == 'modify') {
-			var str = ""; 
-			$(".uploadResult ul li").each(function(i, obj) {
-				// i:순서 , obj:요소(첨부파일 목록 1개)
-				var jobj = $(obj);
-				str += "<input type='hidden' name='attachList["+ i +"].fileName' value='" + jobj.data("filename") + "' >";
-				str += "<input type='hidden' name='attachList["+ i +"].uuid' value='" + jobj.data("uuid") + "' >";
-				str += "<input type='hidden' name='attachList["+ i +"].uploadPath' value='" + jobj.data("path") + "' >";
-				str += "<input type='hidden' name='attachList["+ i +"].fileType' value='" + jobj.data("type") + "' >";
-			});
-			
-			alert("수정 완료.");
-			formObj.append(str).submit();
-		}
+		alert("답변이 완료되었습니다.");
+		formObj.submit();
 	});
-	
-	
 	
 	/*get처리 부분*/
 	//첨부파일 목록 표시

@@ -175,7 +175,7 @@
 							<li><a href="/product/product2">요가용품</a></li>
 							<li><a href="#">게시판</a>
 								<ul class="sub-menu">
-									<li><a href="#">문의 게시판</a></li>
+									<li><a href="/notice/list">공지사항 게시판</a></li>
 									<li><a href="/board/comm_list">커뮤니티 게시판</a></li>
 								</ul>
 							</li>
@@ -204,3 +204,14 @@
 		</div>
 	</div>
 </div><!--End Main Menu Area-->
+
+<!-- CK에디터 연동  -->
+<script type="text/javascript" src="/resources/ckeditor/ckeditor.js"></script>
+<script>
+	var ckeditor_config = {
+			resize_enaleb : false,
+			enterMode : CKEDITOR.ENTER_BR,
+			shiftEnterMode : CKEDITOR.ENTER_P,
+			filebrowserUploadUrl : "/notice/ckupload"		
+	}
+</script>

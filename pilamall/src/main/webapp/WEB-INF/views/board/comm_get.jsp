@@ -52,7 +52,7 @@
 						<i class="fa fa-comments"></i>조회수 : <c:out value="${board.views }"/>
 					</div>
 					<div class="div_line"></div>
-					<p id="se2"><c:out value="${board.content }" /></p>
+					<p id="se2"><c:out value="${board.content }"  escapeXml="false" /></p>
 					<div class="recommendation board_like">
 						<button type="button" class="like_onoff" id='recom_down' onclick=""><i class="fa fa-thumbs-o-up"></i> 좋아요 ${board.likeCnt }</button>
 					</div>

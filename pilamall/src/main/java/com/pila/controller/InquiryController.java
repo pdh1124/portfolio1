@@ -48,6 +48,10 @@ public class InquiryController {
 	@PostMapping("/register")
 	public String registerPost(InquiryVO vo) {
 		
+		if(vo.getAttachList() != null) {
+			vo.getAttachList().forEach(attach -> log.info(attach));
+		}
+		
 		service.register(vo);
 		
 		return "redirect:/product/main";
@@ -74,6 +78,11 @@ public class InquiryController {
 	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/modify")
 	public String modifyPost(InquiryVO vo) {
+		
+		if(vo.getAttachList() != null) {
+			vo.getAttachList().forEach(attach -> log.info(attach));
+		}
+		
 		service.modify(vo);
 		
 		return "redirect:/inquiry/list";
@@ -85,9 +94,9 @@ public class InquiryController {
 	public String deletePost(InquiryVO vo) {
 		
 		List<InquiryAttachVO> attachList = service.getAttachList(vo.getInqNum());
-		deleteFiles(attachList);
 		
 		service.delete(vo);
+		deleteFiles(attachList);
 		
 		return "redirect:/inquiry/list";
 	}

@@ -11,6 +11,8 @@
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
+
+
 <section class="blog-page page fix"><!-- Start Blog Area-->
 	<div class="container">
 		<div class="row">
@@ -67,6 +69,7 @@
 						<c:if test="${inquiry.inqState == '답변대기' }">
 							<button type="submit" class="inq_bt" id="inq_modify" data-oper="modify">문의 수정</button>
 						</c:if>	
+						
 					</form>
 				</div>
 			</div>
@@ -80,6 +83,16 @@
 
 <script>
 $(document).ready(function() {
+	
+	<c:if test="${inquiry.inqState == '답변완료' }">
+	$("#inqTitle").on("click", function() {
+		$(this).attr("readonly", true);
+	});
+	$("#inqContent").on("click", function() {
+		$(this).attr("readonly", true);
+	});
+	$("input[name='uploadFile']").css("display", "none");
+	</c:if>
 	
 	//수정 버튼, 삭제 버튼 submit 하기
 	var formObj = $(".inq_form");

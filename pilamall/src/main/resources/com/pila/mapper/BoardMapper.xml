@@ -48,7 +48,9 @@
 	
 	<!-- 글읽기 -->
 	<select id="read" resultType="com.pila.domain.BoardVO">
-		select * from (select comm_board.*, lead(bno,1) over(order by bno) nextBno, lag(bno,1) over(order by bno) prevBno from comm_board) where bno=#{bno}
+		select * 
+		from (select comm_board.*, lead(bno,1) over(order by bno) nextBno, lag(bno,1) over(order by bno) prevBno from comm_board) 
+		where bno=#{bno}
 	</select>
 	
 	<!-- 글 삭제 -->

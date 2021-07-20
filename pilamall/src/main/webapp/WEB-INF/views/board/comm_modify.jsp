@@ -99,8 +99,7 @@
 								</sec:authorize>
 							</div>
 						</div>
-					</div>
-	
+					</div>	
 				</form>
 			</div>
 		</div>

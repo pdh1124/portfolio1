@@ -48,7 +48,7 @@
 	<select id="adminList" resultType="com.pila.domain.InquiryVO">
 		select *
 		from inquiry
-		where inqState = '답변대기'
+		where inqState = '답변대기' order by regDate desc
 	</select>
 	
 	<!-- 답변대기중인 리스트의 총갯수 -->
@@ -62,7 +62,7 @@
 	<select id="adminListfin" resultType="com.pila.domain.InquiryVO">
 		select *
 		from inquiry
-		where inqState = '답변완료'
+		where inqState = '답변완료' order by regDate desc
 	</select>
 	
 	<!-- 답변완료인 리스트의 총갯수 -->
@@ -75,7 +75,7 @@
 	<!-- 답변 달기 -->
 	<update id="update">
 		update inquiry 
-		set reply=#{reply}, inqState = #{inqState}
+		set inqReply=#{inqReply}, inqState = #{inqState}, inqDate = sysdate
 		where inqNum = #{inqNum}
 	</update>
 	
