@@ -205,13 +205,5 @@
 	</div>
 </div><!--End Main Menu Area-->
 
-<!-- CK에디터 연동  -->
-<script type="text/javascript" src="/resources/ckeditor/ckeditor.js"></script>
-<script>
-	var ckeditor_config = {
-			resize_enaleb : false,
-			enterMode : CKEDITOR.ENTER_BR,
-			shiftEnterMode : CKEDITOR.ENTER_P,
-			filebrowserUploadUrl : "/notice/ckupload"		
-	}
-</script>
+<!-- 스마트에디터2  -->
+<script type="text/javascript" src="/resources/se2/js/HuskyEZCreator.js" charset="utf-8"></script>

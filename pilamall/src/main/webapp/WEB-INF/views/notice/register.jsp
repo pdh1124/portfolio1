@@ -47,7 +47,7 @@
 											<h5>글 내용</h5>
 										</td>
 										<td class="b_write_right">
-											<textarea rows="10" type="text" name="noContent" id="noContent"></textarea>
+											<textarea rows="10" type="text" name="noContent" id="se2"></textarea>
 										</td>
 									</tr>				
 								</tbody>
@@ -70,9 +70,30 @@
 <%@ include file="../includes/footer.jsp"%>
 
 <script>
-CKEDITOR.replace('noContent',ckeditor_config);
-
 $(document).ready(function(e) {
+	
+	var oEditors = []; 
+	$(function(){ 
+		nhn.husky.EZCreator.createInIFrame({ 
+			oAppRef: oEditors, 
+			elPlaceHolder: "se2", 
+			//SmartEditor2Skin.html 파일이 존재하는 경로 
+			sSkinURI: "/resources/se2/SmartEditor2Skin.html", 
+			htParams : { 
+				// 툴바 사용 여부 (true:사용/ false:사용하지 않음) 
+				bUseToolbar : true, 
+				// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음) 
+				bUseVerticalResizer : true, 
+				// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음) 
+				bUseModeChanger : true
+			}, 
+			fOnAppLoad : function(){ 
+				//기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할때 사용 
+				oEditors.getById["se2"].exec("PASTE_HTML", [""]); 
+			}, 
+			fCreator: "createSEditor2" 
+		}); 
+	}); 
 	
 	var csrfHeaderName = "${_csrf.headerName}";
 	var csrfTokenValue = "${_csrf.token}";
@@ -88,6 +109,7 @@ $(document).ready(function(e) {
 		e.preventDefault();
 		alert("공지사항 등록 완료");
 
+		oEditors.getById["se2"].exec("UPDATE_CONTENTS_FIELD", []);
 		formObj.submit();
 	});
 	
