@@ -32,10 +32,26 @@
 			</div>
 			<div class="col-sm-8 col-md-9">
 				<div class="login">
-					
-						
-						<h2>관리자 페이지</h2>
-						
+					<h2>일일 매출</h2>
+					<table class="table cart-table goods-table">
+					<thead class="table-title">
+						<tr>
+							<th class="g-num">번호</th>
+							<th class="g-price">날짜</th>
+							<th class="g-price">일일매출</th>
+
+						</tr>													
+					</thead>
+					<tbody>
+						<c:forEach items="${sum }" var="sum">
+							<tr class="table-info">
+								<td class="g-num">${sum.salNum }</td>
+								<td class="g-price"><fmt:formatDate value="${sum.salDate }" pattern="yyyy년 MM월 dd일" /></td>
+								<td class="g-price"><strong><fmt:formatNumber value="${sum.salStock }" pattern="###,###,###" /></strong> 원</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>		
 						
 
 				</div>

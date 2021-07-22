@@ -67,4 +67,11 @@ public class NoticeServiceImpl implements NoticeService {
 		return mapper.getTotalCount(cri);
 	}
 
+	
+	//메인에 리스트 꾸리기
+	@Override
+	public List<NoticeVO> main_notice() {
+		return mapper.main_notice();
+	}
+
 }

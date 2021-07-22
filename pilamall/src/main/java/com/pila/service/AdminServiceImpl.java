@@ -10,6 +10,7 @@ import com.pila.domain.GoodsVO;
 import com.pila.domain.OrderListVO;
 import com.pila.domain.OrderVO;
 import com.pila.domain.RefundVO;
+import com.pila.domain.SalesVO;
 import com.pila.mapper.AdminMapper;
 
 import lombok.Setter;
@@ -128,6 +129,21 @@ public class AdminServiceImpl implements AdminService {
 	public void refundStats(RefundVO vo) {
 		mapper.refundStats(vo);
 		
+	}
+
+	@Override
+	public void todaySum(SalesVO vo) {
+		mapper.todaySum(vo);		
+	}
+
+	@Override
+	public List<SalesVO> sales_view(Criteria cri) {
+		return mapper.sales_view(cri);
+	}
+
+	@Override
+	public int sumStock(Criteria cri) {
+		return mapper.sumStock(cri);
 	}
 	
 }

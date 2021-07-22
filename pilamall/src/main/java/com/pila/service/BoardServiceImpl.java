@@ -110,5 +110,10 @@ public class BoardServiceImpl implements BoardService {
 		return attachMapper.findByBno(bno);
 	}
 
+	@Override
+	public List<BoardVO> main_comm() {
+		return mapper.main_comm();
+	}
+
 
 }

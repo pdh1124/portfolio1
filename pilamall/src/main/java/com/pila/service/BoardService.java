@@ -24,4 +24,6 @@ public interface BoardService {
 	
 	public List<BoardAttachVO> getAttachList(Long bno); //게시물 번호에 있는 첨부파일 전부 리턴
 	
+	public List<BoardVO> main_comm(); //메인에 꾸리기
+	
 }

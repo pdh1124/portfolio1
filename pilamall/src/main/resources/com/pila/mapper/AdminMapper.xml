@@ -140,4 +140,47 @@
 		where orderId = #{orderId}
 	</update>
 	
+	<!--오늘하루 매출 구하기-->
+	<insert id="todaySum">
+ 		insert into sales_day (salNum, salStock)
+		values (seq_sales_day.nextval, (
+			select nvl(SUM(amount),0) 
+ 			from tbl_order 
+ 			where delivery in ('배송준비','배송중','배송완료') and TO_CHAR(orderdate, 'YYYY-MM-DD')=TO_CHAR(SYSDATE, 'YYYY-MM-DD'))
+ 			)
+ 	</insert>
+ 	
+ 	<!-- 매출표 가져오기 -->
+ 	<select id="sales_view" resultType="com.pila.domain.SalesVO">
+ 		<![CDATA[
+ 		select salNum, salDate, salStock
+ 		from ( 
+ 			select rownum rn, salNum, salDate, salStock
+ 			from (
+ 				select * 
+ 				from sales_day
+ 				where salNum > 0 ORDER BY salNum DESC
+ 				)
+ 			where rownum <= #{pageNum} * #{amount}
+ 			)
+ 		where rn > (#{pageNum} - 1) * #{amount}
+ 		]]>
+ 	</select>
+ 	
+ 	<!-- 총 게시물 수 구하는 식(페이징에서 마지막 페이지를 표시하기 위해) -->
+ 	<select id="getTotalCount" resultType="int">
+		<![CDATA[
+			select count(salNum) 
+			from sales_day
+			where salNum > 0
+		]]>
+	</select>
+ 	
+ 	<!-- 총매출 -->
+ 	<select id="sumStock" resultType="int">
+ 		select nvl(SUM(salStock), 0) from sales_day
+ 	</select>
+ 
+	
+	
 </mapper>

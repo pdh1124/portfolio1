@@ -28,5 +28,8 @@ public interface BoardMapper {
 	public void updateReplyCnt(@Param("bno") Long bno, @Param("amount") int amount); //게시물별 댓글의 갯수 표시
 	
 	public int updateViews(Long bno); //조회수 증가
+	
+	public List<BoardVO> main_comm(); //메인에 꾸리기
+	
 		
 }

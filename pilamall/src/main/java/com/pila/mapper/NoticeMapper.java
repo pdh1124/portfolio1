@@ -20,4 +20,7 @@ public interface NoticeMapper {
 	public List<NoticeVO> getListWithPaging(Criteria cri); //페이징 처리
 	
 	public int getTotalCount(Criteria cri); //게시물 총 갯수
+	
+	
+	public List<NoticeVO> main_notice(); //메인페이지 리스트 꾸리기
 }

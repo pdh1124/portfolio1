@@ -135,79 +135,55 @@
 <div class="blog-area section fix"><!--Start Blog Area-->
 	<div class="container">
 		<div class="row">
-			<div class="section-title">
-				<h2>Latest From Blog</h2>
-				<div class="underline"></div>
+			<div class="col-sm-6">
+				<div class="about-text">
+					<h2><span>공지사항</span> 게시판</h2>
+				</div>
+				<table class="table cart-table board_table">
+					<thead class="table-title">
+						<tr>
+							<th class="b_title">제목</th>
+							<th class="b_writer">작성자</th>
+						</tr>													
+					</thead>
+					<tbody>
+						<c:forEach var="notice" items="${notice }">
+							<tr class="table-info main-table">
+								<td class="m_title align-left">
+									<h5><a href="/notice/get?noNum=${notice.noNum }"><c:out value="${notice.noTitle }" /></a></h5>
+								</td>
+								<td class="m_writer">
+									<h5><c:out value="필라몰 운영자" /></h5>
+								</td>
+							</tr>
+						</c:forEach>					
+					</tbody>
+				</table>
 			</div>
-			<div class="blog-slider owl-carousel">
-				<div class="single-blog">
-					<div class="content fix">
-						<a class="image fix" href="blog-details.html"><img src="/resources/img/blog/blog-1.jpg" alt="" />
-							<div class="date">
-								<h4>25</h4>
-								<h5>Aug</h5>
-							</div>
-						</a>
-						<h2><a class="title" href="blog-details.html">Lorem ipsum dolor sit amet</a></h2>
-						<div class="meta">
-							<a href="#"><i class="fa fa-pencil-square-o"></i>John Lee</a>
-							<a href="#"><i class="fa fa-calendar"></i>2 Days ago</a>
-							<a href="#"><i class="fa fa-comments"></i>12 Comments</a>
-						</div>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim niam.</p>
-					</div>
+			<div class="col-sm-6">
+				<div class="about-text">
+					<h2><span>커뮤니티</span> 게시판</h2>
 				</div>
-				<div class="single-blog">
-					<div class="content fix">
-						<a class="image fix" href="blog-details.html"><img src="/resources/img/blog/blog-2.jpg" alt="" />
-							<div class="date">
-								<h4>25</h4>
-								<h5>Aug</h5>
-							</div>
-						</a>
-						<h2><a class="title" href="blog-details.html">Lorem ipsum dolor sit amet</a></h2>
-						<div class="meta">
-							<a href="#"><i class="fa fa-pencil-square-o"></i>John Lee</a>
-							<a href="#"><i class="fa fa-calendar"></i>2 Days ago</a>
-							<a href="#"><i class="fa fa-comments"></i>12 Comments</a>
-						</div>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim niam.</p>
-					</div>
-				</div>
-				<div class="single-blog">
-					<div class="content fix">
-						<a class="image fix" href="blog-details.html"><img src="/resources/img/blog/blog-3.jpg" alt="" />
-							<div class="date">
-								<h4>25</h4>
-								<h5>Aug</h5>
-							</div>
-						</a>
-						<h2><a class="title" href="blog-details.html">Lorem ipsum dolor sit amet</a></h2>
-						<div class="meta">
-							<a href="#"><i class="fa fa-pencil-square-o"></i>John Lee</a>
-							<a href="#"><i class="fa fa-calendar"></i>2 Days ago</a>
-							<a href="#"><i class="fa fa-comments"></i>12 Comments</a>
-						</div>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim niam.</p>
-					</div>
-				</div>
-				<div class="single-blog">
-					<div class="content fix">
-						<a class="image fix" href="blog-details.html"><img src="/resources/img/blog/blog-4.jpg" alt="" />
-							<div class="date">
-								<h4>25</h4>
-								<h5>Aug</h5>
-							</div>
-						</a>
-						<h2><a class="title" href="blog-details.html">Lorem ipsum dolor sit amet</a></h2>
-						<div class="meta">
-							<a href="#"><i class="fa fa-pencil-square-o"></i>John Lee</a>
-							<a href="#"><i class="fa fa-calendar"></i>2 Days ago</a>
-							<a href="#"><i class="fa fa-comments"></i>12 Comments</a>
-						</div>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim niam.</p>
-					</div>
-				</div>
+				<table class="table cart-table board_table">
+					<thead class="table-title">
+						<tr>
+							<th class="b_title">제목</th>
+							<th class="b_writer">작성자</th>
+						</tr>													
+					</thead>
+					<tbody>
+						<c:forEach var="board" items="${board }">
+							<tr class="table-info main-table">
+								<td class="m_title align-left">
+									<h5><a href="/board/comm_get?bno=${board.bno }"><c:out value="${board.title }" /></a></h5>
+								</td>
+								<td class="m_writer">
+									<h5><c:out value="${board.writer }" /></h5>
+								</td>
+							</tr>
+						</c:forEach>					
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>

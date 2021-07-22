@@ -91,5 +91,18 @@
 			noNum > 0
 		]]>
 	</select>
+	
+	<!-- 메인페이지에 리스트 5개 꾸리기 -->
+	<select id="main_notice" resultType="com.pila.domain.NoticeVO">
+		<![CDATA[
+			select * 
+			from (
+				select *
+				from notice order by regDate desc
+			)
+			where ROWNUM <= 5
+		]]>
+	</select>
+	
 
 </mapper>

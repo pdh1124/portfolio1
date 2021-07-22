@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.pila.domain.Criteria;
 import com.pila.domain.GoodsReplyVO;
 import com.pila.domain.PageDTO;
+import com.pila.service.BoardService;
+import com.pila.service.NoticeService;
 import com.pila.service.ProductService;
 
 import lombok.AllArgsConstructor;
@@ -32,6 +34,12 @@ public class ProductController {
 	@Setter(onMethod_ = @Autowired)
 	private ProductService service;
 	
+	@Setter(onMethod_ = @Autowired)
+	private NoticeService noticeService;
+	
+	@Setter(onMethod_ = @Autowired)
+	private BoardService boardService;
+	
 	@GetMapping("/main")
 	public void mainPageGET(Model model) {
 		
@@ -39,6 +47,8 @@ public class ProductController {
 		model.addAttribute("product", service.newProduct());
 		model.addAttribute("main1", service.main_1());
 		model.addAttribute("main2", service.main_2());
+		model.addAttribute("notice", noticeService.main_notice());
+		model.addAttribute("board", boardService.main_comm());
 	}
 	
 	//전체상품 보기(페이징)

@@ -8,6 +8,7 @@ body, table, div, p{
 textarea {
   resize: none;
 }
+
 /*------------------------------------------------------------------
 	Template Name:	Olongker - eCommerce Bootstrap Template
     Template URI: http://bootexperts.com
@@ -101,6 +102,12 @@ ul {
 }
 img {
   max-width:100%;
+}
+.main-table td {
+ padding: 14px 10px !important;
+}
+.main-table td h5 {
+  font-weight: bold;
 }
 /*----------------------
 	2. Common Classes
@@ -2010,7 +2017,7 @@ img {
 .about-title h2, .about-text h2 {
   font-size: 28px;
   font-weight: 700;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 .about-title span, .about-text span {
   color: #e09e25;

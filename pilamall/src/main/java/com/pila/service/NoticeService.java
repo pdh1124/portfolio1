@@ -19,4 +19,6 @@ public interface NoticeService {
 	
 	public int getTotal(Criteria cri); //총 게시물 수
 	
+	public List<NoticeVO> main_notice(); //메인페이지 리스트 꾸리기
+	
 }

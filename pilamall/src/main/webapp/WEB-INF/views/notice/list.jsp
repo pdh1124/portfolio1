@@ -34,19 +34,19 @@
 							</tr>													
 						</thead>
 						<tbody>
-							<c:forEach var="board" items="${list }">
+							<c:forEach var="list" items="${list }">
 								<tr class="table-info">
 									<td class="b_bno">
-										<h5><c:out value="${board.noNum }" /></h5>
+										<h5><c:out value="${list.noNum }" /></h5>
 									</td>
 									<td class="b_title">
-										<h5><a href="/notice/get?noNum=${board.noNum }"><c:out value="${board.noTitle }" /></a></h5>
+										<h5><a href="/notice/get?noNum=${list.noNum }"><c:out value="${list.noTitle }" /></a></h5>
 									</td>
 									<td class="b_writer align-left">
 										<h5><c:out value="필라몰 운영자" /></h5>
 									</td>
 									<td class="b_regdate">
-										<h5><fmt:formatDate pattern="yyyy-MM-dd" value="${board.regDate }" /></h5>
+										<h5><fmt:formatDate pattern="yyyy-MM-dd" value="${list.regDate }" /></h5>
 									</td>
 								</tr>
 							</c:forEach>					

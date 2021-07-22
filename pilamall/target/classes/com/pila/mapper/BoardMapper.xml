@@ -111,4 +111,17 @@
 		where bno = #{bno}
 	</update>
 	
+	<!-- 커뮤니티 게시판 메인에 4개 꾸리기 -->
+	<select id="main_comm" resultType="com.pila.domain.BoardVO">
+		<![CDATA[
+			select * 
+			from (
+				select *
+				from comm_board 
+				where notice = '일반' order by regDate desc
+			)
+			where ROWNUM <= 5
+		]]>
+	</select>
+	
 </mapper>

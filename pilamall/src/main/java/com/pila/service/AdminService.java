@@ -7,6 +7,7 @@ import com.pila.domain.GoodsVO;
 import com.pila.domain.OrderListVO;
 import com.pila.domain.OrderVO;
 import com.pila.domain.RefundVO;
+import com.pila.domain.SalesVO;
 
 public interface AdminService {
 	
@@ -39,4 +40,8 @@ public interface AdminService {
 	public List<RefundVO> refundList_wait(); //환불 대기 목록
 	public List<RefundVO> refundList_comp(); //환불 완료 목록
 	public void refundStats(RefundVO vo); //환불상태 변경
+	
+	public void todaySum(SalesVO vo); //하루 매출 등록
+	public List<SalesVO> sales_view(Criteria cri); //매출표 보이기
+	public int sumStock(Criteria cri); //총 매출액
 }

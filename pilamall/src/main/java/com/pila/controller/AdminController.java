@@ -27,6 +27,7 @@ import com.pila.domain.PageDTO;
 import com.pila.domain.RefundVO;
 import com.pila.service.AdminService;
 import com.pila.service.InquiryService;
+import com.pila.service.NoticeService;
 import com.pila.service.OrderService;
 import com.pila.utils.UploadFileUtils;
 
@@ -53,11 +54,11 @@ public class AdminController {
 	private String uploadPath;
 	
 	
-	//관리자 메인페이지로 이동
+	//관리자 메인페이지로 이동(매출현황)
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/main")
-	public void adminMain() {
-			
+	public void adminMain(Model model, Criteria cri) {
+		model.addAttribute("sum", service.sales_view(cri));
 	}
 	
 	//제품등록 페이지로 이동
@@ -290,4 +291,5 @@ public class AdminController {
 		
 		return "redirect:/admin/inquiry/list";
 	}
+	
 }
