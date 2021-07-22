@@ -143,10 +143,12 @@
 	<!--오늘하루 매출 구하기-->
 	<insert id="todaySum">
  		insert into sales_day (salNum, salStock)
-		values (seq_sales_day.nextval, (
-			select nvl(SUM(amount),0) 
- 			from tbl_order 
- 			where delivery in ('배송준비','배송중','배송완료') and TO_CHAR(orderdate, 'YYYY-MM-DD')=TO_CHAR(SYSDATE, 'YYYY-MM-DD'))
+		values (
+			seq_sales_day.nextval, (
+				select nvl(SUM(amount),0) 
+	 			from tbl_order 
+	 			where delivery in ('배송준비','배송중','배송완료') and TO_CHAR(orderdate, 'YYYY-MM-DD')=TO_CHAR(SYSDATE, 'YYYY-MM-DD')
+	 			)
  			)
  	</insert>
  	
@@ -176,11 +178,5 @@
 		]]>
 	</select>
  	
- 	<!-- 총매출 -->
- 	<select id="sumStock" resultType="int">
- 		select nvl(SUM(salStock), 0) from sales_day
- 	</select>
- 
-	
 	
 </mapper>

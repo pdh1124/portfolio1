@@ -43,7 +43,6 @@ public interface AdminMapper {
 	
 	public void todaySum(SalesVO vo); //하루 매출 등록
 	public List<SalesVO> sales_view(Criteria cri); //매출표 보이기
-	public int getTotalCount(Criteria cri); //총 매출액
-	public int sumStock(); //총 매출액
+	public int getTotalCount(Criteria cri); //매출표 보이기 페이징
 	
 }

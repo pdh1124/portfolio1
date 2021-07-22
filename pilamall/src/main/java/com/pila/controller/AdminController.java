@@ -7,6 +7,9 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,15 +28,22 @@ import com.pila.domain.OrderListVO;
 import com.pila.domain.OrderVO;
 import com.pila.domain.PageDTO;
 import com.pila.domain.RefundVO;
+import com.pila.domain.SalesVO;
 import com.pila.service.AdminService;
 import com.pila.service.InquiryService;
-import com.pila.service.NoticeService;
 import com.pila.service.OrderService;
 import com.pila.utils.UploadFileUtils;
 
 import lombok.AllArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
+
+//@EnableScheduling // 아래의 클래스를 스케줄링 목적으로 사용하도록 하겠다는 명시
+//@Configuration // 이 어노테이션을 사용하지 않으면 스케줄링이 동작하지 않는다. 
+//spring에서 bean팩토리 설정과 관련된 어노테이션으로 IOC(제어의 역전)
+//을 통한 객체 생성이 가능하다. 
+//스프링 IoC 컨테이너가 해당 클래스를 Bean 정의 소스로 사용
+//이를 통해 클래스 내부의 설정된 메소드들이 자동으로 돌아가도록 한다.
 
 @Controller
 @Log4j
@@ -57,15 +67,21 @@ public class AdminController {
 	//관리자 메인페이지로 이동(매출현황)
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/main")
-	public void adminMain(Model model, Criteria cri) {
+	public void adminMain(Model model, Criteria cri, SalesVO vo) {
+		
 		model.addAttribute("sum", service.sales_view(cri));
+		
+		int total = service.getTotalCount(cri);
+
+		model.addAttribute("pageMaker", new PageDTO(cri, total));
+
 	}
 	
 	//제품등록 페이지로 이동
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/goods/register")
 	public void getRegister() {
-		
+	
 	}
 	
 	//제품등록 실행

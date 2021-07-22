@@ -39,7 +39,6 @@
 							<th class="g-num">번호</th>
 							<th class="g-price">날짜</th>
 							<th class="g-price">일일매출</th>
-
 						</tr>													
 					</thead>
 					<tbody>

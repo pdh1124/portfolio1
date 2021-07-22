@@ -3,6 +3,7 @@ package com.pila.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.pila.domain.Criteria;
@@ -130,20 +131,23 @@ public class AdminServiceImpl implements AdminService {
 		mapper.refundStats(vo);
 		
 	}
-
+	
+	//하루 매출 등록
 	@Override
 	public void todaySum(SalesVO vo) {
 		mapper.todaySum(vo);		
 	}
 
+	//매출표 보이기
 	@Override
 	public List<SalesVO> sales_view(Criteria cri) {
 		return mapper.sales_view(cri);
 	}
 
+	//매출표 보이기 페이징
 	@Override
-	public int sumStock(Criteria cri) {
-		return mapper.sumStock(cri);
+	public int getTotalCount(Criteria cri) {
+		return mapper.getTotalCount(cri);
 	}
-	
+
 }
