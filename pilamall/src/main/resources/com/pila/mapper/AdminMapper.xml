@@ -7,8 +7,8 @@
 	<!-- 관리자 상품 등록 -->
 	<insert id="register">
 		<![CDATA[
-		insert into tbl_goods (gdsNum, gdsName, cateCode, price, stock, gdsDes, gdsImg, thumbImg, option1, option2, option3, option4)
-		values (tbl_goods_seq.nextval, #{gdsName}, #{cateCode}, #{price}, #{stock}, #{gdsDes}, #{gdsImg}, #{thumbImg}, #{option1}, #{option2}, #{option3}, #{option4})
+		insert into tbl_goods (gdsNum, gdsName, cateCode, price, stock, gdsDes, gdsImg, thumbImg)
+		values (tbl_goods_seq.nextval, #{gdsName}, #{cateCode}, #{price}, #{stock}, #{gdsDes}, #{gdsImg}, #{thumbImg})
 		]]>
 	</insert>
 	
@@ -28,7 +28,7 @@
 	<!-- 상품 수정 -->
 	<update id="update">
 		update tbl_goods
-		set gdsName=#{gdsName}, cateCode=#{cateCode}, price=#{price}, stock=#{stock}, gdsDes=#{gdsDes}, gdsImg=#{gdsImg}, thumbImg=#{thumbImg}, option1=#{option1}, option2=#{option2}, option3=#{option3}, option4=#{option4}
+		set gdsName=#{gdsName}, cateCode=#{cateCode}, price=#{price}, stock=#{stock}, gdsDes=#{gdsDes}, gdsImg=#{gdsImg}, thumbImg=#{thumbImg}
 		where gdsNum=#{gdsNum}
 	</update>
 	
