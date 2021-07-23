@@ -16,4 +16,9 @@ public class GoodsVO {
 	private Date regDate; //등록일
 	private int sellCount; //판매 수
 	private String thumbImg; //썸네일
+	
+	private String option1; //옵션1
+	private String option2; //옵션1
+	private String option3; //옵션1
+	private String option4; //옵션1
 }

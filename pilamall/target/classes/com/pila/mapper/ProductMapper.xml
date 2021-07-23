@@ -69,7 +69,7 @@
 		<![CDATA[
 			select *
 			from (
-				select rownum rn, gdsNum, gdsName, cateCode, price, stock, gdsDes, gdsImg, regDate, sellcount, thumbImg
+				select rownum rn, gdsNum, gdsName, cateCode, price, stock, gdsDes, gdsImg, regDate, sellcount, thumbImg, option1, option2, option3, option4
 				from tbl_goods
 				where rownum <= #{pageNum} * #{amount} order by gdsNum desc
 			)
@@ -81,7 +81,7 @@
 		<![CDATA[
 			select *
 			from (
-				select rownum rn, gdsNum, gdsName, cateCode, price, stock, gdsDes, gdsImg, regDate, sellcount, thumbImg
+				select rownum rn, gdsNum, gdsName, cateCode, price, stock, gdsDes, gdsImg, regDate, sellcount, thumbImg , option1, option2, option3, option4
 				from tbl_goods
 				where rownum <= #{pageNum} * #{amount} order by gdsNum desc
 			)
@@ -95,7 +95,7 @@
 		<![CDATA[
 			select *
 			from (
-				select rownum rn, gdsNum, gdsName, cateCode, price, stock, gdsDes, gdsImg, regDate, sellcount, thumbImg
+				select rownum rn, gdsNum, gdsName, cateCode, price, stock, gdsDes, gdsImg, regDate, sellcount, thumbImg, option1, option2, option3, option4
 				from tbl_goods
 				where rownum <= #{pageNum} * #{amount} order by gdsNum desc
 			)
@@ -108,7 +108,7 @@
 		<![CDATA[
 			select *
 			from (
-				select rownum rn, gdsNum, gdsName, cateCode, price, stock, gdsDes, gdsImg, regDate, sellcount, thumbImg
+				select rownum rn, gdsNum, gdsName, cateCode, price, stock, gdsDes, gdsImg, regDate, sellcount, thumbImg, option1, option2, option3, option4
 				from tbl_goods
 				where
 				]]>
@@ -125,7 +125,7 @@
 		<![CDATA[
 			select *
 			from (
-				select rownum rn, gdsNum, gdsName, cateCode, price, stock, gdsDes, gdsImg, regDate, sellcount, thumbImg
+				select rownum rn, gdsNum, gdsName, cateCode, price, stock, gdsDes, gdsImg, regDate, sellcount, thumbImg, option1, option2, option3, option4
 				from tbl_goods
 				where
 				]]>
