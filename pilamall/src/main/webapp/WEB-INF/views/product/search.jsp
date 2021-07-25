@@ -23,20 +23,42 @@
 				<c:forEach items="${list }" var="list">
 					<div class="col-sm-4 col-md-3 fix">
 						<div class="product-item fix">
+							<c:if test="${list.stock > 0 }">
 							<div class="product-img-hover">
 								<!-- Product image -->
-								<a href="#" class="pro-image fix"><img src="${list.thumbImg }" alt="product" /></a>
+								
+								<a href="/product/view?gdsNum=${list.gdsNum }" class="pro-image fix"><img src="${list.thumbImg }" alt="product" /></a>
 							</div>
 							<div class="pro-name-price-ratting">
 								<!-- Product Name -->
 								<div class="pro-name">
-									<a href="#">${list.gdsName }</a>
+									<a href="/product/view?gdsNum=${list.gdsNum }">${list.gdsName }</a>
 								</div>
+								
 								<!-- Product Price -->
 								<div class="pro-price fix">
 									<p><span class="new"><fmt:formatNumber value="${list.price }" pattern="###,###,###" /></span> 원</p>
 								</div>
 							</div>
+							</c:if>
+							<c:if test="${list.stock eq 0 }">
+							<div class="product-img-hover">
+								<!-- Product image -->
+								
+								<a href="#" class="pro-image fix solt-out"><img src="${list.thumbImg }" alt="product" /></a>
+							</div>
+							<div class="pro-name-price-ratting">
+								<!-- Product Name -->
+								<div class="pro-name">
+									<a href="#" style=" text-decoration:line-through;">${list.gdsName }</a>
+								</div>
+								
+								<!-- Product Price -->
+								<div class="pro-price fix">
+									<p><span style="color:red;" class="new">solt out</span></p>
+								</div>
+							</div>
+							</c:if>
 						</div>
 					</div>
 				</c:forEach>

@@ -93,7 +93,8 @@ public class AdminController {
 		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
 		String fileName = null;
 		log.info("ymdPath" + ymdPath);
-		
+		log.info(file.getOriginalFilename());
+		log.info("확인 안함");
 		if(file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
 			//첨부파일이 있고, 파일명이 빈것이 아니라면	
 			log.info("파일명이 잘 넘어오는지 확인 :" + file.getOriginalFilename());

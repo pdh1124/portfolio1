@@ -31,20 +31,42 @@
 					<!-- 상품1 -->
 					<c:forEach var="product" items="${product }">
 						<div class="product-item fix">
+							<c:if test="${product.stock > 0 }">
 							<div class="product-img-hover">
 								<!-- Product image -->
-								<a href="/product/view?gdsNum=${product.gdsNum }" class="pro-image fix"><img src="${product.thumbImg }" alt="featured" /></a>
+								
+								<a href="/product/view?gdsNum=${product.gdsNum }" class="pro-image fix"><img src="${product.thumbImg }" alt="product" /></a>
 							</div>
 							<div class="pro-name-price-ratting">
 								<!-- Product Name -->
 								<div class="pro-name">
 									<a href="/product/view?gdsNum=${product.gdsNum }">${product.gdsName }</a>
 								</div>
+								
 								<!-- Product Price -->
 								<div class="pro-price fix">
 									<p><span class="new"><fmt:formatNumber value="${product.price }" pattern="###,###,###" /></span> 원</p>
 								</div>
 							</div>
+							</c:if>
+							<c:if test="${product.stock eq 0 }">
+							<div class="product-img-hover">
+								<!-- Product image -->
+								
+								<a href="#" class="pro-image fix solt-out"><img src="${product.thumbImg }" alt="product" /></a>
+							</div>
+							<div class="pro-name-price-ratting">
+								<!-- Product Name -->
+								<div class="pro-name">
+									<a href="#" style=" text-decoration:line-through;">${product.gdsName }</a>
+								</div>
+								
+								<!-- Product Price -->
+								<div class="pro-price fix">
+									<p><span style="color:red;" class="new">solt out</span></p>
+								</div>
+							</div>
+							</c:if>
 						</div>
 					</c:forEach>
 					<!-- 상품 끝 -->
@@ -71,8 +93,10 @@
 						<c:forEach var="main1" items="${main1 }">
 							<div class="single-product-item fix">	
 								<div class="product-item fix">
+									<c:if test="${main1.stock > 0 }">
 									<div class="product-img-hover">
 										<!-- Product image -->
+										
 										<a href="/product/view?gdsNum=${main1.gdsNum }" class="pro-image fix"><img src="${main1.thumbImg }" alt="product" /></a>
 									</div>
 									<div class="pro-name-price-ratting">
@@ -80,11 +104,31 @@
 										<div class="pro-name">
 											<a href="/product/view?gdsNum=${main1.gdsNum }">${main1.gdsName }</a>
 										</div>
+										
 										<!-- Product Price -->
 										<div class="pro-price fix">
 											<p><span class="new"><fmt:formatNumber value="${main1.price }" pattern="###,###,###" /></span> 원</p>
 										</div>
 									</div>
+									</c:if>
+									<c:if test="${main1.stock eq 0 }">
+									<div class="product-img-hover">
+										<!-- Product image -->
+										
+										<a href="#" class="pro-image fix solt-out"><img src="${main1.thumbImg }" alt="product" /></a>
+									</div>
+									<div class="pro-name-price-ratting">
+										<!-- Product Name -->
+										<div class="pro-name">
+											<a href="#" style=" text-decoration:line-through;">${main1.gdsName }</a>
+										</div>
+										
+										<!-- Product Price -->
+										<div class="pro-price fix">
+											<p><span style="color:red;" class="new">solt out</span></p>
+										</div>
+									</div>
+									</c:if>
 								</div>	
 							</div>
 						</c:forEach>
@@ -97,8 +141,10 @@
 						<c:forEach var="main2" items="${main2 }">
 							<div class="single-product-item fix">	
 								<div class="product-item fix">
+									<c:if test="${main2.stock > 0 }">
 									<div class="product-img-hover">
 										<!-- Product image -->
+										
 										<a href="/product/view?gdsNum=${main2.gdsNum }" class="pro-image fix"><img src="${main2.thumbImg }" alt="product" /></a>
 									</div>
 									<div class="pro-name-price-ratting">
@@ -106,11 +152,31 @@
 										<div class="pro-name">
 											<a href="/product/view?gdsNum=${main2.gdsNum }">${main2.gdsName }</a>
 										</div>
+										
 										<!-- Product Price -->
 										<div class="pro-price fix">
 											<p><span class="new"><fmt:formatNumber value="${main2.price }" pattern="###,###,###" /></span> 원</p>
 										</div>
 									</div>
+									</c:if>
+									<c:if test="${main2.stock eq 0 }">
+									<div class="product-img-hover">
+										<!-- Product image -->
+										
+										<a href="#" class="pro-image fix solt-out"><img src="${main2.thumbImg }" alt="product" /></a>
+									</div>
+									<div class="pro-name-price-ratting">
+										<!-- Product Name -->
+										<div class="pro-name">
+											<a href="#" style=" text-decoration:line-through;">${main2.gdsName }</a>
+										</div>
+										
+										<!-- Product Price -->
+										<div class="pro-price fix">
+											<p><span style="color:red;" class="new">solt out</span></p>
+										</div>
+									</div>
+									</c:if>
 								</div>	
 							</div>
 						</c:forEach>
