@@ -125,7 +125,7 @@ function replyList() {
 					<input type="hidden" value="${product.gdsNum }" name="gdsNum" id="gdsNum">
 					<h2>${product.gdsName }</h2>
 					<h3 style="font-size:24px; font-weight:bold;">${product.price } 원</h3>
-					<p>${product.gdsDes }</p>
+					<pre><c:out value="${product.gdsDes }" /></pre>
 					<div class="cartSotck">
 						<span>구매 수량 : </span>
 						<input name="stock" id="stock" type="number" value="1" min="1" max="${product.stock}"/>
@@ -160,36 +160,36 @@ function replyList() {
 					</div>
 				</div>
 			</div>
-			
-			<sec:authorize access='isAuthenticated()'>
-				<div>
 
-					<h4 class="heading">리뷰 작성</h4>
-					
-					<div id="commentform">
-						<div class="row review_form">
-							<form class="form-input" id="reply_form" role="form" method="post" autocomplete="off">
-								<input type="hidden" value="${product.gdsNum}" name="gdsNum" id="gdsNum">
-								<input type="hidden" value="${userId}" name="userId" id="userId">
-								
-								<label for="title">별점<span>*</span></label>
-								<select class="review-star" name="star" id="star">
-									<option value="5">★★★★★</option>
-									<option value="4">★★★★☆</option>
-									<option value="3">★★★☆☆</option>
-									<option value="2">★★☆☆☆</option>
-									<option value="1">★☆☆☆☆</option>
-								</select>
-								<br><br>
-								<label for="comment" class="field-label">내용<span>*</span></label>
-								<textarea aria-required="true" name="repCon" id="repCon" rows="4"></textarea>
-								<button type="button" id="review_submit">댓글 등록</button>
-							</form>
-						</div>
-					</div>
-				</div><!-- end commentform -->
-			</sec:authorize>
 		</div>
+		
+		<sec:authorize access='isAuthenticated()'>
+			<div>
+				<h4 class="heading">리뷰 작성</h4>
+				
+				<div id="commentform">
+					<div class="row review_form">
+						<form class="form-input" id="reply_form" role="form" method="post" autocomplete="off">
+							<input type="hidden" value="${product.gdsNum}" name="gdsNum" id="gdsNum">
+							<input type="hidden" value="${userId}" name="userId" id="userId">
+							
+							<label for="title">별점<span>*</span></label>
+							<select class="review-star" name="star" id="star">
+								<option value="5">★★★★★</option>
+								<option value="4">★★★★☆</option>
+								<option value="3">★★★☆☆</option>
+								<option value="2">★★☆☆☆</option>
+								<option value="1">★☆☆☆☆</option>
+							</select>
+							<br><br>
+							<label for="comment" class="field-label">내용<span>*</span></label>
+							<textarea aria-required="true" name="repCon" id="repCon" rows="4"></textarea>
+							<button type="button" id="review_submit">댓글 등록</button>
+						</form>
+					</div>
+				</div>
+			</div><!-- end commentform -->
+		</sec:authorize>
 	</div>
 </section><!--End Product Details Area-->
 

@@ -8,7 +8,14 @@ body, table, div, p{
 textarea {
   resize: none;
 }
-
+pre {
+  border: none;
+  background: none;
+  font-family: ‘Roboto’, ‘Spoqa Han Sans’, ‘Spoqa Han Sans JP’, ‘Sans-serif’;
+  letter-spacing:-0.05px;
+  padding: 0;
+  margin: 28px 0;
+}
 /*------------------------------------------------------------------
 	Template Name:	Olongker - eCommerce Bootstrap Template
     Template URI: http://bootexperts.com

@@ -71,7 +71,7 @@
 											<h5>글 내용</h5>
 										</td>
 										<td class="b_write_right">
-											<textarea rows="10" type="text" name="content"></textarea>
+											<textarea rows="10" name="content" id="text"></textarea>
 										</td>
 									</tr>
 									<tr class="table-info">
@@ -116,7 +116,7 @@ $(document).ready(function(e) {
 	$("button[type='submit']").on("click", function(e) {
 		e.preventDefault();
 		console.log("submit clicked");
-		
+		$('#text').val().replace(/\n/g, "<br>")
 		var str = "";
 		$(".uploadResult ul li").each(function(i, obj) {
 			// i:순서 , obj:요소(첨부파일 목록 1개)

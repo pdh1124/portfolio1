@@ -77,19 +77,22 @@ public class BoardController {
 		if(board.getAttachList() != null) {
 			board.getAttachList().forEach(attach -> log.info(attach));
 		}
+		
+		log.info(board.getContent());
+		
 		return "redirect:/board/comm_list";
 	}
 	
 	//읽기
 	@GetMapping({"/comm_get", "/comm_modify"})
-	public void get(@RequestParam("bno") Long bno , Model model, @ModelAttribute("cri") Criteria cri,Principal principal) {
+	public void get(@RequestParam("bno") Long bno, Model model, @ModelAttribute("cri") Criteria cri,Principal principal) {
 		service.viewCnt(bno);
 		
 		model.addAttribute("board", service.get(bno));
 		
 		//로그인 여부 확인
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		
+	
 		//좋아요 처리
 		if(authentication == null || AnonymousAuthenticationToken.class.isAssignableFrom(authentication.getClass())) {
 			log.info("비로그인 상태");

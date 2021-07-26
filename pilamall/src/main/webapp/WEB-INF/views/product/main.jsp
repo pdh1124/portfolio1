@@ -12,8 +12,8 @@
 <!-- 메인 배너 -->
 <div class="slider-wrap home-1-slider">
 	<div id="mainSlider" class="nivoSlider slider-image">
-		<img src="/resources/img/slider/1.jpg" alt="main slider" title="#htmlcaption1"/>
-		<img src="/resources/img/slider/2.jpg" alt="main slider" title="#htmlcaption2"/>
+		<a href="#"><img src="/resources/Images/main/main_banner_1.jpg" alt="main slider"/></a>
+		<a href="#"><img src="/resources/Images/main/main_banner_2.jpg" alt="main slider"/></a>
 	</div>
 </div>
 
