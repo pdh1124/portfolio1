@@ -50,6 +50,18 @@
 		]]>
 	</select>
 	
+	<!-- 전체상품 리스트 -->
+	<select id="PagingAll" resultType="com.pila.domain.GoodsVO">
+		<![CDATA[
+			select *
+			from (
+				select rownum rn, gdsNum, gdsName, cateCode, price, stock, gdsDes, gdsImg, regDate, sellcount, thumbImg
+				from tbl_goods
+				where rownum <= #{pageNum} * #{amount} order by gdsNum desc
+			)
+			where rn > (#{pageNum}-1) * #{amount} 
+		]]>
+	</select>
 	
 	<!-- 전체 상품 갯수 -->
 	<select id="getTotal" resultType="int">
@@ -64,18 +76,6 @@
 		]]>
 	</select>
 	
-	<!-- 전체상품 리스트 -->
-	<select id="PagingAll" resultType="com.pila.domain.GoodsVO">
-		<![CDATA[
-			select *
-			from (
-				select rownum rn, gdsNum, gdsName, cateCode, price, stock, gdsDes, gdsImg, regDate, sellcount, thumbImg
-				from tbl_goods
-				where rownum <= #{pageNum} * #{amount} order by gdsNum desc
-			)
-			where rn > (#{pageNum}-1) * #{amount} 
-		]]>
-	</select>
 	<!-- 요가복 리스트 -->
 	<select id="PagingProduct1" resultType="com.pila.domain.GoodsVO">
 		<![CDATA[
@@ -83,12 +83,24 @@
 			from (
 				select rownum rn, gdsNum, gdsName, cateCode, price, stock, gdsDes, gdsImg, regDate, sellcount, thumbImg
 				from tbl_goods
-				where rownum <= #{pageNum} * #{amount} order by gdsNum desc
+				where rownum <= #{pageNum} * #{amount} and cateCode = '요가복' order by gdsNum desc
 			)
-			where rn > (#{pageNum}-1) * #{amount} and cateCode = '요가복' 
+			where rn > (#{pageNum}-1) * #{amount} 
 		]]>
 	</select>
 	
+	<!-- 요가복 상품 갯수 -->
+	<select id="getTotal_1" resultType="int">
+		<![CDATA[
+			select count(gdsNum)
+			from tbl_goods
+			where 
+		]]>
+		<include refid="criteria" />		
+		<![CDATA[
+			gdsNum > 0 and cateCode = '요가복' 
+		]]>
+	</select>
 	
 	<!-- 요가용품 리스트 -->
 	<select id="PagingProduct2" resultType="com.pila.domain.GoodsVO">
@@ -97,9 +109,22 @@
 			from (
 				select rownum rn, gdsNum, gdsName, cateCode, price, stock, gdsDes, gdsImg, regDate, sellcount, thumbImg
 				from tbl_goods
-				where rownum <= #{pageNum} * #{amount} order by gdsNum desc
+				where rownum <= #{pageNum} * #{amount} and cateCode = '요가용품' order by gdsNum desc
 			)
-			where rn > (#{pageNum}-1) * #{amount} and cateCode = '요가용품'
+			where rn > (#{pageNum}-1) * #{amount}
+		]]>
+	</select>
+	
+	<!-- 요가용품 상품 갯수 -->
+	<select id="getTotal_2" resultType="int">
+		<![CDATA[
+			select count(gdsNum)
+			from tbl_goods
+			where 
+		]]>
+		<include refid="criteria" />		
+		<![CDATA[
+			gdsNum > 0 and cateCode = '요가용품' 
 		]]>
 	</select>
 	

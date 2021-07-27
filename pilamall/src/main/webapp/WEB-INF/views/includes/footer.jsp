@@ -6,7 +6,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="section-title">
-				<h2>Our Brands</h2>
+				<h2><span>DEVELOPMENT</span> TOOLS</h2>
 				<div class="underline"></div>
 			</div>
 			<div class="brand-slider owl-carousel">
@@ -52,86 +52,7 @@
 </div><!--Start Support Area-->
 <div class="footer-top-area fix"><!--Start Footer top area-->
 	<div class="container">
-		<div class="row">
-			<div class="col-sm-6 col-md-3">
-				<div class="footer-about">
-					<div class="image">
-						<img src="/resources/img/footer/logo_footer.png" alt="" />
-					</div>
-					<p>java, oracleDB, spring, mybaites을 이용해<br>쇼핑몰, 게시판을 만들었습니다.</p>
-				</div>
-				<div class="footer-contact">
-					<div class="single-contact">
-						<div class="icon">
-							<i class="fa fa-map-marker"></i>
-						</div>
-						<div class="details">
-							<p>Main town, Anystreen</p>
-							<p>C/A 1254 New Yourk</p>
-						</div>
-					</div>
-					<div class="single-contact">
-						<div class="icon">
-							<i class="fa fa-phone"></i>
-						</div>
-						<div class="details">
-							<p>+012  456  456  456</p>
-							<p>+012  356  897  222</p>
-						</div>
-					</div>
-					<div class="single-contact">
-						<div class="icon">
-							<i class="fa fa-dribbble"></i>
-						</div>
-						<div class="details">
-							<a href="#">info@olongker.com</a>
-							<a href="#">www.olongker.com</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-6 col-md-3">
-				<div class="footer-quick-link footer-links">
-					<h2>QUICK LINK</h2>
-					<ul>
-						<li><a href="/product/main">Home</a></li>
-						<li><a href="shop.html">Shop</a></li>
-						<li><a href="shop-left-sidebar.html">New Arrivals</a></li>
-						<li><a href="services.html">Services</a></li>	
-						<li><a href="portfolio-1.html">Portfolio</a></li>
-						<li><a href="blog.html">Blog</a></li>
-						<li><a href="#">Shortcodes</a></li>
-						<li><a href="contact.html">Contact</a></li>
-					</ul>
-				</div>
-			</div>
-			<div class="col-sm-12 col-md-6">
-				<div class="row">
-					<div class="col-sm-8 footer-support footer-links">
-						<h2>OUR SUPPORT</h2>
-						<ul>
-							<li><a href="#">Site Map</a></li>
-							<li><a href="#">privacy Policy</a></li>
-							<li><a href="#">Your Account</a></li>
-							<li><a href="#">Term & Conditions</a></li>
-							<li><a href="#">Advance Search</a></li>
-							<li><a href="faq.html">Help & FAQs</a></li>
-							<li><a href="#">Gift Voucher</a></li>
-							<li><a href="contact-2.html">Contact Us</a></li>
-						</ul>
-					</div>
-					<div class="col-sm-4 footer-account footer-links">
-						<h2>my Account</h2>
-						<ul>
-							<li><a href="#">my Account</a></li>
-							<li><a href="#">order History</a></li>
-							<li><a href="#">Returns</a></li>
-							<li><a href="#">Specials</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
+		<div class="row footer-text">Copyright © 2021 PilaMall. All rights reserved.</div>
 	</div>
 </div><!--Start Footer top area-->
 

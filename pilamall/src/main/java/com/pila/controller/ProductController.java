@@ -65,7 +65,7 @@ public class ProductController {
 	@GetMapping("/product1")
 	public void product1(Model model, Criteria cri) {
 		
-		int total = service.getTotal(cri);
+		int total = service.getTotal_1(cri);
 		
 		model.addAttribute("list", service.PagingProduct1(cri));
 		model.addAttribute("pageMaker", new PageDTO(cri,total));
@@ -75,7 +75,7 @@ public class ProductController {
 	@GetMapping("/product2")
 	public void product2(Model model, Criteria cri) {
 		
-		int total = service.getTotal(cri);
+		int total = service.getTotal_2(cri);
 		
 		model.addAttribute("list", service.PagingProduct2(cri));
 		model.addAttribute("pageMaker", new PageDTO(cri,total));

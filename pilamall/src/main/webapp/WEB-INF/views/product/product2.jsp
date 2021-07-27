@@ -79,7 +79,7 @@
 				</div>
 				
 				<!-- 페이징 이동시 넘기는 값 -->
-				<form id="actionForm" action="/product/all" method="get">
+				<form id="actionForm" action="/product/product2" method="get">
 					<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }" />
 					<input type="hidden" name="amount" value="${pageMaker.cri.amount }" />
 				</form>
@@ -100,7 +100,7 @@ $(document).ready(function() {
 		
 		e.preventDefault();
 		
-		actionFrom.find("input[name='pageNum']").val($(this).attr("href"));
+		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
 		//액션폼 input[name=pageNum] 값을 찾아서 href로 받은 값으로 대체
 		
 		actionForm.submit();

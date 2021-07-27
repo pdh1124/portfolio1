@@ -104,7 +104,7 @@
 						<li class="pageMove"><a href="${pageMaker.startPage-1 }"><i class="fa fa-angle-left"></i></a></li>
 					</c:if>
 					<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
-						<li class='pageMove ${pageMaker.cri.pageNum == num?"active":"" }'><a href="${num} "><span>${num }</span></a></li>
+						<li class='pageMove ${pageMaker.cri.pageNum == num?"active":"" }'><a href="${num}"><span>${num }</span></a></li>
 					</c:forEach>
 					<c:if test="${pageMaker.next }">
 						<li class="pageMove"><a href="${pageMaker.endPage+1 }"><i class="fa fa-angle-right"></i></a></li>

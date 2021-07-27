@@ -70,7 +70,7 @@
 							<li class="pageMove"><a href="${pageMaker.startPage-1 }"><i class="fa fa-angle-left"></i></a></li>
 						</c:if>
 						<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
-							<li class='pageMove ${pageMaker.cri.pageNum == num?"active":"" }'><a href="${num} "><span>${num }</span></a></li>
+							<li class='pageMove ${pageMaker.cri.pageNum == num?"active":"" }'><a href="${num}"><span>${num }</span></a></li>
 						</c:forEach>
 						<c:if test="${pageMaker.next }">
 							<li class="pageMove"><a href="${pageMaker.endPage+1 }"><i class="fa fa-angle-right"></i></a></li>
@@ -88,8 +88,6 @@
 	</div>
 </div>
 
-<%@ include file="../includes/footer.jsp"%>
-
 <script>
 $(document).ready(function() {
 	
@@ -97,13 +95,15 @@ $(document).ready(function() {
 	var actionForm = $("#actionForm");
 	
 	$(".pageMove a").on("click", function(e) {
-		
 		e.preventDefault();
 		
-		actionFrom.find("input[name='pageNum']").val($(this).attr("href"));
+		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
 		//액션폼 input[name=pageNum] 값을 찾아서 href로 받은 값으로 대체
 		
 		actionForm.submit();
 	});
+	
 });
 </script>
+
+<%@ include file="../includes/footer.jsp"%>

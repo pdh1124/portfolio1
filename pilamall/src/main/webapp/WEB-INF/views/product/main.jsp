@@ -22,7 +22,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="section-title">
-				<h2>NEW PRODUCT</h2>
+				<h2><span>NEW</span> PRODUCT</h2>
 				<div class="underline"></div>
 			</div>
 			<div class="col-sm-12">
@@ -80,6 +80,10 @@
 <div class="tab-product-area section fix">
 	<div class="container">
 		<div class="row">
+			<div class="section-title">
+				<h2><span>CATEGORY</span> PRODUCT</h2>
+				<div class="underline"></div>
+			</div>
 			<!-- 네비 탭 -->
 			<ul class="tabs-list" role="tablist">
 				<li class="active"><a href="#new" data-toggle="tab">요가복</a></li>
@@ -189,13 +193,13 @@
 </div><!--End Product Area-->
 <div class="magic-area fix"><!--Start Magic Area-->
 	<div class="col-sm-12 col-md-6 image">
-		<a href="#"><img src="/resources/img/magic.jpg" alt="magic" /></a>
+		<a href="/product/view?gdsNum=47"><img src="/resources/Images/main/main_sub_banner.jpg" alt="magic" /></a>
 	</div>
 	<div class="col-sm-12 col-md-6 content">
-		<h2>Use Jewelry’s magic</h2>
-		<h3>buy fine jewelry</h3>
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor</p>
-		<a href="#">Shop Now</a>
+		<h2>필라테스의 가벼운 시작</h2>
+		<h3>요가 매트에서부터 시작합니다.</h3>
+		<p>처음부터 여러장비를 맞출 필요 없이 가벼운 매트하나부터 차근차근 시작하는 겁니다.<br />가벼운 동작부터 몸을 익숙하게 만드는것이 중요합니다.</p>
+		<a href="/product/view?gdsNum=47">Shop Now</a>
 	</div>
 </div><!--End Magic Area-->
 <div class="blog-area section fix"><!--Start Blog Area-->
@@ -254,86 +258,6 @@
 		</div>
 	</div>
 </div><!--End Blog Area-->
-<div class="funfact section fix"><!--Start Fun Factor Area-->
-	<div class="container">
-		<div class="row">
-			<div class="section-title">
-				<h2>Fun Factor</h2>
-				<div class="underline"></div>
-			</div>
-			<div class="col-xs-6 col-sm-3">
-				<div class="fun-factor">
-					<div class="fun-factor-in">
-						<i class="fa fa-user"></i>
-						<div class="fun-factor-out"></div>
-					</div>
-					<p class="timer" data-from="0" data-to="11250"></p>
-					<h4>Happy Customers</h4>
-				</div>
-			</div>
-			<div class="col-xs-6 col-sm-3">
-				<div class="fun-factor">
-					<div class="fun-factor-in">
-						<i class="fa fa-database"></i>
-						<div class="fun-factor-out"></div>
-					</div>
-					<p class="timer" data-from="0" data-to="7500"></p>
-					<h4>Items</h4>
-				</div>
-			</div>
-			<div class="col-xs-6 col-sm-3">
-				<div class="fun-factor">
-					<div class="fun-factor-in">
-						<i class="fa fa-eye"></i>
-						<div class="fun-factor-out"></div>
-					</div>
-					<p class="timer" data-from="0" data-to="2050"></p>
-					<h4>Views</h4>
-				</div>
-			</div>
-			<div class="col-xs-6 col-sm-3">
-				<div class="fun-factor">
-					<div class="fun-factor-in">
-						<i class="fa fa-money"></i>
-						<div class="fun-factor-out"></div>
-					</div>
-					<p class="timer" data-from="0" data-to="1550"></p>
-					<h4>Sales</h4>
-				</div>
-			</div>
-		</div>
-	</div>
-</div><!--Start Fun Factor Area-->
-<div class="testimonial-area fix"><!--Start Testimonial Area-->
-	<div class="overlay section">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-offset-0 col-sm-12 col-md-offset-2 col-md-8">
-					<div class="testimonial-slider  owl-carousel">
-						<div class="testimonial-item">
-							<div class="image fix">
-								<img src="/resources/img/testimonial/testimonial.jpg" alt="" />
-							</div>
-							<div class="content fix">
-								<p>Lorem ipsum dolor sit amet, consectetur adiising elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</p>
-								<h3>Zasika Williams</h3>
-							</div>
-						</div>
-						<div class="testimonial-item">
-							<div class="image fix">
-								<img src="/resources/img/testimonial/testimonial.jpg" alt="" />
-							</div>
-							<div class="content fix">
-								<p>Lorem ipsum dolor sit amet, consectetur adiising elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</p>
-								<h3>Zasika Williams</h3>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div><!--End Testimonial Area-->
 
 
 <%@ include file="../includes/footer.jsp"%>
