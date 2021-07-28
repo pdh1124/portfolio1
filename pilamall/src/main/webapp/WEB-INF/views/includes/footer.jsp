@@ -10,16 +10,20 @@
 				<div class="underline"></div>
 			</div>
 			<div class="brand-slider owl-carousel">
-				<div class="brand-item"><img src="/resources/img/brand/brand-1.png" alt="" /></div>
-				<div class="brand-item"><img src="/resources/img/brand/brand-2.png" alt="" /></div>
-				<div class="brand-item"><img src="/resources/img/brand/brand-3.png" alt="" /></div>
-				<div class="brand-item"><img src="/resources/img/brand/brand-4.png" alt="" /></div>
-				<div class="brand-item"><img src="/resources/img/brand/brand-5.png" alt="" /></div>
-				<div class="brand-item"><img src="/resources/img/brand/brand-1.png" alt="" /></div>
-				<div class="brand-item"><img src="/resources/img/brand/brand-2.png" alt="" /></div>
-				<div class="brand-item"><img src="/resources/img/brand/brand-3.png" alt="" /></div>
-				<div class="brand-item"><img src="/resources/img/brand/brand-4.png" alt="" /></div>
-				<div class="brand-item"><img src="/resources/img/brand/brand-5.png" alt="" /></div>
+				<div class="brand-item"><img src="/resources/Images/brand/01.jpg" alt="" /></div>
+				<div class="brand-item"><img src="/resources/Images/brand/02.jpg" alt="" /></div>
+				<div class="brand-item"><img src="/resources/Images/brand/03.jpg" alt="" /></div>
+				<div class="brand-item"><img src="/resources/Images/brand/04.jpg" alt="" /></div>
+				<div class="brand-item"><img src="/resources/Images/brand/05.jpg" alt="" /></div>
+				<div class="brand-item"><img src="/resources/Images/brand/06.jpg" alt="" /></div>
+				<div class="brand-item"><img src="/resources/Images/brand/07.jpg" alt="" /></div>
+				<div class="brand-item"><img src="/resources/Images/brand/08.jpg" alt="" /></div>
+				<div class="brand-item"><img src="/resources/Images/brand/09.jpg" alt="" /></div>
+				<div class="brand-item"><img src="/resources/Images/brand/10.jpg" alt="" /></div>
+				<div class="brand-item"><img src="/resources/Images/brand/11.jpg" alt="" /></div>
+				<div class="brand-item"><img src="/resources/Images/brand/12.jpg" alt="" /></div>
+				<div class="brand-item"><img src="/resources/Images/brand/13.jpg" alt="" /></div>
+				<div class="brand-item"><img src="/resources/Images/brand/14.jpg" alt="" /></div>
 			</div>
 		</div>
 	</div>
@@ -29,23 +33,23 @@
 		<div class="row">
 			<div class="support col-sm-3">
 				<i class="fa fa-thumbs-up"></i>
-				<h3>High quality</h3>
-				<p>Lorem ipsum dolor sit amet, conseetur adipiscing elit, consectetur</p>
+				<h3>NAME</h3>
+				<p>박동훈</p>
 			</div>
 			<div class="support col-sm-3">
 				<i class="fa fa-bus"></i>
-				<h3>Fast Delivery</h3>
-				<p>Lorem ipsum dolor sit amet, conseetur adipiscing elit, consectetur</p>
+				<h3>ADDRESS</h3>
+				<p>인천광역시 서구</p>
 			</div>
 			<div class="support col-sm-3">
 				<i class="fa fa-phone"></i>
-				<h3>24/7 support</h3>
-				<p>Lorem ipsum dolor sit amet, conseetur adipiscing elit, consectetur</p>
+				<h3>PHONE</h3>
+				<p>010-9267-5842</p>
 			</div>
 			<div class="support col-sm-3">
 				<i class="fa fa-random"></i>
-				<h3>14 - Day Returns</h3>
-				<p>Lorem ipsum dolor sit amet, conseetur adipiscing elit, consectetur</p>
+				<h3>DEVELOP PERIOD</h3>
+				<p>2021-06-03 ~ 2021-07-28</p>
 			</div>
 		</div>
 	</div>

@@ -34,25 +34,41 @@
 				<div class="login">
 					<h2>일일 매출</h2>
 					<table class="table cart-table goods-table">
-					<thead class="table-title">
-						<tr>
-							<th class="g-num">번호</th>
-							<th class="g-price">날짜</th>
-							<th class="g-price">일일매출</th>
-						</tr>													
-					</thead>
-					<tbody>
-						<c:forEach items="${sum }" var="sum">
-							<tr class="table-info">
-								<td class="g-num">${sum.salNum }</td>
-								<td class="g-price"><fmt:formatDate value="${sum.salDate }" pattern="yyyy년 MM월 dd일" /></td>
-								<td class="g-price"><strong><fmt:formatNumber value="${sum.salStock }" pattern="###,###,###" /></strong> 원</td>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>		
-						
-
+						<thead class="table-title">
+							<tr>
+								<th class="g-price">날짜</th>
+								<th class="g-price">일일매출</th>
+							</tr>													
+						</thead>
+						<tbody>
+							<c:forEach items="${sum }" var="sum">
+								<tr class="table-info">
+									<td class="g-price"><fmt:formatDate value="${sum.salDate }" pattern="yyyy년 MM월 dd일" /></td>
+									<td class="g-price"><strong><fmt:formatNumber value="${sum.salStock }" pattern="###,###,###" /></strong> 원</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>		
+					
+					<!-- Pagination -->
+					<div class="pagination">
+						<ul style="margin-top: 50px;">
+							<c:if test="${pageMaker.prev }">
+								<li class="pageMove"><a href="${pageMaker.startPage-1 }"><i class="fa fa-angle-left"></i></a></li>
+							</c:if>
+							<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
+								<li class='pageMove ${pageMaker.cri.pageNum == num?"active":"" }'><a href="${num}"><span>${num }</span></a></li>
+							</c:forEach>
+							<c:if test="${pageMaker.next }">
+								<li class="pageMove"><a href="${pageMaker.endPage+1 }"><i class="fa fa-angle-right"></i></a></li>
+							</c:if>
+						</ul>
+					</div>	
+					
+					<form id="actionForm" action="/admin/main" method="get">
+						<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+						<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+					</form>
 				</div>
 			</div>
 		</div>
@@ -62,3 +78,15 @@
 </sec:authorize>
 
 <%@ include file="../includes/footer.jsp"%>
+<script>
+//배송 대기 목록 페이징 
+var actionForm = $("#actionForm");
+
+$(".pageMove a").on("click", function(e) {
+	e.preventDefault();
+	
+	actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+	
+	actionForm.submit();
+});
+</script>
