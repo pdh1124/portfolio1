@@ -38,7 +38,7 @@
 		insert into comm_board(bno,title,content,writer,notice) values (seq_comm_board.nextval, #{title}, #{content}, #{writer}, #{notice})
 	</insert>
 	
-	<!-- 글번호 받기 -->
+	<!-- 글번호 받고 글 작성 -->
 	<insert id="insertSelectKey">
 		<selectKey keyProperty="bno" order="BEFORE" resultType="long">
 			select seq_comm_board.nextval from dual
