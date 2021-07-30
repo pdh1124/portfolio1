@@ -34,17 +34,17 @@
 			<div class="support col-sm-3">
 				<i class="fa fa-thumbs-up"></i>
 				<h3>NAME</h3>
-				<p>박동훈</p>
+				<p>이름</p>
 			</div>
 			<div class="support col-sm-3">
 				<i class="fa fa-bus"></i>
 				<h3>ADDRESS</h3>
-				<p>인천광역시 서구</p>
+				<p>인천광역시</p>
 			</div>
 			<div class="support col-sm-3">
 				<i class="fa fa-phone"></i>
 				<h3>PHONE</h3>
-				<p>010-9267-5842</p>
+				<p>010-1234-1234</p>
 			</div>
 			<div class="support col-sm-3">
 				<i class="fa fa-random"></i>

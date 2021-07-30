@@ -104,7 +104,7 @@ public class BoardController {
 			vo.setBno(bno);
 			vo.setUserId(userId);
 			
-			int boardLike = likeService.getBoardLike(vo);
+			int boardLike = likeService.getBoardLike(vo); //1
 			log.info(userId);
 			log.info(boardLike);
 			
