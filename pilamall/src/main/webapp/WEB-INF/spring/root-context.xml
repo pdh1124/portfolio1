@@ -38,10 +38,10 @@
 	
 	<!-- 이메일 발송을 위한 bean 설정 -->
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<property name="host" value="smtp.gmail.com" />
+		<property name="host" value="smtp.gmail.com" /> <!-- 어떤 메일인지 설정 -->
 		<property name="port" value="587" />
-		<property name="username" value="pdw3231@gmail.com" />
-		<property name="password" value="aldksgo*6382" />
+		<property name="username" value="pdw3231@gmail.com" /> <!-- 지메일 아이디 -->
+		<property name="password" value="aldksgo*6382" /> <!-- 지메일 비밀번호 -->
 		<property name="javaMailProperties">
 			<props>
 				<prop key="mail.transport.protocol">smtp</prop>
