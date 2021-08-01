@@ -74,7 +74,7 @@ function replyList() {
        	
 
        	<label for="title">별점</label><br>
-		<select class="review-star" name="star" id="star">
+		<select class="review-star" id="star1" name="star">
 			<option value="5">★★★★★</option>
 			<option value="4">★★★★☆</option>
 			<option value="3">★★★☆☆</option>
@@ -174,7 +174,7 @@ function replyList() {
 							<input type="hidden" value="${userId}" name="userId" id="userId">
 							
 							<label for="title">별점<span>*</span></label>
-							<select class="review-star" name="star" id="star">
+							<select class="review-star" name="star" id="star2">
 								<option value="5">★★★★★</option>
 								<option value="4">★★★★☆</option>
 								<option value="3">★★★☆☆</option>
@@ -226,8 +226,10 @@ $(document).ready(function() {
 		var formObj = $("#review_form form[role='form']");
 		var gdsNum = $("#gdsNum").val();
 		var repCon = $("#repCon").val();
-		var star = $("#star").val();
-			
+		var star = $("#star2").val();
+				
+		console.log(star);
+		
 		var data = {
 			gdsNum : gdsNum,
 			userId : userId,
@@ -291,7 +293,7 @@ $(document).ready(function() {
 		var modifyConfirm = confirm("정말 수정하시겠습니까?");
 		var repNum = $("#modalRepNum").val();
 		var repCon = $("#reply_modal").val();
-		var star = $("#star").val();
+		var star = $("#star1").val();
 		
 		console.log("repNum : " + repNum);
 		console.log(star);
