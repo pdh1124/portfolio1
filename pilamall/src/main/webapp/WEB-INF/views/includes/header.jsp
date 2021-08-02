@@ -196,7 +196,6 @@
 									<li><a href="/board/comm_list">커뮤니티 게시판</a></li>
 								</ul>
 							</li>
-							<li><a href="#">소개</a></li>
 						</ul>
 					</nav>
 				</div>
