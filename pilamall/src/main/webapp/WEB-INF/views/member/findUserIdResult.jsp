@@ -27,7 +27,7 @@
 					<h3><c:out value="${logout }" /></h3>
 					<div class="findid_move_bt">
 						<a  href="/member/login">로그인</a>
-						<a class="board_move_bt" href="/member/findPasword">비밀번호 찾기</a>
+						<a class="board_move_bt" href="/member/findUserPass">비밀번호 찾기</a>
 					</div> 
 				</div>
 			</div>

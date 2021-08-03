@@ -173,13 +173,12 @@
 							<li><a href="/product/all">전체 상품</a></li>
 							<li><a href="/product/product1">요가복</a></li>
 							<li><a href="/product/product2">요가용품</a></li>
-							<li><a href="#">게시판</a>
+							<li><a href="/board/comm_list">게시판</a>
 								<ul class="sub-menu">
 									<li><a href="/notice/list">공지사항 게시판</a></li>
 									<li><a href="/board/comm_list">커뮤니티 게시판</a></li>
 								</ul>
 							</li>
-							<li><a href="#">소개</a></li>
 						</ul>
 					</nav>
 				</div>
@@ -192,7 +191,7 @@
 							<li><a href="#">요가용품</a></li>
 							<li><a href="/board/list">게시판</a>
 								<ul>
-									<li><a href="#">문의 게시판</a></li>
+									<li><a href="/notice/list">문의 게시판</a></li>
 									<li><a href="/board/comm_list">커뮤니티 게시판</a></li>
 								</ul>
 							</li>
