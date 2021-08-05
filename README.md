@@ -1,4 +1,3 @@
-![04](https://user-images.githubusercontent.com/75818141/128300494-6e7041c5-a3e7-41d5-9bf1-8bc3327bdaaa.jpg)
 # PilaMall (Spring MVC 패턴 웹 커뮤니티, 쇼핑몰)
 
 ## 개발일정
