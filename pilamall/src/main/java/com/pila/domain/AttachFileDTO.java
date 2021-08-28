@@ -9,4 +9,5 @@ public class AttachFileDTO {
 	private String uploadPath; //경로
 	private String uuid; //식별자번호
 	private boolean image; //이미지 여부
+	
 }
